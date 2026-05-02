@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientHandlerThread {
+public class ClientHandlerThread implements Runnable {
     private Socket socket = new Socket();
     private ICoordinator accessProxy;
     private Coordinator coordinator;
@@ -15,6 +15,6 @@ public class ClientHandlerThread {
 
     @Override
     public void run() {
-        //input and output stream logic, token
+        //input and output stream logic
     }
 }
