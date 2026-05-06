@@ -12,9 +12,7 @@ public class UserSession {
         this.token = token;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
-    }
+
     public String getToken() {
         return this.token;
     }

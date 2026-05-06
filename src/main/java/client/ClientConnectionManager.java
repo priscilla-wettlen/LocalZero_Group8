@@ -12,6 +12,7 @@ public class ClientConnectionManager {
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
+    private String token;
 
     public ClientConnectionManager(int port, String host) throws IOException {
         this.socket = new Socket(host, port);
@@ -36,5 +37,12 @@ public class ClientConnectionManager {
 
     public void closeConnection() throws IOException {
         socket.close();
+    }
+
+    public void setAuthToken(String token) {
+        this.token = token;
+    }
+    public String getToken() {
+        return token;
     }
 }
