@@ -5,12 +5,12 @@ import main.java.client.ClientConnectionManager;
 import main.java.shared.Request;
 import main.java.shared.Response;
 
-public abstract class BaseUserAction {
+public abstract class BaseUserCommand {
     private ClientConnectionManager connectionManager;
 
 
 
-    public BaseUserAction(ClientConnectionManager connectionManager) {
+    public BaseUserCommand(ClientConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
     }
 

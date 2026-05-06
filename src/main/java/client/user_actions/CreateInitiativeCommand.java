@@ -11,10 +11,9 @@ import main.java.shared.Response;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 
 
-public class CreateInitiativeAction extends BaseUserAction implements IUserAction {
+public class CreateInitiativeCommand extends BaseUserCommand implements IUserCommand{
     private String title;
     private String description;
     private Visibility visibility;
@@ -22,8 +21,8 @@ public class CreateInitiativeAction extends BaseUserAction implements IUserActio
     private Neighborhood neighborhood;
     private Date date;
 
-    public CreateInitiativeAction(ClientConnectionManager connectionManager, String title, String description, Visibility visibility,
-                                  Neighborhood neighborhood, InitiativeType initiativeType) {
+    public CreateInitiativeCommand(ClientConnectionManager connectionManager, String title, String description, Visibility visibility,
+                                   Neighborhood neighborhood, InitiativeType initiativeType) {
         super(connectionManager);
 
         this.title = title;
