@@ -1,19 +1,18 @@
 package main.java.shared;
 
-import main.java.server.model.User;
 import main.java.server.model.UserActionType;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 public class Request implements Serializable {
     private UserActionType userActionType;
-    private HashSet details;
+    private HashMap<String, Object> details;
     private String authToken; //for login and register it could be null?? MMhhmm...
 
 
-    public Request(UserActionType userActionType, HashSet details) {
+    public Request(UserActionType userActionType, HashMap<String, Object> details) {
         this.userActionType = userActionType;
         this.details = details;
     }
