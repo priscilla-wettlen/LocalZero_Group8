@@ -1,11 +1,29 @@
 package main.java.client.user_actions;
 
 
-/// The idea with this abstract class is to set a base command for all requests
-/// and then allow each command (the user actions) to implement execute() however they need.
-public abstract class BaseUserAction implements IUserAction {
+import main.java.client.ClientConnectionManager;
+import main.java.shared.Request;
+import main.java.shared.Response;
+
+public abstract class BaseUserAction {
+    private ClientConnectionManager connectionManager;
 
 
 
-    public void execute(){};
+    public BaseUserAction(ClientConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
+    }
+
+    public abstract void handleResponse();
+
+    public abstract Request buildRequest();
+
+    public final Response sendRequest(Request request){
+        Response response= connectionManager.sendRequest(request);
+        return response;
+    }
+
+    public final String getToken() {
+        return connectionManager.getToken();
+    }
 }
