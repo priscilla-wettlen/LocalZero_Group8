@@ -10,6 +10,7 @@ import main.java.shared.Response;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
@@ -37,13 +38,13 @@ public class CreateInitiativeAction extends BaseUserAction implements IUserActio
 
     @Override
     public Request buildRequest() {
-        HashSet details = new HashSet();
-        details.add(title);
-        details.add(description);
-        details.add(visibility);
-        details.add(initiativeType);
-        details.add(neighborhood);
-        details.add(date);
+        HashMap<String, Object> details = new HashMap<>();
+        details.put("title",title);
+        details.put("description",description);
+        details.put("visibility", visibility);
+        details.put("initiativeType",initiativeType);
+        details.put("neighborhood",neighborhood);
+        details.put("date", date);
         Request request = new Request(UserActionType.CreateInitiative, details);
         request.setAuthToken(super.getToken()); ////this is to get the token from the clientConnectionManager to attach it to the request
         return request;
