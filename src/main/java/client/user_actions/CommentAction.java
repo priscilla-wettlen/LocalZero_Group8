@@ -3,10 +3,10 @@ package main.java.client.user_actions;
 import main.java.client.ClientConnectionManager;
 import main.java.shared.Request;
 
-public class CommentAction extends BaseUserAction {
+public class CommentAction extends BaseUserAction implements IUserAction{
 
 
-    public CommentAction(ClientConnectionManager connectionManager, String token) {
+    public CommentAction(ClientConnectionManager connectionManager) {
         super(connectionManager);
     }
 
@@ -17,6 +17,12 @@ public class CommentAction extends BaseUserAction {
 
     @Override
     public Request buildRequest() {
+
+        return null;
+    }
+
+    @Override
+    public void execute() {
 
     }
 }
