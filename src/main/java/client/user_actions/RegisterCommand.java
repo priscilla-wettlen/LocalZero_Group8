@@ -3,10 +3,10 @@ package main.java.client.user_actions;
 import main.java.client.ClientConnectionManager;
 import main.java.shared.Request;
 
-public class JoinInitiativeAction extends BaseUserAction implements IUserAction{
+public class RegisterCommand extends BaseUserCommand implements IUserCommand {
 
 
-    public JoinInitiativeAction(ClientConnectionManager connectionManager, String token) {
+    public RegisterCommand(ClientConnectionManager connectionManager, String token) {
         super(connectionManager);
     }
 

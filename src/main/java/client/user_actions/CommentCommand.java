@@ -3,10 +3,10 @@ package main.java.client.user_actions;
 import main.java.client.ClientConnectionManager;
 import main.java.shared.Request;
 
-public class CommentAction extends BaseUserAction implements IUserAction{
+public class CommentCommand extends BaseUserCommand implements IUserCommand{
 
 
-    public CommentAction(ClientConnectionManager connectionManager) {
+    public CommentCommand(ClientConnectionManager connectionManager) {
         super(connectionManager);
     }
 

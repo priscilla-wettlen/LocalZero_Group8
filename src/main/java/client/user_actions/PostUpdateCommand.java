@@ -3,10 +3,10 @@ package main.java.client.user_actions;
 import main.java.client.ClientConnectionManager;
 import main.java.shared.Request;
 
-public class LogEcoActionAction extends BaseUserAction implements IUserAction {
+public class PostUpdateCommand extends BaseUserCommand implements IUserCommand {
 
 
-    public LogEcoActionAction(ClientConnectionManager connectionManager, String token) {
+    public PostUpdateCommand(ClientConnectionManager connectionManager, String token) {
         super(connectionManager);
     }
 

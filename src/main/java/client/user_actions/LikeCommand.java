@@ -3,10 +3,10 @@ package main.java.client.user_actions;
 import main.java.client.ClientConnectionManager;
 import main.java.shared.Request;
 
-public class LoginAction extends BaseUserAction implements IUserAction {
+public class LikeCommand extends BaseUserCommand implements IUserCommand {
 
 
-    public LoginAction(ClientConnectionManager connectionManager, String token) {
+    public LikeCommand(ClientConnectionManager connectionManager, String token) {
         super(connectionManager);
     }
 
