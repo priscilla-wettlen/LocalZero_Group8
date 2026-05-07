@@ -1,26 +1,34 @@
 package main.java.server.model;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class User {
-    private String ID;
+    private String name;
     private Neighborhood neighborhood;
+    private String email;
     private String passwordHash; ///Option to database??
+    private String id;
     private HashSet<Role> roles = new HashSet<Role>();
 
 
-    public User(String ID, Role role, String passwordHash,  Neighborhood neighborhood) {}
+    public User(String name, Neighborhood neighborhood, String email, String passwordHash, String id, Role role) {
+        this.name = name;
+        this.neighborhood = neighborhood;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.id = id;
+        this.roles = getRoles();
+    }
 
     public void addNewRole(Role role) {
         roles.add(role);
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
     public HashSet<Role> getRoles() {
-        return roles;}
-
+        return roles;
+    }
 }
 
