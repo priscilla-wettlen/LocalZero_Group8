@@ -1,10 +1,7 @@
 package main.java.shared;
 
-import main.java.server.model.UserActionType;
-
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Request implements Serializable {
     private UserActionType userActionType;
@@ -21,5 +18,7 @@ public class Request implements Serializable {
         this.authToken = authToken;
     }
 
-    /// Getters  ...
+    public HashMap<String, Object> getDetails() {
+        return details;
+    }
 }

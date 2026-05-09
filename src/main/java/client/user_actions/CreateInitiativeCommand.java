@@ -3,7 +3,7 @@ package main.java.client.user_actions;
 import main.java.client.ClientConnectionManager;
 import main.java.server.model.InitiativeType;
 import main.java.server.model.Neighborhood;
-import main.java.server.model.UserActionType;
+import main.java.shared.UserActionType;
 import main.java.server.model.Visibility;
 import main.java.shared.Request;
 import main.java.shared.Response;

@@ -8,7 +8,9 @@ public class User {
     private Neighborhood neighborhood;
     private String passwordHash; ///Option to database??
     private HashSet<Role> roles = new HashSet<Role>();
-
+    private String email;
+    private String firstName;
+    private String lastName;
 
     public User(String ID, Role role, String passwordHash,  Neighborhood neighborhood) {}
 
@@ -21,6 +23,16 @@ public class User {
     }
     public HashSet<Role> getRoles() {
         return roles;}
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public Neighborhood getNeighborhood() {
+        return neighborhood;
+    }
 
 }
 
