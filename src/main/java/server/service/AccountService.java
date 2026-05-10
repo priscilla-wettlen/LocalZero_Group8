@@ -32,12 +32,18 @@ public class AccountService implements IAccountService {
 
     @Override
     public String login(String username, String password) {
-        //authenticate then return userId if not empty string.
+
         return "userID";
     }
 
     public User getUser(String userID){
         return users.get(userID);
     }
+
+    public User getUserByEmail(String email){
+        return users.get(email);
+    }
+
+    public void addUser(User user){users.put(user.getEmail(), user);}
 
 }
