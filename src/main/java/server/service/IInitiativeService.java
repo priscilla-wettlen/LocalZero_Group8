@@ -1,7 +1,6 @@
-package main.java.server.service;
+package server.service;
 
-import main.java.server.model.Initiative;
-import main.java.server.model.Visibility;
+import server.model.Initiative;
 
 public interface IInitiativeService {
 

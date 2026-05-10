@@ -1,6 +1,6 @@
-package main.java.server.security;
+package server.security;
 
-import main.java.server.model.User;
+import server.model.User;
 
 
 public class UserSession {

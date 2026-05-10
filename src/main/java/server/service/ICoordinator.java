@@ -1,10 +1,10 @@
-package main.java.server.service;
+package server.service;
 
 //This is the Mediator interface!!
 
 
-import main.java.server.model.Neighborhood;
-import main.java.server.model.User;
+import server.model.Neighborhood;
+import server.model.User;
 
 public interface ICoordinator {
     public User login(String username, String password);

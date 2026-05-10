@@ -1,4 +1,4 @@
-package main.java.server.service;
+package server.service;
 
 public interface ISustainabilityTracker {
     public void logAction(String userID, String actionType, String title,double carbonEquivalent);

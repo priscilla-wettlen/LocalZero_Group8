@@ -1,6 +1,6 @@
-package main.java.server.service;
+package server.service;
 
-import main.java.server.model.Initiative;
+import server.model.Initiative;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

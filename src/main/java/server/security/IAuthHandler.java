@@ -1,7 +1,7 @@
-package main.java.server.security;
+package server.security;
 
-import main.java.shared.Request;
-import main.java.shared.Response;
+import shared.Request;
+import shared.Response;
 
 public interface IAuthHandler {
 

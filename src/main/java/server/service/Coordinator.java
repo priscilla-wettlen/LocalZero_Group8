@@ -1,7 +1,7 @@
-package main.java.server.service;
+package server.service;
 
-import main.java.server.model.Neighborhood;
-import main.java.server.model.User;
+import server.model.Neighborhood;
+import server.model.User;
 
 // The Coordinator gets an instance of every service.
 

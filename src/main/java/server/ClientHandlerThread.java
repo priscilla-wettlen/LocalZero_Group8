@@ -1,12 +1,8 @@
-package main.java.server;
+package server;
 
-import main.java.server.security.IAuthHandler;
-import main.java.server.service.Coordinator;
-import main.java.server.service.ICoordinator;
+import server.security.IAuthHandler;
+import server.service.Coordinator;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ClientHandlerThread implements Runnable {

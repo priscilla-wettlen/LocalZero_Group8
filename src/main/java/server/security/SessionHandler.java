@@ -1,8 +1,8 @@
-package main.java.server.security;
+package server.security;
 
-import main.java.server.service.Coordinator;
-import main.java.shared.Request;
-import main.java.shared.Response;
+import server.service.Coordinator;
+import shared.Request;
+import shared.Response;
 
 public class SessionHandler implements IAuthHandler{
     private Coordinator coordinator;

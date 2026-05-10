@@ -1,6 +1,4 @@
-package main.java.server.security;
-
-import main.java.server.model.User;
+package server.security;
 
 import java.sql.*;
 

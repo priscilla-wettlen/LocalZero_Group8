@@ -1,7 +1,7 @@
-package main.java.client;
+package client;
 
-import main.java.shared.Request;
-import main.java.shared.Response;
+import shared.Request;
+import shared.Response;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

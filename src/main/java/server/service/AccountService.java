@@ -1,9 +1,7 @@
-package main.java.server.service;
+package server.service;
 
-import main.java.server.model.User;
+import server.model.User;
 
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

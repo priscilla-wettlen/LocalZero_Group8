@@ -1,4 +1,4 @@
-package main.java.server.data_persistence;
+package server.data_persistence;
 
 import java.util.HashMap;
 import java.util.Map;

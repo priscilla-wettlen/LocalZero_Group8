@@ -1,9 +1,9 @@
-package main.java.client.user_actions;
+package client.user_actions;
 
 
-import main.java.client.ClientConnectionManager;
-import main.java.shared.Request;
-import main.java.shared.Response;
+import client.ClientConnectionManager;
+import shared.Request;
+import shared.Response;
 
 public abstract class BaseUserCommand {
     private ClientConnectionManager connectionManager;

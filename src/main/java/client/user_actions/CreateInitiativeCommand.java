@@ -1,12 +1,12 @@
-package main.java.client.user_actions;
+package client.user_actions;
 
-import main.java.client.ClientConnectionManager;
-import main.java.server.model.InitiativeType;
-import main.java.server.model.Neighborhood;
-import main.java.shared.UserActionType;
-import main.java.server.model.Visibility;
-import main.java.shared.Request;
-import main.java.shared.Response;
+import client.ClientConnectionManager;
+import server.model.InitiativeType;
+import server.model.Neighborhood;
+import shared.UserActionType;
+import server.model.Visibility;
+import shared.Request;
+import shared.Response;
 
 import java.time.Instant;
 import java.util.Date;

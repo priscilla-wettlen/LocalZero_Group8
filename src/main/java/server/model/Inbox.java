@@ -1,4 +1,4 @@
-package main.java.server.model;
+package server.model;
 
 import java.sql.Date;
 import java.time.Instant;

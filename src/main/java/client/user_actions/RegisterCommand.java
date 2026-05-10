@@ -1,7 +1,7 @@
-package main.java.client.user_actions;
+package client.user_actions;
 
-import main.java.client.ClientConnectionManager;
-import main.java.shared.Request;
+import client.ClientConnectionManager;
+import shared.Request;
 
 public class RegisterCommand extends BaseUserCommand implements IUserCommand {
 

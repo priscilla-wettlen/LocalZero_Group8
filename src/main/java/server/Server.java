@@ -1,7 +1,6 @@
-package main.java.server;
+package server;
 
-import main.java.server.security.*;
-import main.java.server.service.Coordinator;
+import server.service.Coordinator;
 
 import java.io.IOException;
 import java.net.ServerSocket;

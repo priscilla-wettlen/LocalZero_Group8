@@ -1,4 +1,4 @@
-package main.java.client.user_actions;
+package client.user_actions;
 
 
 /// This is the Command interface!!

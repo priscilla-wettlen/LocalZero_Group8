@@ -1,6 +1,4 @@
-package main.java.server.service;
-
-import main.java.server.model.Initiative;
+package server.service;
 
 public interface IUserActionService {
 
