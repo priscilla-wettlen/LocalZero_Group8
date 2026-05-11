@@ -9,7 +9,6 @@ public class User {
     private String passwordHash; ///Option to database??
     private String id;
     private HashSet<Role> roles = new HashSet<Role>();
-    private String email;
     private String firstName;
     private String lastName;
 

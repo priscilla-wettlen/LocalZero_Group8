@@ -1,5 +1,6 @@
 package server;
 
+import server.security.*;
 import server.service.Coordinator;
 
 import java.io.IOException;
