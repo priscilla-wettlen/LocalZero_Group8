@@ -1,10 +1,10 @@
 package server.service;
 
 import org.mindrot.jbcrypt.BCrypt;
+import server.data_persistence.JsonSerializer;
 import server.model.Neighborhood;
 import server.model.Role;
 import server.model.User;
-import server.security.JsonUserStore;
 
 import java.nio.file.Paths;
 import java.util.HashSet;
@@ -19,9 +19,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AccountService implements IAccountService {
 
     private static AccountService accountServiceInstance;
-    private final Map<String, User> usersById = new ConcurrentHashMap<>();
-    private final Map<String, User> usersByEmail = new ConcurrentHashMap<>();
-    private final JsonUserStore userStore = new JsonUserStore(Paths.get("data/users.json"));
+//    private final Map<String, User> usersById = new ConcurrentHashMap<>();
+    private final JsonSerializer<User> serializer =
+            new JsonSerializer<>();
+    private static final String FILE_PATH =
+            "shared/users.json";
+    private final Map<String, User> usersByEmail = serializer.loadSavedData(FILE_PATH);
 
     private AccountService(){}
 
@@ -33,81 +36,98 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public User register(String name, Neighborhood neighborhood, String email, String password, HashSet<Role> roles) {
-        if (name == null || neighborhood == null || email == null || email.isBlank() || password == null || password.isBlank() || roles.isEmpty()) {
+    public User register(String name,
+                         Neighborhood neighborhood,
+                         String email,
+                         String password,
+                         HashSet<Role> roles) {
+
+        Map<String, User> users =
+                serializer.loadSavedData(FILE_PATH);
+
+        if (users.containsKey(email)) {
             return null;
         }
-        if (userStore.exists(email)) {
-            return null;
-        }
-        String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
-        String userId = UUID.randomUUID().toString();
 
-        JsonUserStore.StoredUser storedUser = new JsonUserStore.StoredUser();
-        storedUser.id = userId;
-        storedUser.email = email;
-        storedUser.name = name;
-        storedUser.passwordHash = passwordHash;
-        storedUser.neighborhood = null;
-        userStore.save(storedUser);
+        String passwordHash =
+                BCrypt.hashpw(password, BCrypt.gensalt());
 
-        User user = new User(userId, email, neighborhood, name, passwordHash, Role.Neighbor);
-        usersById.put(user.getId(), user);
-        usersByEmail.put(user.getEmail(), user);
+        String userId =
+                /*
+                * Creates the random IDs
+                * */
+                UUID.randomUUID().toString();
+
+        User user = new User(
+                userId,
+                name,
+                neighborhood,
+                email,
+                passwordHash,
+                Role.Neighbor
+        );
+
+        users.put(email, user);
+
+        serializer.save(FILE_PATH, users);
+
+        usersByEmail.put(email, user);
+
         return user;
     }
 
     @Override
-    public String login(String username, String password) {
-        if (username == null || password == null) {
+    public String login(String email,
+                        String password) {
+
+        User user = usersByEmail.get(email);
+
+        if (user == null) {
+
+            Map<String, User> users =
+                    serializer.loadSavedData(FILE_PATH);
+
+            user = users.get(email);
+
+            if (user != null) {
+                usersByEmail.put(email, user);
+            }
+        }
+
+        if (user == null) {
             return "";
         }
-        User cached = usersByEmail.get(username);
-        if (cached != null && cached.getPasswordHash() != null
-                && BCrypt.checkpw(password, cached.getPasswordHash())) {
-            return cached.getId();
+
+        if (!BCrypt.checkpw(password,
+                user.getPasswordHash())) {
+
+            return "";
         }
 
-        return userStore.findByEmail(username)
-                .filter(stored -> stored.passwordHash != null
-                        && BCrypt.checkpw(password, stored.passwordHash))
-                .map(stored -> {
-                    User user = new User(
-                            stored.id,
-                            stored.name != null ? stored.name : stored.email,
-                            null,
-                            stored.email,
-                            stored.passwordHash,
-                            Role.Neighbor
-                    );
-                    usersById.put(user.getId(), user);
-                    usersByEmail.put(user.getEmail(), user);
-                    return user.getId();
-                })
-                .orElse("");
+        return user.getId();
     }
 
-    public User getUser(String userID){
-        return usersById.get(userID);
-    }
+//    public User getUser(String userID){
+//        return usersById.get(userID);
+//    }
 
     public User getUserByEmail(String email){
         return usersByEmail.get(email);
     }
 
-    public void addUser(User user){
-        if (user == null || user.getEmail() == null) {
-            return;
-        }
-        usersById.put(user.getId(), user);
-        usersByEmail.put(user.getEmail(), user);
-        JsonUserStore.StoredUser storedUser = new JsonUserStore.StoredUser();
-        storedUser.id = user.getId();
-        storedUser.email = user.getEmail();
-        storedUser.name = user.getEmail();
-        storedUser.passwordHash = user.getPasswordHash();
-        storedUser.neighborhood = user.getNeighborhood() != null ? user.getNeighborhood().name() : null;
-        userStore.save(storedUser);
-    }
+//    public void addUser(User user){
+//        if (user == null || user.getEmail() == null) {
+//            return;
+//        }
+//        usersById.put(user.getId(), user);
+//        usersByEmail.put(user.getEmail(), user);
+//        JsonUserStore.StoredUser storedUser = new JsonUserStore.StoredUser();
+//        storedUser.id = user.getId();
+//        storedUser.email = user.getEmail();
+//        storedUser.name = user.getEmail();
+//        storedUser.passwordHash = user.getPasswordHash();
+//        storedUser.neighborhood = user.getNeighborhood() != null ? user.getNeighborhood().name() : null;
+//        userStore.save(storedUser);
+//    }
 
 }

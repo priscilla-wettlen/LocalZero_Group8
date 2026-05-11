@@ -1,57 +1,68 @@
 package server.data_persistence;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import server.security.JsonUserStore;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class JsonSerializer implements IJsonSerializer {
-    private final Path filePath;
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final Object lock = new Object();
+public class JsonSerializer<T> implements IJsonSerializer<T> {
 
-    public JsonSerializer(Path filePath) {
-        this.filePath = filePath;
+    private final Gson gson;
+    private final Object lock;
+
+    public JsonSerializer() {
+        this.gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        this.lock = new Object();
     }
+
     @Override
-    public void save(String filePath, HashMap data) {
+    public void save(String filePath, Map<String, T> data) {
         synchronized (lock) {
-            List<JsonUserStore.StoredUser> users = loadUsers();
-            users.removeIf(existing -> existing.email != null
-                    && existing.email.equalsIgnoreCase(user.email));
-            users.add(user);
-            writeUsers(users);
+            Path path = Path.of(filePath);
+            try {
+
+                if (path.getParent() != null) {
+                    Files.createDirectories(path.getParent());
+                }
+
+                try (Writer writer = Files.newBufferedWriter(path)) {
+
+                    gson.toJson(data, writer);
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to save JSON data", e);
+            }
         }
     }
 
     @Override
-    public Map loadSavedData(String filePath) {
-        if (!Files.exists(filePath)) {
-            return new ArrayList<>();
-        }
-        try (InputStream in = Files.newInputStream(filePath)) {
-            return objectMapper.readValue(in, new TypeReference<List<JsonUserStore.StoredUser>>() {});
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
-    }
+    public Map<String, T> loadSavedData(String filePath) {
+        synchronized (lock) {
+            Path path = Path.of(filePath);
+            if (!Files.exists(path)) {
+                return new HashMap<>();
+            }
 
-    public static class StoredUser {
-        public String id;
-        public String email;
-        public String name;
-        public String passwordHash;
-        public String neighborhood;
+            try (Reader reader = Files.newBufferedReader(path)) {
+                Type type = new TypeToken<Map<String, T>>() {}.getType();
+                Map<String, T> data = gson.fromJson(reader, type);
+                return data != null ? data : new HashMap<>();
 
-        public StoredUser() {
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to load JSON data", e);
+            }
         }
     }
 }
