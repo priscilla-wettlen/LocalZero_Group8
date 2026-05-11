@@ -28,4 +28,10 @@
   "name" : "cyrsha.com",
   "passwordHash" : "$2a$10$8rjk25zE1pBrbexSpVUE6uJa8aka8v0VmkhmwBSNPfTUNRdOp2/P.",
   "neighborhood" : null
+}, {
+  "id" : "1f718adb-9f3c-4df7-811c-96c2dbecec00",
+  "email" : "isabella.katz@hotmail.com",
+  "name" : "isabella.katz@hotmail.com",
+  "passwordHash" : "$2a$10$gpK8hrabHlM1F4SrJv0D6.Kwczk9AXGllZedgn8M12OhGqilH59Va",
+  "neighborhood" : null
 } ]

@@ -1,11 +1,13 @@
 package server.service;
 
 import org.mindrot.jbcrypt.BCrypt;
+import server.model.Neighborhood;
 import server.model.Role;
 import server.model.User;
 import server.security.JsonUserStore;
 
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,11 +33,11 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public User register(String username, String password) {
-        if (username == null || username.isBlank() || password == null || password.isBlank()) {
+    public User register(String name, Neighborhood neighborhood, String email, String password, HashSet<Role> roles) {
+        if (name == null || neighborhood == null || email == null || email.isBlank() || password == null || password.isBlank() || roles.isEmpty()) {
             return null;
         }
-        if (userStore.exists(username)) {
+        if (userStore.exists(email)) {
             return null;
         }
         String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -43,13 +45,13 @@ public class AccountService implements IAccountService {
 
         JsonUserStore.StoredUser storedUser = new JsonUserStore.StoredUser();
         storedUser.id = userId;
-        storedUser.email = username;
-        storedUser.name = username;
+        storedUser.email = email;
+        storedUser.name = name;
         storedUser.passwordHash = passwordHash;
         storedUser.neighborhood = null;
         userStore.save(storedUser);
 
-        User user = new User(username, null, username, passwordHash, userId, Role.Neighbor);
+        User user = new User(userId, email, neighborhood, name, passwordHash, Role.Neighbor);
         usersById.put(user.getId(), user);
         usersByEmail.put(user.getEmail(), user);
         return user;
@@ -71,11 +73,11 @@ public class AccountService implements IAccountService {
                         && BCrypt.checkpw(password, stored.passwordHash))
                 .map(stored -> {
                     User user = new User(
+                            stored.id,
                             stored.name != null ? stored.name : stored.email,
                             null,
                             stored.email,
                             stored.passwordHash,
-                            stored.id,
                             Role.Neighbor
                     );
                     usersById.put(user.getId(), user);

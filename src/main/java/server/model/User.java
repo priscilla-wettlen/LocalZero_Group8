@@ -3,16 +3,15 @@ package server.model;
 import java.util.HashSet;
 
 public class User {
+    private String id;
     private String name;
     private Neighborhood neighborhood;
     private String email;
     private String passwordHash; ///Option to database??
-    private String id;
     private HashSet<Role> roles = new HashSet<Role>();
-    private String firstName;
-    private String lastName;
 
-    public User(String name, Neighborhood neighborhood, String email, String passwordHash, String id, Role role) {
+    public User(String id, String name, Neighborhood neighborhood, String email, String passwordHash, Role roles) {
+        this.id = id;
         this.name = name;
         this.neighborhood = neighborhood;
         this.email = email;
