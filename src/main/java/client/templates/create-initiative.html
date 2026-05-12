@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Initiative — Eco Initiatives</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">
+      <span aria-hidden="true">🌿</span>
+      <span>Eco Initiatives</span>
+    </div>
+    <div class="btnRow" style="margin:0;">
+      <a class="btn btnGhost" href="./dashboard.html">Dashboard</a>
+      <a class="btn btnGhost" href="./initiatives.html">Back to Initiatives</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="split">
+      <section class="card">
+        <h2>Create Sustainability Initiative</h2>
+        <p class="muted">Fields match the assignment: title, description, duration, category, location, visibility.</p>
+        <hr class="sep" />
+
+        <form class="form" action="/create-initiative" method="post" enctype="multipart/form-data">
+          <div>
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" placeholder="Tool Sharing in Block C" required />
+          </div>
+
+          <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Describe goals and how people can participate..." required></textarea>
+          </div>
+
+          <div>
+            <label for="location">Location / Neighborhood</label>
+            <input id="location" name="location" type="text" placeholder="Block C" required />
+          </div>
+
+          <div class="grid" style="grid-template-columns: 1fr 1fr; gap:12px;">
+            <div>
+              <label for="duration">Duration</label>
+              <input id="duration" name="duration" type="text" placeholder="e.g. 3 months" required />
+            </div>
+            <div>
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="TRANSPORT">Transport</option>
+                <option value="WASTE">Waste</option>
+                <option value="COMMUNITY">Community</option>
+                <option value="WATER">Water</option>
+                <option value="ENERGY">Energy</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="visibility">Visibility</label>
+            <select id="visibility" name="visibility" required>
+              <option value="PUBLIC">Public</option>
+              <option value="NEIGHBORHOOD">Neighborhood-specific</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="image">(Optional) Cover image</label>
+            <input id="image" name="image" type="file" accept="image/*" />
+          </div>
+
+          <div class="btnRow" style="margin-top:4px;">
+            <button class="btnPrimary" type="submit">Create Initiative</button>
+            <a class="btn btnGhost" href="./dashboard.html">Cancel</a>
+          </div>
+
+          <div class="small">Note: backend wiring (endpoint + parameters) may need to be added later.</div>
+        </form>
+      </section>
+
+      <aside class="card">
+        <h2>Preview</h2>
+        <div class="feedItem">
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+            <div>
+              <h3 style="margin:0 0 6px;" id="prev-title">Tool Sharing in Block C</h3>
+              <div class="small" id="prev-desc">Share tools to reduce waste and save money across the neighborhood.</div>
+            </div>
+            <span class="badge badgePrimary" id="prev-vis">Public</span>
+          </div>
+          <hr class="sep" />
+          <div class="kv">
+            <div class="k">Location</div>
+            <div class="v" id="prev-loc">Block C</div>
+          </div>
+          <div class="kv" style="margin-top:10px;">
+            <div class="k">Duration</div>
+            <div class="v" id="prev-dur">3 months</div>
+          </div>
+          <div class="kv" style="margin-top:10px;">
+            <div class="k">Category</div>
+            <div class="v" id="prev-cat">Community</div>
+          </div>
+        </div>
+
+        <div class="small" style="margin-top:12px;">
+          The preview updates while you type (client-side only).
+        </div>
+
+        <script>
+          const $ = (id) => document.getElementById(id);
+          const title = $('title');
+          const desc = $('description');
+          const loc = $('location');
+          const duration = $('duration');
+          const cat = $('category');
+          const vis = $('visibility');
+
+          const prevTitle = $('prev-title');
+          const prevDesc = $('prev-desc');
+          const prevLoc = $('prev-loc');
+          const prevDur = $('prev-dur');
+          const prevCat = $('prev-cat');
+          const prevVis = $('prev-vis');
+
+          function update(){
+            if(title) prevTitle.textContent = title.value || 'Tool Sharing in Block C';
+            if(desc) prevDesc.textContent = desc.value || 'Share tools to reduce waste and save money across the neighborhood.';
+            if(loc) prevLoc.textContent = loc.value || 'Block C';
+            if(duration) prevDur.textContent = duration.value || '3 months';
+            if(cat) prevCat.textContent = cat.options[cat.selectedIndex]?.text || 'Community';
+            if(vis){
+              const text = vis.options[vis.selectedIndex]?.text || 'Public';
+              prevVis.textContent = text;
+              prevVis.className = 'badge badgePrimary' + (vis.value === 'NEIGHBORHOOD' ? ' badgeSuccess' : '');
+            }
+          }
+
+          [title, desc, loc, duration, cat, vis].forEach(el => el && el.addEventListener('input', update));
+          update();
+        </script>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
+

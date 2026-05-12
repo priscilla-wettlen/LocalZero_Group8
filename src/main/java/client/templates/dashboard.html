@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Eco Initiatives</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">
+      <span aria-hidden="true">🌿</span>
+      <span>Eco Initiatives</span>
+    </div>
+    <div class="btnRow" style="margin:0;">
+      <a class="btn btnGhost" href="./initiatives.html">Initiatives</a>
+      <a class="btn btnGhost" href="./create-initiative.html">Create</a>
+      <a class="btn btnGhost" href="./index.html">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid">
+      <section class="card">
+        <h2>Welcome</h2>
+        <p class="muted">User management + sessions are implemented on the backend. This dashboard is the GUI layer.</p>
+        <hr class="sep" />
+
+        <div class="btnRow">
+          <a class="btn btnPrimary" href="./create-initiative.html">Create Sustainability Initiative</a>
+          <a class="btn btnGhost" href="./initiatives.html">Browse Public / Neighborhood Initiatives</a>
+        </div>
+
+        <div style="margin-top:14px;" class="kv">
+          <div class="k">Roles</div>
+          <div class="v">Resident, Community Organizer (example)</div>
+        </div>
+        <div style="margin-top:10px;" class="kv">
+          <div class="k">Neighborhood</div>
+          <div class="v">Block C (example)</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Quick Actions</h2>
+        <div class="table" style="padding:0; border:0;">
+          <div style="padding:0;">
+            <div class="feedItem" style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+                <div>
+                  <h3 style="margin:0 0 6px;">Join an Initiative</h3>
+                  <div class="small">Pick an initiative and join it.</div>
+                </div>
+                <a class="btn btnPrimary" href="./initiatives.html">View</a>
+              </div>
+            </div>
+
+            <div class="feedItem" style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+                <div>
+                  <h3 style="margin:0 0 6px;">Post an Update</h3>
+                  <div class="small">Share text and optionally images.</div>
+                </div>
+                <a class="btn btnGhost" href="./initiative-details.html">Open</a>
+              </div>
+            </div>
+
+            <div class="feedItem">
+              <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+                <div>
+                  <h3 style="margin:0 0 6px;">Like / Comment</h3>
+                  <div class="small">React to updates from others.</div>
+                </div>
+                <a class="btn btnGhost" href="./initiative-details.html">React</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+

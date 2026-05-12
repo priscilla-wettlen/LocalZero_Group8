@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Initiatives — Eco Initiatives</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">
+      <span aria-hidden="true">🌿</span>
+      <span>Eco Initiatives</span>
+    </div>
+    <div class="btnRow" style="margin:0;">
+      <a class="btn btnGhost" href="./dashboard.html">Dashboard</a>
+      <a class="btn btnPrimary" href="./create-initiative.html">Create</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="card">
+      <div class="split" style="grid-template-columns: 1fr 1fr;">
+        <div>
+          <h2 style="margin-bottom:6px;">Browse Initiatives</h2>
+          <div class="small">Demo list. Connect to backend later to fetch real initiatives.</div>
+        </div>
+        <div>
+          <label for="search">Search</label>
+          <input id="search" type="text" placeholder="Search by title or category..." />
+        </div>
+      </div>
+
+      <hr class="sep" />
+
+      <div class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+        <div class="feedItem" data-title="Tool Sharing in Block C" data-cat="Community" data-vis="Public">
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+            <div>
+              <h3 style="margin:0 0 6px;">Tool Sharing in Block C</h3>
+              <div class="small">Community · Block C</div>
+            </div>
+            <span class="badge badgePrimary">Public</span>
+          </div>
+          <div class="small" style="margin-top:10px;">Join to coordinate borrowing schedules and reduce waste.</div>
+          <div class="btnRow" style="margin-top:12px;">
+            <a class="btn btnPrimary" href="./initiative-details.html">View</a>
+            <button class="btn btnGhost" type="button" onclick="alert('Join action is a GUI placeholder. Wire to backend later.')">Join</button>
+          </div>
+        </div>
+
+        <div class="feedItem" data-title="Neighborhood Compost Day" data-cat="Waste" data-vis="Neighborhood">
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+            <div>
+              <h3 style="margin:0 0 6px;">Neighborhood Compost Day</h3>
+              <div class="small">Waste · Block C</div>
+            </div>
+            <span class="badge badgeSuccess">Neighborhood</span>
+          </div>
+          <div class="small" style="margin-top:10px;">Join for a monthly compost drop-off and tips.</div>
+          <div class="btnRow" style="margin-top:12px;">
+            <a class="btn btnPrimary" href="./initiative-details.html">View</a>
+            <button class="btn btnGhost" type="button" onclick="alert('Join action is a GUI placeholder. Wire to backend later.')">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="small" style="margin-top:14px;">Tip: Use the search box to filter these demo cards.</div>
+
+      <script>
+        const search = document.getElementById('search');
+        const cards = Array.from(document.querySelectorAll('.feedItem'));
+        function apply(){
+          const q = (search.value || '').toLowerCase();
+          cards.forEach(c => {
+            const t = (c.dataset.title||'') + ' ' + (c.dataset.cat||'') + ' ' + (c.dataset.vis||'');
+            c.style.display = t.toLowerCase().includes(q) ? '' : 'none';
+          });
+        }
+        if(search){
+          search.addEventListener('input', apply);
+        }
+      </script>
+    </section>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Initiative Details — Eco Initiatives</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">
+      <span aria-hidden="true">🌿</span>
+      <span>Eco Initiatives</span>
+    </div>
+    <div class="btnRow" style="margin:0;">
+      <a class="btn btnGhost" href="./initiatives.html">Back</a>
+      <a class="btn btnGhost" href="./dashboard.html">Dashboard</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="split">
+      <section class="card">
+        <h2>Initiative: Tool Sharing in Block C</h2>
+        <div class="btnRow" style="margin-top:6px;">
+          <span class="badge badgePrimary">Public</span>
+          <span class="badge">Community</span>
+        </div>
+        <hr class="sep" />
+
+        <div class="kv">
+          <div class="k">Location</div>
+          <div class="v">Block C</div>
+        </div>
+        <div class="kv" style="margin-top:10px;">
+          <div class="k">Duration</div>
+          <div class="v">3 months</div>
+        </div>
+        <div class="kv" style="margin-top:10px;">
+          <div class="k">Visibility</div>
+          <div class="v">Public</div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <h3>Description</h3>
+          <p class="muted">Share tools to reduce waste and save money across the neighborhood.</p>
+        </div>
+
+        <div class="btnRow" style="margin-top:12px;">
+          <button class="btn btnPrimary" type="button" onclick="alert('Join is a placeholder GUI action. Connect to backend later.')">Join Initiative</button>
+          <button class="btn btnGhost" type="button" onclick="alert('Post update is handled in the feed form on this page.')">Post Update</button>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Post an Update</h2>
+        <form class="form" action="/post-update" method="post" enctype="multipart/form-data">
+          <div>
+            <label for="update-title">Update title</label>
+            <input id="update-title" name="title" type="text" placeholder="e.g. New tool schedule" />
+          </div>
+          <div>
+            <label for="update-text">Update text</label>
+            <textarea id="update-text" name="text" placeholder="What changed?" required></textarea>
+          </div>
+          <div>
+            <label for="update-image">(Optional) Image</label>
+            <input id="update-image" name="image" type="file" accept="image/*" />
+          </div>
+          <div class="btnRow">
+            <button class="btnPrimary" type="submit">Post Update</button>
+            <a class="btn btnGhost" href="./initiatives.html">Cancel</a>
+          </div>
+          <div class="small">Backend endpoint not implemented in this repo; GUI only.</div>
+        </form>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:16px;">
+      <div style="display:flex; justify-content:space-between; gap:12px; align-items:center;">
+        <h2>Updates Feed</h2>
+        <div class="small">Like + comment UI placeholders.</div>
+      </div>
+      <hr class="sep" />
+
+      <div class="feedItem" style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+          <div>
+            <h3 style="margin:0 0 6px;">New tool schedule is live</h3>
+            <div class="small">Posted by Amina · 2 hours ago</div>
+          </div>
+          <span class="badge badgeSuccess">Update</span>
+        </div>
+        <p class="muted" style="margin-top:10px;">Borrowing hours have been updated for weekends.</p>
+
+        <div class="btnRow" style="margin-top:12px;">
+          <button class="btn btnPrimary" type="button" onclick="alert('Like is a placeholder. Wire to backend later.')">👍 Like</button>
+          <button class="btn btnGhost" type="button" onclick="document.getElementById('comment1').focus()">💬 Comment</button>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="comment1">Add comment</label>
+          <textarea id="comment1" placeholder="Write a comment..."></textarea>
+          <div class="btnRow" style="margin-top:8px;">
+            <button class="btn btnGhost" type="button" onclick="alert('Comment is a placeholder. Wire to backend later.')">Post Comment</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedItem">
+        <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+          <div>
+            <h3 style="margin:0 0 6px;">Community toolbox cleaned</h3>
+            <div class="small">Posted by Omar · yesterday</div>
+          </div>
+          <span class="badge">Update</span>
+        </div>
+        <p class="muted" style="margin-top:10px;">Thanks to volunteers! We organized labels and updated inventory.</p>
+
+        <div class="btnRow" style="margin-top:12px;">
+          <button class="btn btnPrimary" type="button" onclick="alert('Like is a placeholder. Wire to backend later.')">👍 Like</button>
+          <button class="btn btnGhost" type="button" onclick="document.getElementById('comment2').focus()">💬 Comment</button>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="comment2">Add comment</label>
+          <textarea id="comment2" placeholder="Write a comment..."></textarea>
+          <div class="btnRow" style="margin-top:8px;">
+            <button class="btn btnGhost" type="button" onclick="alert('Comment is a placeholder. Wire to backend later.')">Post Comment</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
