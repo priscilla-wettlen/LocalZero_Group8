@@ -1,5 +1,6 @@
 package client.user_actions;
 
+import client.RegisterLoginGUI;
 import server.model.Role;
 import server.model.User;
 
@@ -60,8 +61,17 @@ public class DashboardFrame extends JFrame {
 
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, menuPanel, contentPanel);
         split.setDividerLocation(220);
-        JLabel roleLabel = new JLabel("Inloggad som: " + (user != null ? user.getRole() : "okänd")); 
-        add(roleLabel, BorderLayout.NORTH);
+
+        JLabel roleLabel = new JLabel("Logged in as: " + (user != null ? user.getRole() : "okänd"));
+        JButton logoutButton = new JButton("Log out");
+        logoutButton.addActionListener(e -> handleLogout());
+
+        JPanel topBar = new JPanel(new BorderLayout());
+        topBar.setBorder(BorderFactory.createEmptyBorder(8, 10, 8, 10));
+        topBar.add(roleLabel, BorderLayout.WEST);
+        topBar.add(logoutButton, BorderLayout.EAST);
+
+        add(topBar, BorderLayout.NORTH);
 
         add(split);
         contentPanel.setBorder(
@@ -74,5 +84,18 @@ public class DashboardFrame extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JLabel(text, SwingConstants.CENTER), BorderLayout.CENTER);
         return panel;
+    }
+
+    private void handleLogout() {
+        int choice = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to log out?",
+                "Confirm Logout",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (choice == JOptionPane.YES_OPTION) {
+            SwingUtilities.invokeLater(RegisterLoginGUI::new);
+            dispose();
+        }
     }
 }
