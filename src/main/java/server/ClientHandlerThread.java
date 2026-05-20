@@ -1,10 +1,10 @@
 package server;
 
 import server.security.IAuthHandler;
-import server.security.SessionHandler;
 import server.service.Coordinator;
+import server.service.InitiativeService;
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +30,7 @@ public class ClientHandlerThread implements Runnable {
             while(true)
             {
                 Request request = (Request) ins.readObject();
-                Response response = handleRequest(request);
+                Initiative response = handleRequest(request);
                 outs.writeObject(response);
             }
         }catch(IOException | ClassNotFoundException e){
@@ -39,9 +39,12 @@ public class ClientHandlerThread implements Runnable {
     }
 
 
-    private Response handleRequest(Request request){
+
+
+    private Initiative handleRequest(Request request){
+
         try{
-            Response authChainResponse = authChainStart.handle(request);
+            Initiative authChainResponse = authChainStart.handle(request);
             if (authChainResponse != null) {
                 return authChainResponse;
             }

@@ -5,7 +5,7 @@ import server.model.Neighborhood;
 import server.model.User;
 import server.model.Visibility;
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 import java.util.HashMap;
 
@@ -17,10 +17,10 @@ public class Coordinator implements ICoordinator{
     private IMessengerService messengerService = MessengerService.getMessengerServiceInstance();
     private INotificationService notificationService = NotificationService.getNotificationServiceInstance();
 
-    public Response processRequest(Request request){
+    public Initiative processRequest(Request request){
         String requestActionType = request.getUserActionType().toString();
         HashMap<String, Object> paramsMap = request.getDetails();
-        Response response = null;
+        Initiative response = null;
 
         switch (requestActionType){
             case "createInitiative":
@@ -51,7 +51,7 @@ public class Coordinator implements ICoordinator{
 /// "contract" and call the respective service! I didn't want all this in the switch
 
 
-    private Response extractParamsCreateInitiative(HashMap<String, Object> params){
+    private Initiative extractParamsCreateInitiative(HashMap<String, Object> params){
         String creator = (String) params.get("username");
         String title = params.get("title").toString();
         String description = params.get("description").toString();
@@ -63,24 +63,24 @@ public class Coordinator implements ICoordinator{
     }
 
 
-    private Response extractLogEcoActionParams(HashMap<String, Object> paramsMap) {
+    private Initiative extractLogEcoActionParams(HashMap<String, Object> paramsMap) {
 
         return null;
     }
 
-    private Response extractParamsLike(HashMap<String, Object> paramsMap) {
+    private Initiative extractParamsLike(HashMap<String, Object> paramsMap) {
         return null;
     }
 
-    private Response extractParamsComment(HashMap<String, Object> paramsMap) {
+    private Initiative extractParamsComment(HashMap<String, Object> paramsMap) {
         return null;
     }
 
-    private Response extractParamsPostUpdate(HashMap<String, Object> params) {
+    private Initiative extractParamsPostUpdate(HashMap<String, Object> params) {
         return null;
     }
 
-    private Response extractParamsJoinInitiative(HashMap<String, Object> params) {
+    private Initiative extractParamsJoinInitiative(HashMap<String, Object> params) {
         return null;
     }
 
@@ -103,7 +103,7 @@ public class Coordinator implements ICoordinator{
     }
 
     @Override
-    public Response createInitiative(String creator, String title, String description, InitiativeType type, Neighborhood location, Visibility visibility) {
+    public Initiative createInitiative(String creator, String title, String description, InitiativeType type, Neighborhood location, Visibility visibility) {
 
 
         return null;

@@ -2,7 +2,7 @@ package server.security;
 
 import server.service.Coordinator;
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 public class LoginHandler implements IAuthHandler{
     private Coordinator coordinator;
@@ -19,7 +19,7 @@ public class LoginHandler implements IAuthHandler{
     }
 
     @Override
-    public Response handle(Request request) {
+    public Initiative handle(Request request) {
         return null;
     }
 }

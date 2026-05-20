@@ -1,12 +1,12 @@
 package server.security;
 
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 public interface IAuthHandler {
 
     public IAuthHandler setNext(IAuthHandler next);
-    public Response handle(Request request);
+    public Initiative handle(Request request);
 
 
 }

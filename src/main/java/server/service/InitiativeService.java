@@ -1,37 +1,58 @@
 package server.service;
 
-import server.model.Initiative;
+import server.data_persistence.JsonSerializer;
 import server.model.Neighborhood;
 import server.model.Visibility;
-import shared.Response;
+import shared.Initiative;
 
+import java.net.URL;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-//Singleton class, like all service classes!
-public class InitiativeService implements IInitiativeService{
+public class InitiativeService implements IInitiativeService {
     private static InitiativeService initiativeServiceInstance;
-    private Map<String, Initiative> initiatives =  new ConcurrentHashMap<>();
+    private static final String FILE_PATH = "shared/initiative.json";
+    private final JsonSerializer<Initiative> serializer = new JsonSerializer<>(Initiative.class);
+    private Map<String, Initiative> initiatives = new ConcurrentHashMap<>();
 
+    private InitiativeService() {
+        // Load existing initiatives from the JSON file
+        initiatives.putAll(serializer.loadSavedData(FILE_PATH));
+    }
 
-    private InitiativeService(){}
-
-    public static InitiativeService getInitiativeServiceInstance(){
-        if(initiativeServiceInstance == null){
+    public static InitiativeService getInitiativeServiceInstance() {
+        if (initiativeServiceInstance == null) {
             initiativeServiceInstance = new InitiativeService();
         }
         return initiativeServiceInstance;
     }
 
     @Override
-    public Response createInitiative(String creator, String title, String description, String initiativeType, Neighborhood location, Visibility visibility) {
-        return null;
+    public Initiative createInitiative(String creator, String title, String description, String initiativeType, Neighborhood location, Visibility visibility, String duration, URL image) {
+        // Validate input
+        if (title == null || title.isEmpty() || description == null || description.isEmpty()) {
+            throw new IllegalArgumentException("Title and description cannot be null or empty.");
+        }
+
+        // Generate a unique ID for the initiative
+        String id = UUID.randomUUID().toString();
+
+        // Create a new Initiative object
+        Initiative initiative = new Initiative(id, title, initiativeType, duration, visibility, description, location, image, creator);
+
+        // Add the initiative to the map
+        initiatives.put(id, initiative);
+
+        // Save the updated initiatives map to the JSON file
+        serializer.save(FILE_PATH, initiatives);
+
+        // Return the created initiative
+        return initiative;
     }
 
     @Override
-    public void joinInitiative(String initiativeID, String userID) {
-
+    public Map<String, Initiative> getAllInitiatives() {
+        return new ConcurrentHashMap<>(initiatives);
     }
-
-
 }

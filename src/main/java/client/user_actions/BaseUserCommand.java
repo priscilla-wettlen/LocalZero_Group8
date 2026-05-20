@@ -3,7 +3,7 @@ package client.user_actions;
 
 import client.ClientConnectionManager;
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 public abstract class BaseUserCommand {
     private ClientConnectionManager connectionManager;
@@ -18,8 +18,8 @@ public abstract class BaseUserCommand {
 
     public abstract Request buildRequest();
 
-    public final Response sendRequest(Request request){
-        Response response= connectionManager.sendRequest(request);
+    public final Initiative sendRequest(Request request){
+        Initiative response= connectionManager.sendRequest(request);
         return response;
     }
 

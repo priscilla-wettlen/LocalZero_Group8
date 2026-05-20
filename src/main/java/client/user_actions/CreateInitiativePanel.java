@@ -44,12 +44,12 @@ public class CreateInitiativePanel extends JPanel {
 
         // Image
         gbc.gridx = 0; gbc.gridy = 5; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
-        form.add(new JLabel("Image:"), gbc);
+        form.add(new JLabel(""), gbc);
         gbc.gridx = 1;
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        JLabel imageLabel = new JLabel("No image selected");
+        JLabel imageLabel = new JLabel("Choose a picture");
         imageLabel.setForeground(Color.GRAY);
-        JButton browseBtn = new JButton("Browse...");
+        JButton browseBtn = new JButton();
         final String[] selectedImagePath = {null};
         browseBtn.addActionListener(e -> {
             JFileChooser chooser = new JFileChooser();

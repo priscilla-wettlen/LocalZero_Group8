@@ -15,6 +15,10 @@ public class Initiative {
     private String duration;
     private Date date;
 
+    public Initiative() {
+
+    }
+
     public Initiative(String ID, String title, InitiativeType initiativeType, Visibility visibility, String description, URL image, String location, String duration, Date date) {
         this.ID = ID;
         this.title = title;
@@ -42,6 +46,10 @@ public class Initiative {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
     }
     public void setTitle(String Title) {
         this.title = Title;

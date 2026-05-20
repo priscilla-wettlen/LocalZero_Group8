@@ -1,7 +1,7 @@
 package client;
 
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,11 +22,11 @@ public class ClientConnectionManager {
     }
 
 
-    public Response sendRequest(Request request){
-        Response response = null;
+    public Initiative sendRequest(Request request){
+        Initiative response = null;
         try{
             out.writeObject(request);
-            response = (Response) in.readObject();
+            response = (Initiative) in.readObject();
 
         }catch(ClassNotFoundException|IOException|RuntimeException e){
             System.out.println("Error sending request");

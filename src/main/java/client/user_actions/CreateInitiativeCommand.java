@@ -6,7 +6,7 @@ import server.model.Neighborhood;
 import shared.UserActionType;
 import server.model.Visibility;
 import shared.Request;
-import shared.Response;
+import shared.Initiative;
 
 import java.time.Instant;
 import java.util.Date;
@@ -56,7 +56,7 @@ public class CreateInitiativeCommand extends BaseUserCommand implements IUserCom
     @Override
     public void execute(){
         Request request = buildRequest();
-        Response response = super.sendRequest(request);
+        Initiative response = super.sendRequest(request);
         handleResponse();
 
     }
