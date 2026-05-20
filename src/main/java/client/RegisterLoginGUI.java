@@ -21,6 +21,7 @@ public class RegisterLoginGUI extends JFrame {
     private JComboBox<Neighborhood> neighborhoodBox;
     private JTextField registerEmailField;
     private JPasswordField registerPasswordField;
+    private JTextField registerAdminCodeField;
     private JComboBox<Role> roleBox;
     private JButton registerButton;
 
@@ -109,6 +110,8 @@ public class RegisterLoginGUI extends JFrame {
 
         registerPasswordField = new JPasswordField();
 
+        registerAdminCodeField = new JTextField();
+
         roleBox = new JComboBox<>();
 
         roleBox.addItem(Role.Neighbor);
@@ -132,6 +135,10 @@ public class RegisterLoginGUI extends JFrame {
         registerPanel.add(new JLabel("Password"));
 
         registerPanel.add(registerPasswordField);
+
+        registerPanel.add(new JLabel("Admin Code (optional)"));
+
+        registerPanel.add(registerAdminCodeField);
 
         registerPanel.add(new JLabel("Role"));
 
@@ -182,6 +189,9 @@ public class RegisterLoginGUI extends JFrame {
         String password =
                 new String(registerPasswordField.getPassword());
 
+        String adminCode =
+                new String(registerAdminCodeField.getText());
+
         Role selectedRole =
                 (Role) roleBox.getSelectedItem();
 
@@ -192,7 +202,7 @@ public class RegisterLoginGUI extends JFrame {
                 || selectedRole == null) {
 
             statusLabel.setText(
-                    "All register fields are required");
+                    "All register fields, except Admin Code, are required");
 
             return;
         }
@@ -206,7 +216,8 @@ public class RegisterLoginGUI extends JFrame {
                 neighborhood,
                 email,
                 password,
-                roles
+                adminCode
+                //roles
         );
 
         if (user == null) {
