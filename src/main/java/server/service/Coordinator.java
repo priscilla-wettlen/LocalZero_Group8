@@ -103,7 +103,10 @@ public class Coordinator implements ICoordinator{
     }
 
     @Override
-    public void createInitiative(String creator, String title, String description, InitiativeType type, Neighborhood location, Visibility visibility) {
+    public Response createInitiative(String creator, String title, String description, InitiativeType type, Neighborhood location, Visibility visibility) {
+
+
+        return null;
 
     }
 
