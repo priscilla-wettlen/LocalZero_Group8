@@ -8,7 +8,6 @@ import server.service.AccountService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashSet;
 
 public class RegisterLoginGUI extends JFrame {
 
@@ -208,17 +207,13 @@ public class RegisterLoginGUI extends JFrame {
             return;
         }
 
-        HashSet<Role> roles = new HashSet<>();
-
-        roles.add(selectedRole);
-
         User user = accountService.register(
                 name,
                 neighborhood,
                 email,
                 password,
-                adminCode
-                //roles
+                adminCode,
+                selectedRole != null ? selectedRole.name() : null
         );
 
         if (user == null) {
