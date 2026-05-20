@@ -40,7 +40,9 @@ public class AccountService implements IAccountService {
                          Neighborhood neighborhood,
                          String email,
                          String password,
-                         HashSet<Role> roles) {
+                         String adminCode,
+                         String role){
+                         //HashSet<Role> roles) {
 
         Map<String, User> users =
                 serializer.loadSavedData(FILE_PATH);
@@ -51,6 +53,8 @@ public class AccountService implements IAccountService {
 
         String passwordHash =
                 BCrypt.hashpw(password, BCrypt.gensalt());
+
+
 
         String userId =
                 /*
@@ -64,7 +68,9 @@ public class AccountService implements IAccountService {
                 neighborhood,
                 email,
                 passwordHash,
-                Role.Neighbor
+                adminCode,
+                role
+                //Role.Neighbor
         );
 
         users.put(email, user);
