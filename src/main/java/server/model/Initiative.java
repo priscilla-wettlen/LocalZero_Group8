@@ -12,10 +12,10 @@ public class Initiative {
     private String description;
     private URL image;
     private String location;
-    private int duration;
+    private String duration;
     private Date date;
 
-    public Initiative(String ID, String title, InitiativeType initiativeType, Visibility visibility, String description, URL image, String location, int duration, Date date) {
+    public Initiative(String ID, String title, InitiativeType initiativeType, Visibility visibility, String description, URL image, String location, String duration, Date date) {
         this.ID = ID;
         this.title = title;
         this.initiativeType = initiativeType;
