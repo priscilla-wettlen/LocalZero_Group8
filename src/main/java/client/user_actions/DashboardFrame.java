@@ -34,9 +34,9 @@ public class DashboardFrame extends JFrame {
         createTaskBtn.setBorder(buttonBorder);
         forumBtn.setBorder(buttonBorder);
 
-        boolean isOrganizer = user != null && user.getRoles() != null
-                && user.getRoles().contains(Role.CommunityOrganizer);
-        createTaskBtn.setEnabled(isOrganizer);
+//        boolean isOrganizer = user != null && user.getRoles() != null
+//                && user.getRoles().contains(Role.CommunityOrganizer);
+//        createTaskBtn.setEnabled(isOrganizer);
 
         contentPanel.add(makeLabelPanel("Community Board View"), "community");
         contentPanel.add(makeLabelPanel("Active Tasks View"), "tasks");
