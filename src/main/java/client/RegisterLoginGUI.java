@@ -22,6 +22,7 @@ public class RegisterLoginGUI extends JFrame {
     private JTextField registerEmailField;
     private JPasswordField registerPasswordField;
     private JTextField registerAdminCodeField;
+    private JLabel registerAdminCodeLabel;
     private JComboBox<Role> roleBox;
     private JButton registerButton;
 
@@ -111,6 +112,7 @@ public class RegisterLoginGUI extends JFrame {
         registerPasswordField = new JPasswordField();
 
         registerAdminCodeField = new JTextField();
+        registerAdminCodeLabel = new JLabel("Admin Code (optional)");
 
         roleBox = new JComboBox<>();
 
@@ -119,6 +121,8 @@ public class RegisterLoginGUI extends JFrame {
         roleBox.addItem(Role.CommunityOrganizer);
 
         registerButton = new JButton("Register");
+
+        roleBox.addActionListener(e -> updateAdminCodeField());
 
         registerPanel.add(new JLabel("Name"));
 
@@ -136,13 +140,13 @@ public class RegisterLoginGUI extends JFrame {
 
         registerPanel.add(registerPasswordField);
 
-        registerPanel.add(new JLabel("Admin Code (optional)"));
-
-        registerPanel.add(registerAdminCodeField);
-
         registerPanel.add(new JLabel("Role"));
 
         registerPanel.add(roleBox);
+
+        registerPanel.add(registerAdminCodeLabel);
+
+        registerPanel.add(registerAdminCodeField);
 
         registerPanel.add(registerButton);
 
@@ -173,6 +177,19 @@ public class RegisterLoginGUI extends JFrame {
         loginButton.addActionListener(e -> login());
 
         registerButton.addActionListener(e -> register());
+
+        updateAdminCodeField();
+    }
+
+    private void updateAdminCodeField() {
+        Role selectedRole = (Role) roleBox.getSelectedItem();
+        boolean isOrganizer = selectedRole == Role.CommunityOrganizer;
+        registerAdminCodeField.setEditable(isOrganizer);
+        registerAdminCodeField.setEnabled(isOrganizer);
+        registerAdminCodeLabel.setEnabled(isOrganizer);
+        if (!isOrganizer) {
+            registerAdminCodeField.setText("");
+        }
     }
 
     private void register() {
@@ -258,3 +275,4 @@ public class RegisterLoginGUI extends JFrame {
         dispose(); // close login window
     }
 }
+

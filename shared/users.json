@@ -35,5 +35,22 @@
     "passwordHash": "$2a$10$I4qjvjUAvRHEC7.76lcW2.pLjPcqODyxAlUF2fcAMfSyuo9I5EmW6",
     "adminCode": "",
     "role": "Neighbor"
+  },
+  "admin@admin.com": {
+    "id": "dbc88777-8fd9-40da-851c-4c30149ed004",
+    "name": "Adminius",
+    "neighborhood": "VästraHamnen",
+    "email": "admin@admin.com",
+    "passwordHash": "$2a$10$Kv5Rwz9Ohz4ouW0G7gMGEOsRYw/Rl39pBOaXvpy/WGsf0On06s7CS",
+    "role": "Neighbor"
+  },
+  "org.org.com": {
+    "id": "965e591c-508a-4d5b-9cd7-dd0d81f0893f",
+    "name": "orgius",
+    "neighborhood": "VästraHamnen",
+    "email": "org.org.com",
+    "passwordHash": "$2a$10$.zA2H47qZrRP9YNUmkT.u.HLtdRprpFgFPSjs/Hqsnp6kFUcdrJBa",
+    "adminCode": "1234",
+    "role": "CommunityOrganizer"
   }
 }
