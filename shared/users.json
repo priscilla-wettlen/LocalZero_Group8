@@ -1,0 +1,39 @@
+{
+  "hejhej@hej.com": {
+    "id": "203a2f6e-43c3-4f97-99b2-e1a919483046",
+    "name": "hej",
+    "neighborhood": "Ellstorp",
+    "email": "hejhej@hej.com",
+    "passwordHash": "$2a$10$ojHMUF9F1tBPM/KQ9PI25uqJzgIKXtWGcxuTo.3pz9UC1iEPo43/K"
+  },
+  "hejhej@hej2.com": {
+    "id": "d2b7cd7f-8096-4aa3-8bee-3d4542fa3b3b",
+    "name": "hej2",
+    "neighborhood": "VästraHamnen",
+    "email": "hejhej@hej2.com",
+    "passwordHash": "$2a$10$Ojo05aznzl8iJkQzDB4qXelntkDjQa1KU9N2rClNc0JfTw9/yhDsm"
+  },
+  "cyr@sha.com": {
+    "id": "550f7acc-77db-4ea7-b39a-0bf0dbc4ce81",
+    "name": "cyr",
+    "neighborhood": "VästraHamnen",
+    "email": "cyr@sha.com",
+    "passwordHash": "$2a$10$j1QhPRhQrXsiz4dPJoO8eO/amfi2gseY2ojvdc2A9KJSOhSXNJtTO"
+  },
+  "org@org.com": {
+    "id": "98911092-f4ff-409a-b72d-bceb326816fd",
+    "name": "organizer",
+    "neighborhood": "VästraHamnen",
+    "email": "org@org.com",
+    "passwordHash": "$2a$10$jBQs8g8qQrVrPmZEYTERn.8MgMXxgl3aKYnDWY/.cwu7MURluEioy"
+  },
+  "yoyo@yo.com": {
+    "id": "992b1615-b8c5-49ab-81c7-80faa0863e63",
+    "name": "yoyo",
+    "neighborhood": "VästraHamnen",
+    "email": "yoyo@yo.com",
+    "passwordHash": "$2a$10$I4qjvjUAvRHEC7.76lcW2.pLjPcqODyxAlUF2fcAMfSyuo9I5EmW6",
+    "adminCode": "",
+    "role": "Neighbor"
+  }
+}
