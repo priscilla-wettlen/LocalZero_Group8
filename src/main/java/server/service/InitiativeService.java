@@ -1,6 +1,9 @@
 package server.service;
 
 import server.model.Initiative;
+import server.model.Neighborhood;
+import server.model.Visibility;
+import shared.Response;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,7 +24,7 @@ public class InitiativeService implements IInitiativeService{
     }
 
     @Override
-    public Initiative createInitiative(String title, String description, String initiativeType, String visibility, String creatorUserID) {
+    public Response createInitiative(String creator, String title, String description, String initiativeType, Neighborhood location, Visibility visibility) {
         return null;
     }
 

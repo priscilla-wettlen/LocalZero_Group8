@@ -21,4 +21,16 @@ public class Request implements Serializable {
     public HashMap<String, Object> getDetails() {
         return details;
     }
+
+
+    public void setDetails(HashMap<String, Object> details) {
+        this.details = details;
+    }
+    public void setUserActionType(UserActionType userActionType) {
+        this.userActionType = userActionType;
+    }
+
+    public  UserActionType getUserActionType() {
+        return userActionType;
+    }
 }
