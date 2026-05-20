@@ -57,8 +57,11 @@ public class DashboardFrame extends JFrame {
         menuPanel.add(new JLabel());
         menuPanel.add(new JLabel());
 
+
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, menuPanel, contentPanel);
         split.setDividerLocation(220);
+        JLabel roleLabel = new JLabel("Inloggad som: " + (user != null ? user.getRole() : "okänd")); 
+        add(roleLabel, BorderLayout.NORTH);
 
         add(split);
         contentPanel.setBorder(

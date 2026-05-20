@@ -1,6 +1,10 @@
 package server.service;
 
+import java.util.Map;
+import java.util.UUID;
+
 import org.mindrot.jbcrypt.BCrypt;
+
 import server.data_persistence.JsonSerializer;
 import server.model.Neighborhood;
 import server.model.Role;
@@ -19,12 +23,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AccountService implements IAccountService {
 
     private static AccountService accountServiceInstance;
-//    private final Map<String, User> usersById = new ConcurrentHashMap<>();
+
+    // Admin-kod
+    private static final String ADMIN_CODE = "1234";
+
+    //    private final Map<String, User> usersById = new ConcurrentHashMap<>();
     private final JsonSerializer<User> serializer =
         new JsonSerializer<>(User.class);
     private static final String FILE_PATH =
             "shared/users.json";
     private final Map<String, User> usersByEmail = serializer.loadSavedData(FILE_PATH);
+
 
     private AccountService(){}
 
@@ -42,7 +51,20 @@ public class AccountService implements IAccountService {
                          String password,
                          String adminCode,
                          String role){
-                         //HashSet<Role> roles) {
+
+        
+        if (role != null && role.equals(server.model.Role.CommunityOrganizer.name())) {
+            if (adminCode == null || adminCode.isBlank() || !ADMIN_CODE.equals(adminCode)) {
+                return null;
+            }
+        }
+
+        
+        if (role == null || !role.equals(server.model.Role.CommunityOrganizer.name())) {
+            adminCode = null;
+        }
+
+
 
         Map<String, User> users =
                 serializer.loadSavedData(FILE_PATH);
