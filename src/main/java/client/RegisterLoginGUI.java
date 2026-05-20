@@ -1,5 +1,6 @@
 package client;
 
+import client.user_actions.DashboardFrame;
 import server.model.Neighborhood;
 import server.model.Role;
 import server.model.User;
@@ -223,35 +224,31 @@ public class RegisterLoginGUI extends JFrame {
     }
 
     private void login() {
+        String email = loginEmailField.getText();
+        String password = new String(loginPasswordField.getPassword());
 
-        String email =
-                loginEmailField.getText();
-
-        String password =
-                new String(loginPasswordField.getPassword());
-
-        if (email.isBlank()
-                || password.isBlank()) {
-
-            statusLabel.setText(
-                    "Email and password required");
-
+        if (email.isBlank() || password.isBlank()) {
+            statusLabel.setText("Email and password required");
             return;
         }
 
-        String userId =
-                accountService.login(email, password);
+        String userId = accountService.login(email, password);
 
         if (userId.isEmpty()) {
-
-            statusLabel.setText(
-                    "Login failed");
-
-        } else {
-
-            statusLabel.setText(
-                    "Login successful. User ID = "
-                            + userId);
+            statusLabel.setText("Login failed");
+            return;
         }
+
+        User user = accountService.getUserByEmail(email);
+        if (user == null) {
+            statusLabel.setText("Login failed (user not found)");
+            return;
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            DashboardFrame dashboard = new DashboardFrame(user);
+            dashboard.setVisible(true);
+        });
+        dispose(); // close login window
     }
 }
