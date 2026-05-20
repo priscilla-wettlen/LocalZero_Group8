@@ -26,6 +26,9 @@ public class AccountService implements IAccountService {
             "shared/users.json";
     private final Map<String, User> usersByEmail = serializer.loadSavedData(FILE_PATH);
 
+    private static final String COMMUNITY_ORGANIZER_CODE =
+            "ABC";
+
     private AccountService(){}
 
     public static AccountService getAccountServiceInstance() {
@@ -41,8 +44,7 @@ public class AccountService implements IAccountService {
                          String email,
                          String password,
                          String adminCode,
-                         String role){
-                         //HashSet<Role> roles) {
+                         Role role) {
 
         Map<String, User> users =
                 serializer.loadSavedData(FILE_PATH);
@@ -54,13 +56,19 @@ public class AccountService implements IAccountService {
         String passwordHash =
                 BCrypt.hashpw(password, BCrypt.gensalt());
 
-
-
         String userId =
-                /*
-                * Creates the random IDs
-                * */
                 UUID.randomUUID().toString();
+
+        boolean isCommunityOrganizer =
+                adminCode != null
+                        && adminCode.equals(COMMUNITY_ORGANIZER_CODE);
+
+
+        if (isCommunityOrganizer) {
+            role = Role.COMMUNITY_ORGANIZER;
+        } else {
+            role = Role.RESIDENT;
+        }
 
         User user = new User(
                 userId,
@@ -68,9 +76,7 @@ public class AccountService implements IAccountService {
                 neighborhood,
                 email,
                 passwordHash,
-                adminCode,
                 role
-                //Role.Neighbor
         );
 
         users.put(email, user);

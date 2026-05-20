@@ -1,6 +1,6 @@
 package server.model;
 
 public enum Role {
-    CommunityOrganizer,
-    Neighbor,
+    RESIDENT,
+    COMMUNITY_ORGANIZER
 }

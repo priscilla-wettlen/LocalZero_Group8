@@ -2,7 +2,6 @@ package client;
 
 import client.user_actions.DashboardFrame;
 import server.model.Neighborhood;
-import server.model.Role;
 import server.model.User;
 import server.service.AccountService;
 
@@ -11,7 +10,7 @@ import java.awt.*;
 
 public class RegisterLoginGUI extends JFrame {
 
-    // LOGIN COMPONENTSs
+    // LOGIN COMPONENTS
     private JTextField loginEmailField;
     private JPasswordField loginPasswordField;
     private JButton loginButton;
@@ -22,13 +21,12 @@ public class RegisterLoginGUI extends JFrame {
     private JTextField registerEmailField;
     private JPasswordField registerPasswordField;
     private JTextField registerAdminCodeField;
-    private JComboBox<Role> roleBox;
     private JButton registerButton;
 
     // STATUS
     private JLabel statusLabel;
 
-    private  AccountService accountService;
+    private AccountService accountService;
 
     public RegisterLoginGUI() {
 
@@ -59,7 +57,8 @@ public class RegisterLoginGUI extends JFrame {
 
         JPanel mainPanel = new JPanel();
 
-        mainPanel.setLayout(new GridLayout(1, 2, 20, 20));
+        mainPanel.setLayout(
+                new GridLayout(1, 2, 20, 20));
 
         // =========================
         // LOGIN PANEL
@@ -99,7 +98,7 @@ public class RegisterLoginGUI extends JFrame {
                 BorderFactory.createTitledBorder("Register"));
 
         registerPanel.setLayout(
-                new GridLayout(11, 1, 10, 10));
+                new GridLayout(10, 1, 10, 10));
 
         registerNameField = new JTextField();
 
@@ -111,12 +110,6 @@ public class RegisterLoginGUI extends JFrame {
         registerPasswordField = new JPasswordField();
 
         registerAdminCodeField = new JTextField();
-
-        roleBox = new JComboBox<>();
-
-        roleBox.addItem(Role.Neighbor);
-
-        roleBox.addItem(Role.CommunityOrganizer);
 
         registerButton = new JButton("Register");
 
@@ -136,13 +129,10 @@ public class RegisterLoginGUI extends JFrame {
 
         registerPanel.add(registerPasswordField);
 
-        registerPanel.add(new JLabel("Admin Code (optional)"));
+        registerPanel.add(
+                new JLabel("Admin Code (optional)"));
 
         registerPanel.add(registerAdminCodeField);
-
-        registerPanel.add(new JLabel("Role"));
-
-        registerPanel.add(roleBox);
 
         registerPanel.add(registerButton);
 
@@ -181,28 +171,26 @@ public class RegisterLoginGUI extends JFrame {
                 registerNameField.getText();
 
         Neighborhood neighborhood =
-                (Neighborhood) neighborhoodBox.getSelectedItem();
+                (Neighborhood)
+                        neighborhoodBox.getSelectedItem();
 
         String email =
                 registerEmailField.getText();
 
         String password =
-                new String(registerPasswordField.getPassword());
+                new String(
+                        registerPasswordField.getPassword());
 
         String adminCode =
-                new String(registerAdminCodeField.getText());
-
-        Role selectedRole =
-                (Role) roleBox.getSelectedItem();
+                registerAdminCodeField.getText();
 
         if (name.isBlank()
                 || email.isBlank()
                 || password.isBlank()
-                || neighborhood == null
-                || selectedRole == null) {
+                || neighborhood == null) {
 
             statusLabel.setText(
-                    "All register fields, except Admin Code, are required");
+                    "All fields except admin code are required");
 
             return;
         }
@@ -212,8 +200,7 @@ public class RegisterLoginGUI extends JFrame {
                 neighborhood,
                 email,
                 password,
-                adminCode,
-                selectedRole != null ? selectedRole.name() : null
+                adminCode
         );
 
         if (user == null) {
@@ -224,37 +211,59 @@ public class RegisterLoginGUI extends JFrame {
         } else {
 
             statusLabel.setText(
-                    "Registered user: "
-                            + user.getEmail());
+                    "Registered as "
+                            + user.getRole());
         }
     }
 
     private void login() {
-        String email = loginEmailField.getText();
-        String password = new String(loginPasswordField.getPassword());
 
-        if (email.isBlank() || password.isBlank()) {
-            statusLabel.setText("Email and password required");
+        String email =
+                loginEmailField.getText();
+
+        String password =
+                new String(
+                        loginPasswordField.getPassword());
+
+        if (email.isBlank()
+                || password.isBlank()) {
+
+            statusLabel.setText(
+                    "Email and password required");
+
             return;
         }
 
-        String userId = accountService.login(email, password);
+        String userId =
+                accountService.login(email, password);
 
         if (userId.isEmpty()) {
-            statusLabel.setText("Login failed");
+
+            statusLabel.setText(
+                    "Login failed");
+
             return;
         }
 
-        User user = accountService.getUserByEmail(email);
+        User user =
+                accountService.getUserByEmail(email);
+
         if (user == null) {
-            statusLabel.setText("Login failed (user not found)");
+
+            statusLabel.setText(
+                    "Login failed (user not found)");
+
             return;
         }
 
         SwingUtilities.invokeLater(() -> {
-            DashboardFrame dashboard = new DashboardFrame(user);
+
+            DashboardFrame dashboard =
+                    new DashboardFrame(user);
+
             dashboard.setVisible(true);
         });
-        dispose(); // close login window
+
+        dispose();
     }
 }
