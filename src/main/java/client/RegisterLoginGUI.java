@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class RegisterLoginGUI extends JFrame {
 
-    // LOGIN COMPONENTS
+    // LOGIN COMPONENTSs
     private JTextField loginEmailField;
     private JPasswordField loginPasswordField;
     private JButton loginButton;
