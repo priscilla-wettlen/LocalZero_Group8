@@ -21,7 +21,7 @@ public class AccountService implements IAccountService {
     private static AccountService accountServiceInstance;
 //    private final Map<String, User> usersById = new ConcurrentHashMap<>();
     private final JsonSerializer<User> serializer =
-            new JsonSerializer<>();
+        new JsonSerializer<>(User.class);
     private static final String FILE_PATH =
             "shared/users.json";
     private final Map<String, User> usersByEmail = serializer.loadSavedData(FILE_PATH);
