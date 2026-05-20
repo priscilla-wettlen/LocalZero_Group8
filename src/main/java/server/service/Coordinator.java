@@ -27,7 +27,7 @@ public class Coordinator implements ICoordinator{
                 response = extractParamsCreateInitiative(paramsMap);
                 break;
             case "joinInitiative":
-                response = etxractParamsJoinInitiative(paramsMap);
+                response = extractParamsJoinInitiative(paramsMap);
                 break;
             case "postUpdate":
                 response = extractParamsPostUpdate(paramsMap);
@@ -80,7 +80,7 @@ public class Coordinator implements ICoordinator{
         return null;
     }
 
-    private Response etxractParamsJoinInitiative(HashMap<String, Object> params) {
+    private Response extractParamsJoinInitiative(HashMap<String, Object> params) {
         return null;
     }
 
