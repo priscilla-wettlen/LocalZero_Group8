@@ -52,5 +52,31 @@
     "passwordHash": "$2a$10$.zA2H47qZrRP9YNUmkT.u.HLtdRprpFgFPSjs/Hqsnp6kFUcdrJBa",
     "adminCode": "1234",
     "role": "CommunityOrganizer"
+  },
+  "mail@gmail.com": {
+    "id": "8d5d095f-8d6f-42eb-9080-929bda35c892",
+    "name": "Bella",
+    "neighborhood": "GamlaVäster",
+    "email": "mail@gmail.com",
+    "passwordHash": "$2a$10$wNkgGyv538tynNVeJ.gcXe0GMacetwe2IwkJLYMhEATQA9b4QHNP6",
+    "adminCode": "1234",
+    "role": "CommunityOrganizer"
+  },
+  "bella@gmail.com": {
+    "id": "4b6ebdae-3e3c-4017-9930-c52f88048175",
+    "name": "bella",
+    "neighborhood": "VästraHamnen",
+    "email": "bella@gmail.com",
+    "passwordHash": "$2a$10$PtmQSQGpUXWbCAMq9M0Zge5VMllMQ7N1QFqzLRTWfZJ/T5.xcZvK2",
+    "adminCode": "1234",
+    "role": "CommunityOrganizer"
+  },
+  "hej": {
+    "id": "a3ddb1b2-4e34-4a7f-b2d6-35a4830e2d69",
+    "name": "bella",
+    "neighborhood": "VästraHamnen",
+    "email": "hej",
+    "passwordHash": "$2a$10$XjIwih5mSfKYIic0odrDb.9Mf1Za6IHeoDZhhoMhdc39DtJX74lFy",
+    "role": "Resident"
   }
 }

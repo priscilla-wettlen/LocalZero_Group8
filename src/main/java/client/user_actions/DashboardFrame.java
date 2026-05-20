@@ -21,38 +21,38 @@ public class DashboardFrame extends JFrame {
         JPanel menuPanel = new JPanel(new GridLayout(8, 1, 0, 8));
         menuPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JButton communityBtn = new JButton("Community Board");
-        JButton activeTasksBtn = new JButton("Active Tasks");
-        JButton createTaskBtn = new JButton("Create New Task");
+        JButton createNewInitiative = new JButton("Create New Initiative");
         JButton forumBtn = new JButton("Forum");
+        JButton accountBtn = new JButton("My Account");
+        //JButton forumBtn = new JButton("Forum");
 
         Border buttonBorder = BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.DARK_GRAY),
                 BorderFactory.createEmptyBorder(8, 10, 8, 10)
         );
-        communityBtn.setBorder(buttonBorder);
-        activeTasksBtn.setBorder(buttonBorder);
-        createTaskBtn.setBorder(buttonBorder);
+        createNewInitiative.setBorder(buttonBorder);
         forumBtn.setBorder(buttonBorder);
+        accountBtn.setBorder(buttonBorder);
+        //forumBtn.setBorder(buttonBorder);
 
 //        boolean isOrganizer = user != null && user.getRoles() != null
 //                && user.getRoles().contains(Role.CommunityOrganizer);
 //        createTaskBtn.setEnabled(isOrganizer);
 
-        contentPanel.add(makeLabelPanel("Community Board View"), "community");
+        contentPanel.add(makeLabelPanel("Create New Initiative"), "community");
         contentPanel.add(makeLabelPanel("Active Tasks View"), "tasks");
-        contentPanel.add(makeLabelPanel("Create New Task View"), "create");
+        contentPanel.add(new CreateInitiativePanel(), "Create");
         contentPanel.add(makeLabelPanel("Forum View"), "forum");
 
-        communityBtn.addActionListener(e -> cardLayout.show(contentPanel, "community"));
-        activeTasksBtn.addActionListener(e -> cardLayout.show(contentPanel, "tasks"));
-        createTaskBtn.addActionListener(e -> cardLayout.show(contentPanel, "create"));
+        createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
         forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
+        accountBtn.addActionListener(e -> cardLayout.show(contentPanel, "my account"));
+        //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
 
-        menuPanel.add(communityBtn);
-        menuPanel.add(activeTasksBtn);
-        menuPanel.add(createTaskBtn);
+        menuPanel.add(createNewInitiative);
         menuPanel.add(forumBtn);
+        menuPanel.add(accountBtn);
+        //menuPanel.add(forumBtn);
         menuPanel.add(new JLabel());
         menuPanel.add(new JLabel());
         menuPanel.add(new JLabel());
