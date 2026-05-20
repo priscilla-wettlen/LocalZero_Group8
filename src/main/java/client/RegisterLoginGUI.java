@@ -112,11 +112,11 @@ public class RegisterLoginGUI extends JFrame {
         registerPasswordField = new JPasswordField();
 
         registerAdminCodeField = new JTextField();
-        registerAdminCodeLabel = new JLabel("Admin Code (optional)");
+        registerAdminCodeLabel = new JLabel("Admin Code");
 
         roleBox = new JComboBox<>();
 
-        roleBox.addItem(Role.Neighbor);
+        roleBox.addItem(Role.Resident);
 
         roleBox.addItem(Role.CommunityOrganizer);
 
