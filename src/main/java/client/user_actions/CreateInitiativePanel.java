@@ -1,7 +1,12 @@
 package client.user_actions;
 
+import server.model.Neighborhood;
+import server.model.Visibility;
+import server.service.InitiativeService;
+
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class CreateInitiativePanel extends JPanel {
 
@@ -19,6 +24,9 @@ public class CreateInitiativePanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JComboBox<Neighborhood> neighborhoodBox = new JComboBox<>(Neighborhood.values());
+
 
         // Title
         gbc.gridx = 0;
@@ -120,8 +128,33 @@ public class CreateInitiativePanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "Title and description are required.");
                 return;
             }
-            String visibility = publicCheckBox.isSelected() ? "Public" : "Neighborhood Specific";
-            JOptionPane.showMessageDialog(this, "Initiative created: " + t + "\nVisibility: " + visibility);
+
+            Visibility visibility = publicCheckBox.isSelected()
+                    ? Visibility.Public
+                    : Visibility.Neighborhood;
+
+            Neighborhood location = (Neighborhood) neighborhoodBox.getSelectedItem();
+            if (location == null) {
+                JOptionPane.showMessageDialog(this, "Location is required.");
+                return;
+            }
+            String duration = durationField.getText().trim();
+            String initiativeType = "General";
+            URL imageUrl = null; // optional: convert selected file to URL
+
+            InitiativeService.getInitiativeServiceInstance()
+                    .createInitiative(
+                            "creator-email-or-name",
+                            t,
+                            d,
+                            initiativeType,
+                            location,
+                            visibility,
+                            duration,
+                            imageUrl
+                    );
+
+            JOptionPane.showMessageDialog(this, "Initiative created: " + t);
             titleField.setText("");
             descArea.setText("");
             locationField.setText("");

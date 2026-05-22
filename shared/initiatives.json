@@ -1,0 +1,38 @@
+{
+  "bf4b3c53-aa15-4a4f-a2f2-83d52923c53c": {
+    "id": "bf4b3c53-aa15-4a4f-a2f2-83d52923c53c",
+    "title": "sgsgsd",
+    "initiativeType": "General",
+    "duration": "ewwerwer",
+    "visibility": "Public",
+    "description": "sdgsg",
+    "location": "VästraHamnen",
+    "creator": "creator-email-or-name",
+    "success": false,
+    "responseParam": {}
+  },
+  "9f1d0378-32cf-4b0b-a872-fda5a5375606": {
+    "id": "9f1d0378-32cf-4b0b-a872-fda5a5375606",
+    "title": "Städa Sjö",
+    "initiativeType": "General",
+    "duration": "6 månader typ",
+    "visibility": "Public",
+    "description": "Städa pilldamsparken eller nåt",
+    "location": "VästraHamnen",
+    "creator": "creator-email-or-name",
+    "success": false,
+    "responseParam": {}
+  },
+  "719c5473-c8c6-42cc-8fb0-d70b4f85048e": {
+    "id": "719c5473-c8c6-42cc-8fb0-d70b4f85048e",
+    "title": "sgsdg",
+    "initiativeType": "General",
+    "duration": "dfd",
+    "visibility": "Neighborhood",
+    "description": "sdgsgsdg",
+    "location": "VästraHamnen",
+    "creator": "creator-email-or-name",
+    "success": false,
+    "responseParam": {}
+  }
+}
