@@ -10,7 +10,7 @@ import java.util.Map;
 public interface IInitiativeService {
 
     Initiative createInitiative(String creator, String title, String description, String initiativeType,
-                                Neighborhood location, Neighborhood creatorNeighborhood, Visibility visibility,
+                                String specificLocation, Neighborhood creatorNeighborhood, Visibility visibility,
                                 String duration, URL image);
 
     Map<String, Initiative> getAllInitiatives();

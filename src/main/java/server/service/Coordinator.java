@@ -67,13 +67,14 @@ public class Coordinator implements ICoordinator{
         String creator = (String) params.get("username");
         String title = params.get("title").toString();
         String description = params.get("description").toString();
-        Neighborhood location = (Neighborhood) params.get("neighborhood");
+        String specificLocation = params.get("specificLocation") != null
+                ? params.get("specificLocation").toString() : "";
         Neighborhood creatorNeighborhood = (Neighborhood) params.get("creatorNeighborhood");
         InitiativeType type = (InitiativeType) params.get("type");
         Visibility visibility = (Visibility) params.get("visibility");
         String duration = params.get("duration") != null ? params.get("duration").toString() : "";
 
-        return createInitiative(creator, title, description, type, location, creatorNeighborhood, visibility, duration);
+        return createInitiative(creator, title, description, type, specificLocation, creatorNeighborhood, visibility, duration);
     }
 
 
@@ -118,11 +119,11 @@ public class Coordinator implements ICoordinator{
 
     @Override
     public Initiative createInitiative(String creator, String title, String description, InitiativeType type,
-                                       Neighborhood location, Neighborhood creatorNeighborhood,
+                                       String specificLocation, Neighborhood creatorNeighborhood,
                                        Visibility visibility, String duration) {
         String initiativeType = type != null ? type.name() : "General";
         return initiativeService.createInitiative(
-                creator, title, description, initiativeType, location, creatorNeighborhood,
+                creator, title, description, initiativeType, specificLocation, creatorNeighborhood,
                 visibility, duration, null);
     }
 

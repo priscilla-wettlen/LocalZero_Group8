@@ -78,5 +78,13 @@
     "email": "hej",
     "passwordHash": "$2a$10$XjIwih5mSfKYIic0odrDb.9Mf1Za6IHeoDZhhoMhdc39DtJX74lFy",
     "role": "Resident"
+  },
+  "heja": {
+    "id": "c59392ff-f9fc-487d-9579-0acc79c36446",
+    "name": "heja",
+    "neighborhood": "VästraSorgenfri",
+    "email": "heja",
+    "passwordHash": "$2a$10$A9kinYytZlvtU77jCJDglOAMJ5Kzo1sLvVjhZEofWvEUYDYcvwjzW",
+    "role": "Resident"
   }
 }

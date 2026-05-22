@@ -29,9 +29,6 @@ public class CreateInitiativePanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JComboBox<Neighborhood> neighborhoodBox = new JComboBox<>(Neighborhood.values());
-
-
         // Title
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -137,19 +134,23 @@ public class CreateInitiativePanel extends JPanel {
                     ? Visibility.Public
                     : Visibility.Neighborhood;
 
-            Neighborhood location = (Neighborhood) neighborhoodBox.getSelectedItem();
-            if (location == null) {
+            String specificLocation = locationField.getText().trim();
+            if (specificLocation.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Location is required.");
                 return;
             }
+
+            if (currentUser == null || currentUser.getNeighborhood() == null) {
+                JOptionPane.showMessageDialog(this, "You must be logged in with a registered neighborhood.");
+                return;
+            }
+
             String duration = durationField.getText().trim();
             String initiativeType = "General";
             URL imageUrl = null; // optional: convert selected file to URL
 
-            String creator = currentUser != null ? currentUser.getEmail() : "anonymous";
-            Neighborhood creatorNeighborhood = currentUser != null
-                    ? currentUser.getNeighborhood()
-                    : location;
+            String creator = currentUser.getEmail();
+            Neighborhood creatorNeighborhood = currentUser.getNeighborhood();
 
             InitiativeService.getInitiativeServiceInstance()
                     .createInitiative(
@@ -157,7 +158,7 @@ public class CreateInitiativePanel extends JPanel {
                             t,
                             d,
                             initiativeType,
-                            location,
+                            specificLocation,
                             creatorNeighborhood,
                             visibility,
                             duration,

@@ -33,7 +33,7 @@ public class InitiativeService implements IInitiativeService {
 
     @Override
     public Initiative createInitiative(String creator, String title, String description, String initiativeType,
-                                       Neighborhood location, Neighborhood creatorNeighborhood,
+                                       String specificLocation, Neighborhood creatorNeighborhood,
                                        Visibility visibility, String duration, URL image) {
         // Validate input
         if (title == null || title.isEmpty() || description == null || description.isEmpty()) {
@@ -45,7 +45,7 @@ public class InitiativeService implements IInitiativeService {
 
         // Create a new Initiative object
         Initiative initiative = new Initiative(id, title, initiativeType, duration, visibility, description,
-                location, creatorNeighborhood, image, creator);
+                specificLocation, creatorNeighborhood, image, creator);
 
         // Add the initiative to the map
         initiatives.put(id, initiative);
@@ -82,9 +82,6 @@ public class InitiativeService implements IInitiativeService {
             return false;
         }
         Neighborhood creatorNeighborhood = initiative.getCreatorNeighborhood();
-        if (creatorNeighborhood == null) {
-            creatorNeighborhood = initiative.getLocation();
-        }
-        return viewerNeighborhood == creatorNeighborhood;
+        return creatorNeighborhood != null && viewerNeighborhood == creatorNeighborhood;
     }
 }

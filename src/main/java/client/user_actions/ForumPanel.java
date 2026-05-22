@@ -99,10 +99,14 @@ public class ForumPanel extends JPanel {
         JLabel titleLabel = new JLabel(initiative.getTitle());
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 15f));
 
+        String neighborhoodText = initiative.getCreatorNeighborhood() != null
+                ? formatNeighborhoodName(initiative.getCreatorNeighborhood().name())
+                : "—";
         JLabel metaLabel = new JLabel(String.format(
-                "%s · %s · %s · by %s",
+                "<html>%s · <b>Neighborhood:</b> %s · <b>Location:</b> %s · %s · by %s</html>",
                 nullToDash(initiative.getInitiativeType()),
-                nullToDash(initiative.getLocation() != null ? initiative.getLocation().name() : null),
+                neighborhoodText,
+                nullToDash(initiative.getSpecificLocation()),
                 nullToDash(initiative.getDuration()),
                 nullToDash(initiative.getCreator())
         ));
@@ -140,5 +144,13 @@ public class ForumPanel extends JPanel {
 
     private static String nullToDash(String value) {
         return value == null || value.isBlank() ? "—" : value;
+    }
+
+    /** Turns enum-style names like VästraHamnen into readable labels. */
+    private static String formatNeighborhoodName(String enumName) {
+        if (enumName == null || enumName.isBlank()) {
+            return "—";
+        }
+        return enumName.replaceAll("([a-zåäö])([A-ZÅÄÖ])", "$1 $2");
     }
 }

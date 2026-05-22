@@ -1,12 +1,12 @@
 package shared;
 
-import server.model.Neighborhood;
-import server.model.Visibility;
-
 import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+
+import server.model.Neighborhood;
+import server.model.Visibility;
 
 public class Initiative implements Serializable {
     private String id;
@@ -15,7 +15,9 @@ public class Initiative implements Serializable {
     private String duration;
     private Visibility visibility;
     private String description;
-    private Neighborhood location;
+    /** Free-text place for the initiative (e.g. "at home eating soup"). */
+    private String specificLocation;
+    /** Creator's registered neighborhood, used for neighborhood-only visibility. */
     private Neighborhood creatorNeighborhood;
     private URL image;
     private String creator;
@@ -30,7 +32,7 @@ public class Initiative implements Serializable {
     }
 
     public Initiative(String id, String title, String initiativeType, String duration, Visibility visibility,
-                      String description, Neighborhood location, Neighborhood creatorNeighborhood,
+                      String description, String specificLocation, Neighborhood creatorNeighborhood,
                       URL image, String creator) {
         this.id = id;
         this.title = title;
@@ -38,7 +40,7 @@ public class Initiative implements Serializable {
         this.duration = duration;
         this.visibility = visibility;
         this.description = description;
-        this.location = location;
+        this.specificLocation = specificLocation;
         this.creatorNeighborhood = creatorNeighborhood;
         this.image = image;
         this.creator = creator;
@@ -98,8 +100,8 @@ public class Initiative implements Serializable {
         return description;
     }
 
-    public Neighborhood getLocation() {
-        return location;
+    public String getSpecificLocation() {
+        return specificLocation;
     }
 
     public Neighborhood getCreatorNeighborhood() {
