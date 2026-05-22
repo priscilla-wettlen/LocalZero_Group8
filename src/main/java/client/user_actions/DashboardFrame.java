@@ -11,8 +11,11 @@ import java.awt.*;
 public class DashboardFrame extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel contentPanel = new JPanel(cardLayout);
+    private final User loggedInUser;
+    private ForumPanel forumPanel;
 
     public DashboardFrame(User user) {
+        this.loggedInUser = user;
         setTitle("LocalZero Dashboard");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,11 +44,15 @@ public class DashboardFrame extends JFrame {
 
         contentPanel.add(makeLabelPanel("Create New Initiative"), "community");
         contentPanel.add(makeLabelPanel("Active Tasks View"), "tasks");
-        contentPanel.add(new CreateInitiativePanel(), "Create");
-        contentPanel.add(makeLabelPanel("Forum View"), "forum");
+        contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
+        forumPanel = new ForumPanel(loggedInUser);
+        contentPanel.add(forumPanel, "forum");
 
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
-        forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
+        forumBtn.addActionListener(e -> {
+            forumPanel.refreshForum();
+            cardLayout.show(contentPanel, "forum");
+        });
         accountBtn.addActionListener(e -> cardLayout.show(contentPanel, "my account"));
         //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
 

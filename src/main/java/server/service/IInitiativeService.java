@@ -9,9 +9,14 @@ import java.util.Map;
 
 public interface IInitiativeService {
 
-    public Initiative createInitiative(String creator, String title, String description, String initiativeType, Neighborhood location, Visibility visibility, String duration, URL image);
-        Map<String, Initiative> getAllInitiatives();
-    }
+    Initiative createInitiative(String creator, String title, String description, String initiativeType,
+                                Neighborhood location, Neighborhood creatorNeighborhood, Visibility visibility,
+                                String duration, URL image);
+
+    Map<String, Initiative> getAllInitiatives();
+
+    java.util.List<Initiative> getForumInitiativesForViewer(Neighborhood viewerNeighborhood);
+}
     /*
     public void joinInitiative(String initiativeID, String userID);
 

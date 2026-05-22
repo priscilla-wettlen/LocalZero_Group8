@@ -1,6 +1,7 @@
 package client.user_actions;
 
 import server.model.Neighborhood;
+import server.model.User;
 import server.model.Visibility;
 import server.service.InitiativeService;
 
@@ -10,7 +11,10 @@ import java.net.URL;
 
 public class CreateInitiativePanel extends JPanel {
 
-    public CreateInitiativePanel() {
+    private final User currentUser;
+
+    public CreateInitiativePanel(User currentUser) {
+        this.currentUser = currentUser;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -142,19 +146,26 @@ public class CreateInitiativePanel extends JPanel {
             String initiativeType = "General";
             URL imageUrl = null; // optional: convert selected file to URL
 
+            String creator = currentUser != null ? currentUser.getEmail() : "anonymous";
+            Neighborhood creatorNeighborhood = currentUser != null
+                    ? currentUser.getNeighborhood()
+                    : location;
+
             InitiativeService.getInitiativeServiceInstance()
                     .createInitiative(
-                            "creator-email-or-name",
+                            creator,
                             t,
                             d,
                             initiativeType,
                             location,
+                            creatorNeighborhood,
                             visibility,
                             duration,
                             imageUrl
                     );
 
-            JOptionPane.showMessageDialog(this, "Initiative created: " + t);
+            JOptionPane.showMessageDialog(this,
+                    "Initiative created and posted to the forum: " + t);
             titleField.setText("");
             descArea.setText("");
             locationField.setText("");

@@ -8,6 +8,7 @@ import shared.Request;
 import shared.Initiative;
 
 import java.util.HashMap;
+import java.util.List;
 
 // The Coordinator gets an instance of every service.
 
@@ -23,23 +24,26 @@ public class Coordinator implements ICoordinator{
         Initiative response = null;
 
         switch (requestActionType){
-            case "createInitiative":
+            case "CreateInitiative":
                 response = extractParamsCreateInitiative(paramsMap);
                 break;
-            case "joinInitiative":
+            case "JoinInitiative":
                 response = extractParamsJoinInitiative(paramsMap);
                 break;
-            case "postUpdate":
+            case "PostUpdate":
                 response = extractParamsPostUpdate(paramsMap);
                 break;
-            case "comment":
+            case "Comment":
                 response = extractParamsComment(paramsMap);
                 break;
-            case "like":
+            case "Like":
                 response = extractParamsLike(paramsMap);
                 break;
-            case "logEcoAction":
+            case "LogEcoAction":
                 response = extractLogEcoActionParams(paramsMap);
+                break;
+            case "ViewInitiatives":
+                response = extractParamsViewForum(paramsMap);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid request type!");
@@ -51,15 +55,25 @@ public class Coordinator implements ICoordinator{
 /// "contract" and call the respective service! I didn't want all this in the switch
 
 
+    private Initiative extractParamsViewForum(HashMap<String, Object> params) {
+        Neighborhood viewerNeighborhood = (Neighborhood) params.get("viewerNeighborhood");
+        List<Initiative> initiatives = initiativeService.getForumInitiativesForViewer(viewerNeighborhood);
+        Initiative response = new Initiative(true, "Forum initiatives loaded");
+        response.putInitiativesList(initiatives);
+        return response;
+    }
+
     private Initiative extractParamsCreateInitiative(HashMap<String, Object> params){
         String creator = (String) params.get("username");
         String title = params.get("title").toString();
         String description = params.get("description").toString();
         Neighborhood location = (Neighborhood) params.get("neighborhood");
+        Neighborhood creatorNeighborhood = (Neighborhood) params.get("creatorNeighborhood");
         InitiativeType type = (InitiativeType) params.get("type");
         Visibility visibility = (Visibility) params.get("visibility");
+        String duration = params.get("duration") != null ? params.get("duration").toString() : "";
 
-        return createInitiative(creator, title, description, type, location, visibility);
+        return createInitiative(creator, title, description, type, location, creatorNeighborhood, visibility, duration);
     }
 
 
@@ -103,11 +117,13 @@ public class Coordinator implements ICoordinator{
     }
 
     @Override
-    public Initiative createInitiative(String creator, String title, String description, InitiativeType type, Neighborhood location, Visibility visibility) {
-
-
-        return null;
-
+    public Initiative createInitiative(String creator, String title, String description, InitiativeType type,
+                                       Neighborhood location, Neighborhood creatorNeighborhood,
+                                       Visibility visibility, String duration) {
+        String initiativeType = type != null ? type.name() : "General";
+        return initiativeService.createInitiative(
+                creator, title, description, initiativeType, location, creatorNeighborhood,
+                visibility, duration, null);
     }
 
     @Override

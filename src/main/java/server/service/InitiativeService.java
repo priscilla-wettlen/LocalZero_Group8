@@ -6,6 +6,9 @@ import server.model.Visibility;
 import shared.Initiative;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,7 +32,9 @@ public class InitiativeService implements IInitiativeService {
     }
 
     @Override
-    public Initiative createInitiative(String creator, String title, String description, String initiativeType, Neighborhood location, Visibility visibility, String duration, URL image) {
+    public Initiative createInitiative(String creator, String title, String description, String initiativeType,
+                                       Neighborhood location, Neighborhood creatorNeighborhood,
+                                       Visibility visibility, String duration, URL image) {
         // Validate input
         if (title == null || title.isEmpty() || description == null || description.isEmpty()) {
             throw new IllegalArgumentException("Title and description cannot be null or empty.");
@@ -39,7 +44,8 @@ public class InitiativeService implements IInitiativeService {
         String id = UUID.randomUUID().toString();
 
         // Create a new Initiative object
-        Initiative initiative = new Initiative(id, title, initiativeType, duration, visibility, description, location, image, creator);
+        Initiative initiative = new Initiative(id, title, initiativeType, duration, visibility, description,
+                location, creatorNeighborhood, image, creator);
 
         // Add the initiative to the map
         initiatives.put(id, initiative);
@@ -54,5 +60,31 @@ public class InitiativeService implements IInitiativeService {
     @Override
     public Map<String, Initiative> getAllInitiatives() {
         return new ConcurrentHashMap<>(initiatives);
+    }
+
+    @Override
+    public List<Initiative> getForumInitiativesForViewer(Neighborhood viewerNeighborhood) {
+        List<Initiative> visible = new ArrayList<>();
+        for (Initiative initiative : initiatives.values()) {
+            if (isVisibleOnForum(initiative, viewerNeighborhood)) {
+                visible.add(initiative);
+            }
+        }
+        visible.sort(Comparator.comparing(Initiative::getTitle, String.CASE_INSENSITIVE_ORDER));
+        return visible;
+    }
+
+    private boolean isVisibleOnForum(Initiative initiative, Neighborhood viewerNeighborhood) {
+        if (initiative.getVisibility() == Visibility.Public) {
+            return true;
+        }
+        if (viewerNeighborhood == null) {
+            return false;
+        }
+        Neighborhood creatorNeighborhood = initiative.getCreatorNeighborhood();
+        if (creatorNeighborhood == null) {
+            creatorNeighborhood = initiative.getLocation();
+        }
+        return viewerNeighborhood == creatorNeighborhood;
     }
 }
