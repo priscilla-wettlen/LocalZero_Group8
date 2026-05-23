@@ -7,14 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import server.data_persistence.JsonSerializer;
 import server.model.Neighborhood;
-import server.model.Role;
 import server.model.User;
-
-import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 //This class has to be a Singleton like the rest of the Services!!
@@ -104,9 +97,10 @@ public class AccountService implements IAccountService {
         return user;
     }
 
+
     @Override
-    public String login(String email,
-                        String password) {
+    public User login(String email,
+                      String password) {
 
         User user = usersByEmail.get(email);
 
@@ -123,16 +117,17 @@ public class AccountService implements IAccountService {
         }
 
         if (user == null) {
-            return "";
+            return null;
         }
 
-        if (!BCrypt.checkpw(password,
+        if (!BCrypt.checkpw(
+                password,
                 user.getPasswordHash())) {
 
-            return "";
+            return null;
         }
 
-        return user.getId();
+        return user;
     }
 
 //    public User getUser(String userID){

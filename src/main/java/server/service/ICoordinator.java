@@ -7,7 +7,7 @@ import server.model.InitiativeType;
 import server.model.Neighborhood;
 import server.model.User;
 import server.model.Visibility;
-import shared.Initiative;
+import protocol.Initiative;
 
 public interface ICoordinator {
     public User login(String username, String password);

@@ -1,13 +1,12 @@
 package client;
 
-import shared.Request;
-import shared.Response;
+import protocol.Request;
+import protocol.Initiative;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.HashMap;
 
 public class ClientConnectionManager {
     private Socket socket;
@@ -15,27 +14,36 @@ public class ClientConnectionManager {
     private ObjectOutputStream out;
     private String token;
 
-    public ClientConnectionManager(int port, String host) throws IOException {
+    public ClientConnectionManager(String host,
+                                   int port)
+            throws IOException {
+
         this.socket = new Socket(host, port);
 
-        this.in = new ObjectInputStream(socket.getInputStream());
-        this.out = new ObjectOutputStream(socket.getOutputStream());
+        this.out = new ObjectOutputStream(
+                socket.getOutputStream());
+
+        out.flush();
+
+        this.in = new ObjectInputStream(
+                socket.getInputStream());
     }
 
 
-    public HashMap<String, Object> sendRequest(Request request){
-        HashMap<String, Object> responseParam = new HashMap<>();
-        try{
+    public Initiative sendRequest(Request request) {
+        Initiative response = null;
+        try {
             out.writeObject(request);
-            Response response = (Response) in.readObject();
-            if(response.isSuccess()){
-                responseParam = response.getResponseParam();
-            }
-
-        }catch(ClassNotFoundException|IOException|RuntimeException e){
+            out.flush();
+            response = (Initiative) in.readObject();
+        } catch (ClassNotFoundException
+                 | IOException
+                 | RuntimeException e) {
             System.out.println("Error sending request");
+
+            e.printStackTrace();
         }
-        return responseParam;
+        return response;
     }
 
 

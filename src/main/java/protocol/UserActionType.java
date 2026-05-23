@@ -1,4 +1,4 @@
-package shared;
+package protocol;
 
 public enum UserActionType {
     Register,

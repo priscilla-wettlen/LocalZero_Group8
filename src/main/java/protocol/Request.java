@@ -1,4 +1,4 @@
-package shared;
+package protocol;
 
 import java.io.Serializable;
 import java.util.HashMap;

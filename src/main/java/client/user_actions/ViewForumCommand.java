@@ -3,9 +3,9 @@ package client.user_actions;
 import client.ClientConnectionManager;
 import server.model.Neighborhood;
 import server.service.InitiativeService;
-import shared.Initiative;
-import shared.Request;
-import shared.UserActionType;
+import protocol.Initiative;
+import protocol.Request;
+import protocol.UserActionType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +57,7 @@ public class ViewForumCommand extends BaseUserCommand implements IUserCommand {
             loadedInitiatives = InitiativeService.getInitiativeServiceInstance()
                     .getForumInitiativesForViewer(viewerNeighborhood);
         }
+
     }
 
     public List<Initiative> getLoadedInitiatives() {

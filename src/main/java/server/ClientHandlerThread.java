@@ -2,9 +2,8 @@ package server;
 
 import server.security.IAuthHandler;
 import server.service.Coordinator;
-import server.service.InitiativeService;
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -25,15 +24,26 @@ public class ClientHandlerThread implements Runnable {
 
     @Override
     public void run() {
-        try(ObjectInputStream ins = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream outs = new ObjectOutputStream(socket.getOutputStream())){
-            while(true)
-            {
-                Request request = (Request) ins.readObject();
-                Initiative response = handleRequest(request);
+        try (
+                ObjectOutputStream outs =
+                        new ObjectOutputStream(
+                                socket.getOutputStream());
+                ObjectInputStream ins =
+                        new ObjectInputStream(
+                                socket.getInputStream())
+        ) {
+            outs.flush();
+            while (true) {
+                Request request =
+                        (Request) ins.readObject();
+                Initiative response =
+                        handleRequest(request);
                 outs.writeObject(response);
+                outs.flush();
             }
-        }catch(IOException | ClassNotFoundException e){
+
+        } catch (IOException
+                 | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

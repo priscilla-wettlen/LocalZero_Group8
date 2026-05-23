@@ -1,9 +1,10 @@
 package server.service;
 
 import server.data_persistence.JsonSerializer;
+import server.model.Comment;
 import server.model.Neighborhood;
 import server.model.Visibility;
-import shared.Initiative;
+import protocol.Initiative;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,14 +64,34 @@ public class InitiativeService implements IInitiativeService {
     }
 
     @Override
-    public List<Initiative> getForumInitiativesForViewer(Neighborhood viewerNeighborhood) {
-        List<Initiative> visible = new ArrayList<>();
-        for (Initiative initiative : initiatives.values()) {
-            if (isVisibleOnForum(initiative, viewerNeighborhood)) {
+    public List<Initiative> getForumInitiativesForViewer(
+            Neighborhood viewerNeighborhood) {
+
+        // Reload latest initiatives from JSON
+        initiatives.clear();
+
+        initiatives.putAll(
+                serializer.loadSavedData(FILE_PATH));
+
+        List<Initiative> visible =
+                new ArrayList<>();
+
+        for (Initiative initiative
+                : initiatives.values()) {
+
+            if (isVisibleOnForum(
+                    initiative,
+                    viewerNeighborhood)) {
+
                 visible.add(initiative);
             }
         }
-        visible.sort(Comparator.comparing(Initiative::getTitle, String.CASE_INSENSITIVE_ORDER));
+
+        visible.sort(
+                Comparator.comparing(
+                        Initiative::getTitle,
+                        String.CASE_INSENSITIVE_ORDER));
+
         return visible;
     }
 
@@ -83,5 +104,39 @@ public class InitiativeService implements IInitiativeService {
         }
         Neighborhood creatorNeighborhood = initiative.getCreatorNeighborhood();
         return creatorNeighborhood != null && viewerNeighborhood == creatorNeighborhood;
+    }
+
+
+    public void likeInitiative(String initiativeId) {
+
+        Initiative initiative =
+                initiatives.get(initiativeId);
+
+        if (initiative == null) {
+            return;
+        }
+
+        initiative.addLike();
+
+        serializer.save(FILE_PATH, initiatives);
+    }
+
+    public void addComment(String initiativeId,
+                           String author,
+                           String text) {
+
+        Initiative initiative =
+                initiatives.get(initiativeId);
+
+        if (initiative == null) {
+            return;
+        }
+
+        Comment comment =
+                new Comment(author, text);
+
+        initiative.addComment(comment);
+
+        serializer.save(FILE_PATH, initiatives);
     }
 }

@@ -3,10 +3,10 @@ package client.user_actions;
 import client.ClientConnectionManager;
 import server.model.InitiativeType;
 import server.model.Neighborhood;
-import shared.UserActionType;
+import protocol.UserActionType;
 import server.model.Visibility;
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 import java.time.Instant;
 import java.util.Date;

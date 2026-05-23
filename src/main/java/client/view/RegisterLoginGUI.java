@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RegisterLoginGUI extends JFrame {
-
+    private final ClientConnectionManager clientConnectionManager;
     // LOGIN COMPONENTSs
     private JTextField loginEmailField;
     private JPasswordField loginPasswordField;
@@ -28,9 +28,9 @@ public class RegisterLoginGUI extends JFrame {
     // STATUS
     private JLabel statusLabel;
 
-    private  AccountService accountService;
+    private AccountService accountService;
 
-    public RegisterLoginGUI() {
+    public RegisterLoginGUI(ClientConnectionManager clientConnectionManager) {
 
         accountService =
                 AccountService.getAccountServiceInstance();
@@ -40,6 +40,8 @@ public class RegisterLoginGUI extends JFrame {
         initializeComponents();
 
         setVisible(true);
+
+        this.clientConnectionManager = clientConnectionManager;
     }
 
     private void initializeWindow() {
@@ -246,31 +248,46 @@ public class RegisterLoginGUI extends JFrame {
     }
 
     private void login() {
-        String email = loginEmailField.getText();
-        String password = new String(loginPasswordField.getPassword());
 
-        if (email.isBlank() || password.isBlank()) {
-            statusLabel.setText("Email and password required");
+        String email =
+                loginEmailField.getText();
+
+        String password =
+                new String(
+                        loginPasswordField.getPassword());
+
+        if (email.isBlank()
+                || password.isBlank()) {
+
+            statusLabel.setText(
+                    "Email and password required");
+
             return;
         }
 
-        String userId = accountService.login(email, password);
+        User user =
+                accountService.login(
+                        email,
+                        password);
 
-        if (userId.isEmpty()) {
-            statusLabel.setText("Login failed");
-            return;
-        }
-
-        User user = accountService.getUserByEmail(email);
         if (user == null) {
-            statusLabel.setText("Login failed (user not found)");
+
+            statusLabel.setText(
+                    "Login failed");
+
             return;
         }
 
         SwingUtilities.invokeLater(() -> {
-            DashboardFrame dashboard = new DashboardFrame(user);
+
+            DashboardFrame dashboard =
+                    new DashboardFrame(
+                            user,
+                            clientConnectionManager);
+
             dashboard.setVisible(true);
         });
-        dispose(); // close login window
+
+        dispose();
     }
 }

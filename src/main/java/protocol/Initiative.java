@@ -1,10 +1,12 @@
-package shared;
+package protocol;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import server.model.Comment;
 import server.model.Neighborhood;
 import server.model.Visibility;
 
@@ -25,6 +27,9 @@ public class Initiative implements Serializable {
     private boolean success;
     private String message;
     private HashMap<String, Object> responseParam = new HashMap<>();
+
+    private int likes = 0;
+    private List<Comment> comments = new ArrayList<>();
 
     public Initiative(boolean success, String message) {
         this.success = success;
@@ -114,5 +119,21 @@ public class Initiative implements Serializable {
 
     public String getCreator() {
         return creator;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void addLike() {
+        likes++;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }

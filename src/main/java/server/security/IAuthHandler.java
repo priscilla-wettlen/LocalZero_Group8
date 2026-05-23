@@ -1,7 +1,7 @@
 package server.security;
 
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 public interface IAuthHandler {
 
