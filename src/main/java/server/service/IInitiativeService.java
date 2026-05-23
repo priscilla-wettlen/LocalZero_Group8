@@ -16,6 +16,12 @@ public interface IInitiativeService {
     Map<String, Initiative> getAllInitiatives();
 
     java.util.List<Initiative> getForumInitiativesForViewer(Neighborhood viewerNeighborhood);
+
+    void likeInitiative(String initiativeId);
+
+    void addComment(String initiativeId,
+                    String author,
+                    String text);
 }
     /*
     public void joinInitiative(String initiativeID, String userID);

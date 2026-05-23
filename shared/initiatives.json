@@ -1,79 +1,179 @@
 {
-  "661f3f4e-81b1-43b1-a57e-9200570b1428": {
-    "id": "661f3f4e-81b1-43b1-a57e-9200570b1428",
-    "title": "byta mat",
+  "9e1b8dec-6898-448d-a348-f6b8be55eae7": {
+    "id": "9e1b8dec-6898-448d-a348-f6b8be55eae7",
+    "title": "Grill",
     "initiativeType": "SwapFood",
-    "duration": "5 minuter",
+    "duration": "3 hrs",
     "visibility": "Neighborhood",
-    "description": "jag är hungrid",
-    "specificLocation": "lund",
-    "creatorNeighborhood": "VästraHamnen",
-    "creator": "hej",
+    "description": "grilling meat",
+    "specificLocation": "my haus",
+    "creatorNeighborhood": "Sofielund",
+    "creator": "este@ban.com",
     "success": true,
-    "responseParam": {}
+    "responseParam": {},
+    "likes": 2,
+    "comments": [
+      {
+        "text": "sounds good",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 20,
+            "minute": 54,
+            "second": 35,
+            "nano": 680062000
+          }
+        }
+      },
+      {
+        "text": "fantastic",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 21,
+            "minute": 11,
+            "second": 2,
+            "nano": 896407000
+          }
+        }
+      },
+      {
+        "text": "sounds fun",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 21,
+            "minute": 13,
+            "second": 18,
+            "nano": 268643000
+          }
+        }
+      },
+      {
+        "text": "yesss",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 21,
+            "minute": 16,
+            "second": 50,
+            "nano": 60316000
+          }
+        }
+      },
+      {
+        "author": "Lola ",
+        "text": "ysysysysys",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 21,
+            "minute": 25,
+            "second": 14,
+            "nano": 648307000
+          }
+        }
+      }
+    ]
   },
-  "58ad0d72-dd91-4b81-9476-9751a73e40be": {
-    "id": "58ad0d72-dd91-4b81-9476-9751a73e40be",
-    "title": "klippa häcken",
+  "403da7a9-026e-4e30-a586-84eb2800cd31": {
+    "id": "403da7a9-026e-4e30-a586-84eb2800cd31",
+    "title": "Partyyyy",
     "initiativeType": "GardenActivity",
-    "duration": "3h",
+    "duration": "1 day",
     "visibility": "Neighborhood",
-    "description": "vi ska hjälpas åt",
-    "specificLocation": "innegården",
-    "creatorNeighborhood": "VästraHamnen",
-    "creator": "hej",
+    "description": "Partayyyy",
+    "specificLocation": "My haus",
+    "creatorNeighborhood": "Sofielund",
+    "creator": "lola@mail.com",
     "success": true,
-    "responseParam": {}
+    "responseParam": {},
+    "likes": 1,
+    "comments": [
+      {
+        "author": "0b22da9b-df49-4197-a470-d1afe05b3f12",
+        "text": "going",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 19,
+            "minute": 57,
+            "second": 52,
+            "nano": 431898000
+          }
+        }
+      },
+      {
+        "author": "Lola ",
+        "text": "kullll",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 23
+          },
+          "time": {
+            "hour": 21,
+            "minute": 25,
+            "second": 23,
+            "nano": 796771000
+          }
+        }
+      }
+    ]
   },
-  "b5265506-ccdd-4bd0-ba24-cd239a981daf": {
-    "id": "b5265506-ccdd-4bd0-ba24-cd239a981daf",
-    "title": "hej",
-    "initiativeType": "General",
-    "duration": "10min",
-    "visibility": "Neighborhood",
-    "description": "då",
-    "specificLocation": "hemma",
-    "creatorNeighborhood": "VästraSorgenfri",
-    "creator": "heja",
-    "success": true,
-    "responseParam": {}
-  },
-  "42ea2903-8ab4-4678-b6e2-818b8fdc3a73": {
-    "id": "42ea2903-8ab4-4678-b6e2-818b8fdc3a73",
-    "title": "he",
-    "initiativeType": "General",
-    "duration": "10 mån",
+  "230908d8-235c-4269-939a-e44f514deac7": {
+    "id": "230908d8-235c-4269-939a-e44f514deac7",
+    "title": "Clean the garden",
+    "initiativeType": "EcoAction",
+    "duration": "1 day",
     "visibility": "Public",
-    "description": "je",
-    "specificLocation": "hemma",
-    "creatorNeighborhood": "VästraSorgenfri",
-    "creator": "heja",
+    "description": "let\u0027s clean",
+    "specificLocation": "Storgatan 11",
+    "creatorNeighborhood": "VästraHamnen",
+    "creator": "juani@ta.com",
     "success": true,
-    "responseParam": {}
+    "responseParam": {},
+    "likes": 0,
+    "comments": []
   },
-  "d61a0a18-88bc-46b9-8b83-9bf6318840c9": {
-    "id": "d61a0a18-88bc-46b9-8b83-9bf6318840c9",
-    "title": "hejdå",
-    "initiativeType": "General",
-    "duration": "10",
+  "7428909f-1678-499c-b8f2-483938ac2ed7": {
+    "id": "7428909f-1678-499c-b8f2-483938ac2ed7",
+    "title": "Clean the beach",
+    "initiativeType": "EcoAction",
+    "duration": "1 day",
     "visibility": "Public",
-    "description": "test",
-    "specificLocation": "euj",
+    "description": "let\u0027s clean",
+    "specificLocation": "Ribersborg",
     "creatorNeighborhood": "VästraHamnen",
-    "creator": "hej",
+    "creator": "juani@ta.com",
     "success": true,
-    "responseParam": {}
-  },
-  "183036bf-88e8-4148-ad83-ad55a8ac5617": {
-    "id": "183036bf-88e8-4148-ad83-ad55a8ac5617",
-    "title": "hej",
-    "initiativeType": "General",
-    "duration": "10min",
-    "visibility": "Neighborhood",
-    "description": "testar en grej",
-    "creatorNeighborhood": "VästraHamnen",
-    "creator": "hej",
-    "success": true,
-    "responseParam": {}
+    "responseParam": {},
+    "likes": 1,
+    "comments": []
   }
 }

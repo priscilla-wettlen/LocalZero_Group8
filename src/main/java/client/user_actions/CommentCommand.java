@@ -7,13 +7,13 @@ import protocol.UserActionType;
 import java.util.HashMap;
 
 public class CommentCommand extends BaseUserCommand implements IUserCommand{
-    private String userId;
+    private String userName;
     private String initiativeId;
     private String comment;
 
-    public CommentCommand(ClientConnectionManager connectionManager, String userId, String initiativeId, String comment) {
+    public CommentCommand(ClientConnectionManager connectionManager, String userName, String initiativeId, String comment) {
         super(connectionManager);
-        this.userId = userId;
+        this.userName = userName;
         this.initiativeId = initiativeId;
         this.comment = comment;
     }
@@ -29,7 +29,7 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
         HashMap<String, Object> details =
                 new HashMap<>();
 
-        details.put("userId", userId);
+        details.put("name", userName);
 
         details.put("initiativeId", initiativeId);
 

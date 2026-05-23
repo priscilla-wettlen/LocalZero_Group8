@@ -83,12 +83,41 @@ public class Coordinator implements ICoordinator{
         return null;
     }
 
-    private Initiative extractParamsLike(HashMap<String, Object> paramsMap) {
-        return null;
+    private Initiative extractParamsLike(
+            HashMap<String, Object> paramsMap) {
+
+        String initiativeId =
+                (String) paramsMap.get("initiativeId");
+
+        initiativeService.likeInitiative(
+                initiativeId);
+
+        return new Initiative(
+                true,
+                "Initiative liked successfully");
     }
 
-    private Initiative extractParamsComment(HashMap<String, Object> paramsMap) {
-        return null;
+    private Initiative extractParamsComment(
+            HashMap<String, Object> paramsMap) {
+
+        String initiativeId =
+                (String) paramsMap.get("initiativeId");
+
+        String name =
+                (String) paramsMap.get("name");
+
+        String commentText =
+                (String) paramsMap.get("commentText");
+
+        initiativeService.addComment(
+                initiativeId,
+                name,
+                commentText
+        );
+
+        return new Initiative(
+                true,
+                "Comment added successfully");
     }
 
     private Initiative extractParamsPostUpdate(HashMap<String, Object> params) {

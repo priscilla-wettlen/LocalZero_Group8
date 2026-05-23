@@ -24,7 +24,7 @@ public class AccountService implements IAccountService {
     private final JsonSerializer<User> serializer =
         new JsonSerializer<>(User.class);
     private static final String FILE_PATH =
-            "protocol/users.json";
+            "shared/users.json";
     private final Map<String, User> usersByEmail = serializer.loadSavedData(FILE_PATH);
 
 
@@ -97,9 +97,10 @@ public class AccountService implements IAccountService {
         return user;
     }
 
+
     @Override
-    public String login(String email,
-                        String password) {
+    public User login(String email,
+                      String password) {
 
         User user = usersByEmail.get(email);
 
@@ -116,16 +117,17 @@ public class AccountService implements IAccountService {
         }
 
         if (user == null) {
-            return "";
+            return null;
         }
 
-        if (!BCrypt.checkpw(password,
+        if (!BCrypt.checkpw(
+                password,
                 user.getPasswordHash())) {
 
-            return "";
+            return null;
         }
 
-        return user.getId();
+        return user;
     }
 
 //    public User getUser(String userID){

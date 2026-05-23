@@ -108,7 +108,11 @@ public class ForumPanel extends JPanel {
 
     public void refreshForum() {
         Neighborhood viewerNeighborhood = currentUser != null ? currentUser.getNeighborhood() : null;
-        ViewForumCommand command = new ViewForumCommand(viewerNeighborhood);
+        ViewForumCommand command =
+                new ViewForumCommand(
+                        clientConnectionManager,
+                        viewerNeighborhood
+                );
         command.execute();
         displayInitiatives(command.getLoadedInitiatives());
     }
@@ -135,71 +139,189 @@ public class ForumPanel extends JPanel {
     }
 
     private JPanel buildInitiativeCard(Initiative initiative) {
-        JPanel card = new JPanel(new BorderLayout(8, 8));
-        card.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(200, 200, 200)),
-                new EmptyBorder(12, 14, 12, 14)
-        ));
-        card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 220));
+
+        JPanel card =
+                new JPanel(new BorderLayout(8, 8));
+
+        card.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(200, 200, 200)),
+                        new EmptyBorder(12, 14, 12, 14)
+                ));
+
+        card.setMaximumSize(
+                new Dimension(Integer.MAX_VALUE, 320));
+
         card.setAlignmentX(Component.LEFT_ALIGNMENT);
+
         card.setBackground(Color.WHITE);
 
-        String visibilityLabel = initiative.getVisibility() == Visibility.Public
-                ? "Public"
-                : "Neighborhood only";
-        JLabel titleLabel = new JLabel(initiative.getTitle());
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 15f));
+        // =========================
+        // TITLE + VISIBILITY
+        // =========================
 
-        String neighborhoodText = initiative.getCreatorNeighborhood() != null
-                ? formatNeighborhoodName(initiative.getCreatorNeighborhood().name())
-                : "—";
-        JLabel metaLabel = new JLabel(String.format(
-                "<html>%s · <b>Neighborhood:</b> %s · <b>Location:</b> %s · %s · by %s</html>",
-                nullToDash(initiative.getInitiativeType()),
-                neighborhoodText,
-                nullToDash(initiative.getSpecificLocation()),
-                nullToDash(initiative.getDuration()),
-                nullToDash(initiative.getCreator())
-        ));
-        metaLabel.setForeground(Color.GRAY);
+        String visibilityLabel =
+                initiative.getVisibility()
+                        == Visibility.Public
+                        ? "Public"
+                        : "Neighborhood only";
 
-        JTextArea description = new JTextArea(initiative.getDescription());
-        description.setLineWrap(true);
-        description.setWrapStyleWord(true);
-        description.setEditable(false);
-        description.setOpaque(false);
-        description.setFont(metaLabel.getFont());
-        description.setBorder(null);
+        JLabel titleLabel =
+                new JLabel(initiative.getTitle());
 
-        JLabel badge = new JLabel(visibilityLabel);
+        titleLabel.setFont(
+                titleLabel.getFont()
+                        .deriveFont(Font.BOLD, 15f));
+
+        JLabel badge =
+                new JLabel(visibilityLabel);
+
         badge.setOpaque(true);
-        badge.setBorder(new EmptyBorder(4, 8, 4, 8));
-        if (initiative.getVisibility() == Visibility.Public) {
-            badge.setBackground(new Color(220, 245, 220));
+
+        badge.setBorder(
+                new EmptyBorder(4, 8, 4, 8));
+
+        if (initiative.getVisibility()
+                == Visibility.Public) {
+
+            badge.setBackground(
+                    new Color(220, 245, 220));
+
         } else {
-            badge.setBackground(new Color(255, 240, 210));
+
+            badge.setBackground(
+                    new Color(255, 240, 210));
         }
 
-        JPanel top = new JPanel(new BorderLayout());
+        JPanel top =
+                new JPanel(new BorderLayout());
+
         top.add(titleLabel, BorderLayout.CENTER);
+
         top.add(badge, BorderLayout.EAST);
 
-        JPanel center = new JPanel(new BorderLayout(0, 6));
+        // =========================
+        // META INFO
+        // =========================
+
+        String neighborhoodText =
+                initiative.getCreatorNeighborhood()
+                        != null
+                        ? formatNeighborhoodName(
+                        initiative.getCreatorNeighborhood()
+                                .name())
+                        : "—";
+
+        JLabel metaLabel =
+                new JLabel(String.format(
+                        "<html>%s · <b>Neighborhood:</b> %s · "
+                                + "<b>Location:</b> %s · %s · by %s</html>",
+
+                        nullToDash(
+                                initiative.getInitiativeType()),
+
+                        neighborhoodText,
+
+                        nullToDash(
+                                initiative.getSpecificLocation()),
+
+                        nullToDash(
+                                initiative.getDuration()),
+
+                        nullToDash(
+                                initiative.getCreator())
+                ));
+
+        metaLabel.setForeground(Color.GRAY);
+
+        JTextArea description =
+                new JTextArea(
+                        initiative.getDescription());
+
+        description.setLineWrap(true);
+
+        description.setWrapStyleWord(true);
+
+        description.setEditable(false);
+
+        description.setOpaque(false);
+
+        description.setFont(metaLabel.getFont());
+
+        description.setBorder(null);
+
+        JPanel center =
+                new JPanel(new BorderLayout(0, 6));
+
         center.add(metaLabel, BorderLayout.NORTH);
+
         center.add(description, BorderLayout.CENTER);
 
-        card.add(top, BorderLayout.NORTH);
-        card.add(center, BorderLayout.CENTER);
+        // =========================
+        // COMMENTS SECTION
+        // =========================
+
+        JPanel commentsPanel =
+                new JPanel();
+
+        commentsPanel.setLayout(
+                new BoxLayout(
+                        commentsPanel,
+                        BoxLayout.Y_AXIS));
+
+        commentsPanel.setBorder(
+                new EmptyBorder(10, 0, 0, 0));
+
+        if (initiative.getComments() != null
+                && !initiative.getComments().isEmpty()) {
+
+            JLabel commentsTitle =
+                    new JLabel("Comments:");
+
+            commentsTitle.setFont(
+                    commentsTitle.getFont()
+                            .deriveFont(Font.BOLD));
+
+            commentsPanel.add(commentsTitle);
+
+            commentsPanel.add(Box.createVerticalStrut(6));
+
+            for (server.model.Comment comment
+                    : initiative.getComments()) {
+
+                JLabel commentLabel =
+                        new JLabel(
+                                "<html><b>"
+                                        + comment.getAuthor()
+                                        + ":</b> "
+                                        + comment.getText()
+                                        + "</html>");
+
+                commentLabel.setBorder(
+                        new EmptyBorder(2, 8, 2, 2));
+
+                commentsPanel.add(commentLabel);
+            }
+        }
+
+        center.add(commentsPanel,
+                BorderLayout.SOUTH);
 
         // =========================
-        // LIKE + COMMENT BUTTONS
+        // ACTION BUTTONS
         // =========================
 
         JPanel actionsPanel =
-                new JPanel(new FlowLayout(FlowLayout.LEFT));
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.LEFT));
 
         JButton likeButton =
-                new JButton("Like");
+                new JButton(
+                        "Like ("
+                                + initiative.getLikes()
+                                + ")");
 
         JButton commentButton =
                 new JButton("Comment");
@@ -207,9 +329,6 @@ public class ForumPanel extends JPanel {
         actionsPanel.add(likeButton);
 
         actionsPanel.add(commentButton);
-
-        card.add(actionsPanel, BorderLayout.SOUTH);
-
 
         // =========================
         // BUTTON ACTIONS
@@ -220,7 +339,7 @@ public class ForumPanel extends JPanel {
             LikeCommand command =
                     new LikeCommand(
                             clientConnectionManager,
-                            currentUser.getId(),
+                            currentUser.getName(),
                             initiative.getId()
                     );
 
@@ -242,7 +361,7 @@ public class ForumPanel extends JPanel {
                 CommentCommand command =
                         new CommentCommand(
                                 clientConnectionManager,
-                                currentUser.getId(),
+                                currentUser.getName(),
                                 initiative.getId(),
                                 comment
                         );
@@ -252,6 +371,16 @@ public class ForumPanel extends JPanel {
                 refreshForum();
             }
         });
+
+        // =========================
+        // ADD EVERYTHING TO CARD
+        // =========================
+
+        card.add(top, BorderLayout.NORTH);
+
+        card.add(center, BorderLayout.CENTER);
+
+        card.add(actionsPanel, BorderLayout.SOUTH);
 
         return card;
     }

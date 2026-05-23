@@ -56,6 +56,7 @@ public class ViewForumCommand extends BaseUserCommand implements IUserCommand {
             loadedInitiatives = InitiativeService.getInitiativeServiceInstance()
                     .getForumInitiativesForViewer(viewerNeighborhood);
         }
+
     }
 
     public List<Initiative> getLoadedInitiatives() {

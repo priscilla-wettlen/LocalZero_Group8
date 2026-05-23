@@ -1,18 +1,15 @@
 package server.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Comment {
+public class Comment implements Serializable {
 
     private String author;
 
     private String text;
 
-    private String timestamp;
-
-    // Empty constructor for Gson
-    public Comment() {
-    }
+    private LocalDateTime timestamp;
 
     public Comment(String author,
                    String text) {
@@ -21,7 +18,8 @@ public class Comment {
 
         this.text = text;
 
-        this.timestamp = LocalDateTime.now().toString();
+        this.timestamp =
+                LocalDateTime.now();
     }
 
     public String getAuthor() {
@@ -32,7 +30,7 @@ public class Comment {
         return text;
     }
 
-    public String getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 }

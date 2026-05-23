@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InitiativeService implements IInitiativeService {
     private static InitiativeService initiativeServiceInstance;
-    private static final String FILE_PATH = "protocol/initiatives.json";
+    private static final String FILE_PATH = "shared/initiatives.json";
     private final JsonSerializer<Initiative> serializer = new JsonSerializer<>(Initiative.class);
     private Map<String, Initiative> initiatives = new ConcurrentHashMap<>();
 
