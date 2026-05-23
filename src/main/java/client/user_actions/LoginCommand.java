@@ -3,6 +3,8 @@ package client.user_actions;
 import client.ClientConnectionManager;
 import protocol.Request;
 
+import java.util.HashMap;
+
 public class LoginCommand extends BaseUserCommand implements IUserCommand {
 
 
@@ -11,7 +13,7 @@ public class LoginCommand extends BaseUserCommand implements IUserCommand {
     }
 
     @Override
-    public void handleResponse() {
+    public void handleResponse(HashMap<String, Object> responseParam) {
 
     }
 

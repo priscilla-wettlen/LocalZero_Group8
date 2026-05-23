@@ -41,15 +41,16 @@ public class ViewForumCommand extends BaseUserCommand implements IUserCommand {
     }
 
     @Override
-    public void handleResponse() {
+    public void handleResponse(HashMap<String, Object> responseParam) {
         // Populated in execute() after sendRequest or local load.
     }
 
     @Override
     public void execute() {
         if (getConnectionManager() != null) {
-            Initiative response = sendRequest(buildRequest());
-            if (response != null && response.isSuccess()) {
+            Initiative responseParam = sendRequest(buildRequest()).get;
+
+            if (response != null) {
                 loadedInitiatives = response.getInitiativesList();
             }
         } else {
