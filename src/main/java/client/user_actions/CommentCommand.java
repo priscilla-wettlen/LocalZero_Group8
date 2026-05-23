@@ -1,7 +1,9 @@
 package client.user_actions;
 
-import client.view.ClientConnectionManager;
+import client.ClientConnectionManager;
 import shared.Request;
+
+import java.util.HashMap;
 
 public class CommentCommand extends BaseUserCommand implements IUserCommand{
 
@@ -11,7 +13,7 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
     }
 
     @Override
-    public void handleResponse() {
+    public void handleResponse(HashMap<String, Object> responsParam) {
 
     }
 

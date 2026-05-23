@@ -1,12 +1,13 @@
-package client.view;
+package client;
 
 import shared.Request;
-import shared.Initiative;
+import shared.Response;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class ClientConnectionManager {
     private Socket socket;
@@ -22,16 +23,19 @@ public class ClientConnectionManager {
     }
 
 
-    public Initiative sendRequest(Request request){
-        Initiative response = null;
+    public HashMap<String, Object> sendRequest(Request request){
+        HashMap<String, Object> responseParam = new HashMap<>();
         try{
             out.writeObject(request);
-            response = (Initiative) in.readObject();
+            Response response = (Response) in.readObject();
+            if(response.isSuccess()){
+                responseParam = response.getResponseParam();
+            }
 
         }catch(ClassNotFoundException|IOException|RuntimeException e){
             System.out.println("Error sending request");
         }
-        return response;
+        return responseParam;
     }
 
 
