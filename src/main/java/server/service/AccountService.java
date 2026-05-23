@@ -35,13 +35,7 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public User register(String name,
-                         Neighborhood neighborhood,
-                         String email,
-                         String password,
-                         String adminCode,
-                         String role) {
-
+    public User register(String name, Neighborhood neighborhood, String email, String password, String adminCode, String role) {
         Set<Role> roles = new HashSet<>();
         roles.add(Role.Resident);
 
@@ -63,10 +57,8 @@ public class AccountService implements IAccountService {
 
         String passwordHash =
                 BCrypt.hashpw(password, BCrypt.gensalt());
-
         String userId =
                 UUID.randomUUID().toString();
-
         User user = new User(
                 userId,
                 name,
@@ -78,27 +70,19 @@ public class AccountService implements IAccountService {
         );
 
         users.put(email, user);
-
         serializer.save(FILE_PATH, users);
-
         usersByEmail.put(email, user);
-
         return user;
     }
 
     @Override
-    public String login(String email,
-                        String password) {
-
+    public String login(String email, String password) {
         User user = usersByEmail.get(email);
 
         if (user == null) {
-
             Map<String, User> users =
                     serializer.loadSavedData(FILE_PATH);
-
             user = users.get(email);
-
             if (user != null) {
                 usersByEmail.put(email, user);
             }
@@ -110,7 +94,6 @@ public class AccountService implements IAccountService {
 
         if (!BCrypt.checkpw(password,
                 user.getPasswordHash())) {
-
             return "";
         }
 

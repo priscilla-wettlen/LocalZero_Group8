@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String passwordHash; ///Option to database??
     private String adminCode;
-    private String role; // legacy single-role field (kept for backward compatibility)
+    private String role; // old one?
     private Set<Role> roles = new HashSet<>();
 
     public User(String id, String name, Neighborhood neighborhood, String email, String passwordHash, String adminCode,
@@ -110,7 +110,7 @@ public class User {
     }
 
     /**
-     * Ensures roles set is populated for legacy users that only have a single role string.
+     * For old accounts.
      */
     private void ensureRolesInitialized() {
         if (roles == null) {
@@ -120,7 +120,6 @@ public class User {
             try {
                 roles.add(Role.valueOf(role));
             } catch (IllegalArgumentException ignored) {
-                // Ignore unknown legacy role values.
             }
         }
         roles.add(Role.Resident);
