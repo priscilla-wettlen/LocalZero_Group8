@@ -29,6 +29,7 @@ public class MyAccountPanel extends JPanel {
         this.currentUser = currentUser;
         setLayout(new BorderLayout(0, 12));
         setBorder(new EmptyBorder(20, 20, 20, 20));
+        adminCodeField.setColumns(12);
 
         JLabel heading = new JLabel("My Account");
         heading.setFont(heading.getFont().deriveFont(Font.BOLD, 18f));
