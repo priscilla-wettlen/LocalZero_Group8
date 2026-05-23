@@ -64,14 +64,34 @@ public class InitiativeService implements IInitiativeService {
     }
 
     @Override
-    public List<Initiative> getForumInitiativesForViewer(Neighborhood viewerNeighborhood) {
-        List<Initiative> visible = new ArrayList<>();
-        for (Initiative initiative : initiatives.values()) {
-            if (isVisibleOnForum(initiative, viewerNeighborhood)) {
+    public List<Initiative> getForumInitiativesForViewer(
+            Neighborhood viewerNeighborhood) {
+
+        // Reload latest initiatives from JSON
+        initiatives.clear();
+
+        initiatives.putAll(
+                serializer.loadSavedData(FILE_PATH));
+
+        List<Initiative> visible =
+                new ArrayList<>();
+
+        for (Initiative initiative
+                : initiatives.values()) {
+
+            if (isVisibleOnForum(
+                    initiative,
+                    viewerNeighborhood)) {
+
                 visible.add(initiative);
             }
         }
-        visible.sort(Comparator.comparing(Initiative::getTitle, String.CASE_INSENSITIVE_ORDER));
+
+        visible.sort(
+                Comparator.comparing(
+                        Initiative::getTitle,
+                        String.CASE_INSENSITIVE_ORDER));
+
         return visible;
     }
 
