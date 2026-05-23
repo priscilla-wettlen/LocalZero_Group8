@@ -1,7 +1,5 @@
-package client.user_actions;
+package client.view;
 
-import client.RegisterLoginGUI;
-import server.model.Role;
 import server.model.User;
 
 import javax.swing.*;

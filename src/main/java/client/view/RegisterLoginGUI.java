@@ -1,6 +1,5 @@
-package client;
+package client.view;
 
-import client.user_actions.DashboardFrame;
 import server.model.Neighborhood;
 import server.model.Role;
 import server.model.User;
@@ -275,4 +274,3 @@ public class RegisterLoginGUI extends JFrame {
         dispose(); // close login window
     }
 }
-

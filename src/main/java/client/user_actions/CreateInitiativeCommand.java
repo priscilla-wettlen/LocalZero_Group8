@@ -1,6 +1,6 @@
 package client.user_actions;
 
-import client.ClientConnectionManager;
+import client.view.ClientConnectionManager;
 import server.model.InitiativeType;
 import server.model.Neighborhood;
 import shared.UserActionType;

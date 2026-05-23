@@ -1,6 +1,6 @@
 package client.user_actions;
 
-import client.ClientConnectionManager;
+import client.view.ClientConnectionManager;
 import shared.Request;
 
 public class LogEcoActionCommand extends BaseUserCommand implements IUserCommand {

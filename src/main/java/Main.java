@@ -1,6 +1,6 @@
-import client.RegisterLoginGUI;
-
 import javax.swing.SwingUtilities;
+
+import client.view.RegisterLoginGUI;
 
 public class Main {
 
