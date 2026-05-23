@@ -4,10 +4,13 @@ import server.model.Neighborhood;
 import server.model.User;
 import server.model.Visibility;
 import server.service.InitiativeService;
+import server.model.InitiativeType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+
+//create initiative gui
 
 public class CreateInitiativePanel extends JPanel {
 
@@ -52,7 +55,7 @@ public class CreateInitiativePanel extends JPanel {
         form.add(new JScrollPane(descArea), gbc);
 
         // Image
-        gbc.gridx = 0; gbc.gridy = 5; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0; gbc.gridy = 6; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
         form.add(new JLabel(""), gbc);
         gbc.gridx = 1;
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -77,9 +80,22 @@ public class CreateInitiativePanel extends JPanel {
 
         add(form, BorderLayout.CENTER);
 
-        // Location
+        // Initiative Type
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        form.add(new JLabel("Initiative Type:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridwidth = 2;
+        JComboBox<InitiativeType> initiativeTypeBox =
+                new JComboBox<>(InitiativeType.values());
+
+        form.add(initiativeTypeBox, gbc);
+
+        // Location
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         form.add(new JLabel("Location:"), gbc);
 
@@ -90,7 +106,7 @@ public class CreateInitiativePanel extends JPanel {
 
         // Duration
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         form.add(new JLabel("Duration:"), gbc);
 
@@ -101,7 +117,7 @@ public class CreateInitiativePanel extends JPanel {
 
         // Visibility
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 1;
         form.add(new JLabel("Visibility:"), gbc);
 
@@ -146,8 +162,16 @@ public class CreateInitiativePanel extends JPanel {
             }
 
             String duration = durationField.getText().trim();
-            String initiativeType = "General";
-            URL imageUrl = null; // optional: convert selected file to URL
+            InitiativeType selectedType =
+                    (InitiativeType) initiativeTypeBox.getSelectedItem();
+
+            if (selectedType == null) {
+                JOptionPane.showMessageDialog(this, "Please select initiative type.");
+                return;
+            }
+
+            String initiativeType = selectedType.name();
+            URL imageUrl = null;
 
             String creator = currentUser.getEmail();
             Neighborhood creatorNeighborhood = currentUser.getNeighborhood();

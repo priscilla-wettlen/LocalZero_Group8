@@ -65,5 +65,4 @@ public class Initiative {
     public void setVisibility(String visibility) {
         this.visibility = Visibility.valueOf(visibility);
     }
-
 }

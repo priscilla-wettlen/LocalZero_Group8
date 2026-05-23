@@ -1,5 +1,31 @@
 {
-"b5265506-ccdd-4bd0-ba24-cd239a981daf": {
+  "661f3f4e-81b1-43b1-a57e-9200570b1428": {
+    "id": "661f3f4e-81b1-43b1-a57e-9200570b1428",
+    "title": "byta mat",
+    "initiativeType": "SwapFood",
+    "duration": "5 minuter",
+    "visibility": "Neighborhood",
+    "description": "jag är hungrid",
+    "specificLocation": "lund",
+    "creatorNeighborhood": "VästraHamnen",
+    "creator": "hej",
+    "success": true,
+    "responseParam": {}
+  },
+  "58ad0d72-dd91-4b81-9476-9751a73e40be": {
+    "id": "58ad0d72-dd91-4b81-9476-9751a73e40be",
+    "title": "klippa häcken",
+    "initiativeType": "GardenActivity",
+    "duration": "3h",
+    "visibility": "Neighborhood",
+    "description": "vi ska hjälpas åt",
+    "specificLocation": "innegården",
+    "creatorNeighborhood": "VästraHamnen",
+    "creator": "hej",
+    "success": true,
+    "responseParam": {}
+  },
+  "b5265506-ccdd-4bd0-ba24-cd239a981daf": {
     "id": "b5265506-ccdd-4bd0-ba24-cd239a981daf",
     "title": "hej",
     "initiativeType": "General",
