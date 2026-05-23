@@ -2,9 +2,8 @@ package server;
 
 import server.security.IAuthHandler;
 import server.service.Coordinator;
-import server.service.InitiativeService;
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

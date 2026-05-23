@@ -1,7 +1,7 @@
 package client.user_actions;
 
 import client.ClientConnectionManager;
-import shared.Request;
+import protocol.Request;
 
 public class PostUpdateCommand extends BaseUserCommand implements IUserCommand {
 

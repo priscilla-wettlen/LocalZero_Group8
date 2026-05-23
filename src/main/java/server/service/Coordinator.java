@@ -4,8 +4,8 @@ import server.model.InitiativeType;
 import server.model.Neighborhood;
 import server.model.User;
 import server.model.Visibility;
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,8 +1,8 @@
 package server.security;
 
 import server.service.Coordinator;
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 public class RegistrationHandler implements IAuthHandler{
     private Coordinator coordinator;

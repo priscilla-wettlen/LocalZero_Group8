@@ -7,14 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import server.data_persistence.JsonSerializer;
 import server.model.Neighborhood;
-import server.model.Role;
 import server.model.User;
-
-import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 //This class has to be a Singleton like the rest of the Services!!
@@ -31,7 +24,7 @@ public class AccountService implements IAccountService {
     private final JsonSerializer<User> serializer =
         new JsonSerializer<>(User.class);
     private static final String FILE_PATH =
-            "shared/users.json";
+            "protocol/users.json";
     private final Map<String, User> usersByEmail = serializer.loadSavedData(FILE_PATH);
 
 

@@ -2,7 +2,7 @@ package server.service;
 
 import server.model.Neighborhood;
 import server.model.Visibility;
-import shared.Initiative;
+import protocol.Initiative;
 
 import java.net.URL;
 import java.util.Map;

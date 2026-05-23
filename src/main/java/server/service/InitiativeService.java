@@ -1,9 +1,10 @@
 package server.service;
 
 import server.data_persistence.JsonSerializer;
+import server.model.Comment;
 import server.model.Neighborhood;
 import server.model.Visibility;
-import shared.Initiative;
+import protocol.Initiative;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InitiativeService implements IInitiativeService {
     private static InitiativeService initiativeServiceInstance;
-    private static final String FILE_PATH = "shared/initiatives.json";
+    private static final String FILE_PATH = "protocol/initiatives.json";
     private final JsonSerializer<Initiative> serializer = new JsonSerializer<>(Initiative.class);
     private Map<String, Initiative> initiatives = new ConcurrentHashMap<>();
 
@@ -83,5 +84,39 @@ public class InitiativeService implements IInitiativeService {
         }
         Neighborhood creatorNeighborhood = initiative.getCreatorNeighborhood();
         return creatorNeighborhood != null && viewerNeighborhood == creatorNeighborhood;
+    }
+
+
+    public void likeInitiative(String initiativeId) {
+
+        Initiative initiative =
+                initiatives.get(initiativeId);
+
+        if (initiative == null) {
+            return;
+        }
+
+        initiative.addLike();
+
+        serializer.save(FILE_PATH, initiatives);
+    }
+
+    public void addComment(String initiativeId,
+                           String author,
+                           String text) {
+
+        Initiative initiative =
+                initiatives.get(initiativeId);
+
+        if (initiative == null) {
+            return;
+        }
+
+        Comment comment =
+                new Comment(author, text);
+
+        initiative.addComment(comment);
+
+        serializer.save(FILE_PATH, initiatives);
     }
 }

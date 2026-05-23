@@ -1,7 +1,7 @@
 package client;
 
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,7 +16,6 @@ public class ClientConnectionManager {
 
     public ClientConnectionManager(int port, String host) throws IOException {
         this.socket = new Socket(host, port);
-
         this.in = new ObjectInputStream(socket.getInputStream());
         this.out = new ObjectOutputStream(socket.getOutputStream());
     }

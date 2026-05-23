@@ -2,8 +2,8 @@ package client.user_actions;
 
 
 import client.ClientConnectionManager;
-import shared.Request;
-import shared.Initiative;
+import protocol.Request;
+import protocol.Initiative;
 
 public abstract class BaseUserCommand {
     private final ClientConnectionManager connectionManager;

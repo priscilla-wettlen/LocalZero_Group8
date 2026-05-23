@@ -3,7 +3,8 @@ package client.user_actions;
 import server.model.Neighborhood;
 import server.model.User;
 import server.model.Visibility;
-import shared.Initiative;
+import protocol.Initiative;
+import client.ClientConnectionManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,7 +15,7 @@ import java.util.List;
  * Swing forum view: lists sustainability initiatives the current user is allowed to see.
  */
 public class ForumPanel extends JPanel {
-
+    private ClientConnectionManager clientConnectionManager;
     private final User currentUser;
     private final JPanel initiativesListPanel = new JPanel();
 
@@ -139,6 +140,69 @@ public class ForumPanel extends JPanel {
 
         card.add(top, BorderLayout.NORTH);
         card.add(center, BorderLayout.CENTER);
+
+        // =========================
+        // LIKE + COMMENT BUTTONS
+        // =========================
+
+        JPanel actionsPanel =
+                new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JButton likeButton =
+                new JButton("Like");
+
+        JButton commentButton =
+                new JButton("Comment");
+
+        actionsPanel.add(likeButton);
+
+        actionsPanel.add(commentButton);
+
+        card.add(actionsPanel, BorderLayout.SOUTH);
+
+
+        // =========================
+        // BUTTON ACTIONS
+        // =========================
+
+        likeButton.addActionListener(e -> {
+
+            LikeCommand command =
+                    new LikeCommand(
+                            clientConnectionManager,
+                            currentUser.getId(),
+                            initiative.getId()
+                    );
+
+            command.execute();
+
+            refreshForum();
+        });
+
+        commentButton.addActionListener(e -> {
+
+            String comment =
+                    JOptionPane.showInputDialog(
+                            this,
+                            "Write a comment");
+
+            if (comment != null
+                    && !comment.isBlank()) {
+
+                CommentCommand command =
+                        new CommentCommand(
+                                clientConnectionManager,
+                                currentUser.getId(),
+                                initiative.getId(),
+                                ""
+                        );
+
+                command.execute();
+
+                refreshForum();
+            }
+        });
+
         return card;
     }
 
