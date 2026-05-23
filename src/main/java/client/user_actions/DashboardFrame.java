@@ -1,7 +1,6 @@
 package client.user_actions;
 
 import client.RegisterLoginGUI;
-import server.model.Role;
 import server.model.User;
 
 import javax.swing.*;
@@ -13,6 +12,7 @@ public class DashboardFrame extends JFrame {
     private final JPanel contentPanel = new JPanel(cardLayout);
     private final User loggedInUser;
     private ForumPanel forumPanel;
+    private MyAccountPanel myAccountPanel;
 
     public DashboardFrame(User user) {
         this.loggedInUser = user;
@@ -47,13 +47,18 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
         forumPanel = new ForumPanel(loggedInUser);
         contentPanel.add(forumPanel, "forum");
+        myAccountPanel = new MyAccountPanel(loggedInUser);
+        contentPanel.add(myAccountPanel, "my account");
 
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
         forumBtn.addActionListener(e -> {
             forumPanel.refreshForum();
             cardLayout.show(contentPanel, "forum");
         });
-        accountBtn.addActionListener(e -> cardLayout.show(contentPanel, "my account"));
+        accountBtn.addActionListener(e -> {
+            myAccountPanel.refreshUser(loggedInUser);
+            cardLayout.show(contentPanel, "my account");
+        });
         //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
 
         menuPanel.add(createNewInitiative);

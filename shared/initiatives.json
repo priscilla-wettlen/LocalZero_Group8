@@ -63,17 +63,5 @@
     "creator": "hej",
     "success": true,
     "responseParam": {}
-  },
-  "183036bf-88e8-4148-ad83-ad55a8ac5617": {
-    "id": "183036bf-88e8-4148-ad83-ad55a8ac5617",
-    "title": "hej",
-    "initiativeType": "General",
-    "duration": "10min",
-    "visibility": "Neighborhood",
-    "description": "testar en grej",
-    "creatorNeighborhood": "VästraHamnen",
-    "creator": "hej",
-    "success": true,
-    "responseParam": {}
   }
 }

@@ -16,9 +16,6 @@ public interface IInitiativeService {
     Map<String, Initiative> getAllInitiatives();
 
     java.util.List<Initiative> getForumInitiativesForViewer(Neighborhood viewerNeighborhood);
+
+    boolean deleteInitiative(String initiativeId);
 }
-    /*
-    public void joinInitiative(String initiativeID, String userID);
-
-     */
-

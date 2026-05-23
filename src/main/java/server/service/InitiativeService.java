@@ -74,6 +74,19 @@ public class InitiativeService implements IInitiativeService {
         return visible;
     }
 
+    @Override
+    public boolean deleteInitiative(String initiativeId) {
+        if (initiativeId == null || initiativeId.isBlank()) {
+            return false;
+        }
+        Initiative removed = initiatives.remove(initiativeId);
+        if (removed == null) {
+            return false;
+        }
+        serializer.save(FILE_PATH, initiatives);
+        return true;
+    }
+
     private boolean isVisibleOnForum(Initiative initiative, Neighborhood viewerNeighborhood) {
         if (initiative.getVisibility() == Visibility.Public) {
             return true;

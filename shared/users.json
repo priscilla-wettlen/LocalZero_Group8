@@ -77,7 +77,10 @@
     "neighborhood": "VästraHamnen",
     "email": "hej",
     "passwordHash": "$2a$10$XjIwih5mSfKYIic0odrDb.9Mf1Za6IHeoDZhhoMhdc39DtJX74lFy",
-    "role": "Resident"
+    "role": "Resident",
+    "roles": [
+      "Resident"
+    ]
   },
   "heja": {
     "id": "c59392ff-f9fc-487d-9579-0acc79c36446",
