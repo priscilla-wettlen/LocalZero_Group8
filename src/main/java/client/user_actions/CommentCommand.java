@@ -10,14 +10,12 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
     private String userId;
     private String initiativeId;
     private String comment;
-    private String token;
 
-    public CommentCommand(ClientConnectionManager connectionManager, String userId, String initiativeId, String comment, String token) {
+    public CommentCommand(ClientConnectionManager connectionManager, String userId, String initiativeId, String comment) {
         super(connectionManager);
         this.userId = userId;
         this.initiativeId = initiativeId;
         this.comment = comment;
-        this.token = token;
     }
 
     @Override
@@ -35,7 +33,7 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
 
         details.put("initiativeId", initiativeId);
 
-        details.put("commentText", "");
+        details.put("commentText", comment);
 
         Request request =
                 new Request(
@@ -43,7 +41,7 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
                         details
                 );
 
-        request.setAuthToken(token);
+        request.setAuthToken(getToken());
 
         return request;
     }

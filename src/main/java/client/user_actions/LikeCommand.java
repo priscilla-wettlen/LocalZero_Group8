@@ -6,20 +6,29 @@ import protocol.UserActionType;
 
 import java.util.HashMap;
 
-public class LikeCommand extends BaseUserCommand implements IUserCommand {
-    private String userId;
-    private String initiativeId;
-    private String token;
+public class LikeCommand
+        extends BaseUserCommand
+        implements IUserCommand {
 
-    public LikeCommand(ClientConnectionManager connectionManager, String userId, String initiativeId, String token) {
+    private String userId;
+
+    private String initiativeId;
+
+    public LikeCommand(
+            ClientConnectionManager connectionManager,
+            String userId,
+            String initiativeId) {
+
         super(connectionManager);
+
         this.userId = userId;
+
         this.initiativeId = initiativeId;
-        this.token = token;
     }
 
     @Override
     public void handleResponse() {
+
         System.out.println(
                 "Like request completed");
     }
@@ -40,15 +49,18 @@ public class LikeCommand extends BaseUserCommand implements IUserCommand {
                         details
                 );
 
-        request.setAuthToken(token);
+        request.setAuthToken(getToken());
 
         return request;
     }
 
     @Override
     public void execute() {
+
         Request request = buildRequest();
+
         getConnectionManager().sendRequest(request);
+
         handleResponse();
     }
 }

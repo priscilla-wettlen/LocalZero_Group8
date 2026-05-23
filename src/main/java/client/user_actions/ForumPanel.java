@@ -194,7 +194,7 @@ public class ForumPanel extends JPanel {
                                 clientConnectionManager,
                                 currentUser.getId(),
                                 initiative.getId(),
-                                ""
+                                comment
                         );
 
                 command.execute();
