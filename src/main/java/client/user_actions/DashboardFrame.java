@@ -1,5 +1,6 @@
 package client.user_actions;
 
+import client.ClientConnectionManager;
 import client.RegisterLoginGUI;
 import server.model.Role;
 import server.model.User;
@@ -11,11 +12,15 @@ import java.awt.*;
 public class DashboardFrame extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel contentPanel = new JPanel(cardLayout);
+    private final ClientConnectionManager clientConnectionManager;
     private final User loggedInUser;
     private ForumPanel forumPanel;
 
-    public DashboardFrame(User user) {
+
+    public DashboardFrame(User user,
+                          ClientConnectionManager clientConnectionManager) {
         this.loggedInUser = user;
+        this.clientConnectionManager = clientConnectionManager;
         setTitle("LocalZero Dashboard");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +50,7 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(makeLabelPanel("Create New Initiative"), "community");
         contentPanel.add(makeLabelPanel("Active Tasks View"), "tasks");
         contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
-        forumPanel = new ForumPanel(loggedInUser);
+        forumPanel = new ForumPanel(loggedInUser, clientConnectionManager);
         contentPanel.add(forumPanel, "forum");
 
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
@@ -101,7 +106,9 @@ public class DashboardFrame extends JFrame {
                 JOptionPane.YES_NO_OPTION
         );
         if (choice == JOptionPane.YES_OPTION) {
-            SwingUtilities.invokeLater(RegisterLoginGUI::new);
+            SwingUtilities.invokeLater(() -> {
+                new RegisterLoginGUI(clientConnectionManager);
+            });
             dispose();
         }
     }

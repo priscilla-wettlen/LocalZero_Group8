@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RegisterLoginGUI extends JFrame {
-
+    private final ClientConnectionManager clientConnectionManager;
     // LOGIN COMPONENTSs
     private JTextField loginEmailField;
     private JPasswordField loginPasswordField;
@@ -31,7 +31,7 @@ public class RegisterLoginGUI extends JFrame {
 
     private  AccountService accountService;
 
-    public RegisterLoginGUI() {
+    public RegisterLoginGUI(ClientConnectionManager clientConnectionManager) {
 
         accountService =
                 AccountService.getAccountServiceInstance();
@@ -41,6 +41,8 @@ public class RegisterLoginGUI extends JFrame {
         initializeComponents();
 
         setVisible(true);
+
+        this.clientConnectionManager = clientConnectionManager;
     }
 
     private void initializeWindow() {
@@ -269,7 +271,7 @@ public class RegisterLoginGUI extends JFrame {
         }
 
         SwingUtilities.invokeLater(() -> {
-            DashboardFrame dashboard = new DashboardFrame(user);
+            DashboardFrame dashboard = new DashboardFrame(user, clientConnectionManager);
             dashboard.setVisible(true);
         });
         dispose(); // close login window

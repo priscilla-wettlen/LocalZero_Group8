@@ -14,21 +14,34 @@ public class ClientConnectionManager {
     private ObjectOutputStream out;
     private String token;
 
-    public ClientConnectionManager(int port, String host) throws IOException {
+    public ClientConnectionManager(String host,
+                                   int port)
+            throws IOException {
+
         this.socket = new Socket(host, port);
-        this.in = new ObjectInputStream(socket.getInputStream());
-        this.out = new ObjectOutputStream(socket.getOutputStream());
+
+        this.out = new ObjectOutputStream(
+                socket.getOutputStream());
+
+        out.flush();
+
+        this.in = new ObjectInputStream(
+                socket.getInputStream());
     }
 
 
-    public Initiative sendRequest(Request request){
+    public Initiative sendRequest(Request request) {
         Initiative response = null;
-        try{
+        try {
             out.writeObject(request);
+            out.flush();
             response = (Initiative) in.readObject();
-
-        }catch(ClassNotFoundException|IOException|RuntimeException e){
+        } catch (ClassNotFoundException
+                 | IOException
+                 | RuntimeException e) {
             System.out.println("Error sending request");
+
+            e.printStackTrace();
         }
         return response;
     }

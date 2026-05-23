@@ -19,38 +19,88 @@ public class ForumPanel extends JPanel {
     private final User currentUser;
     private final JPanel initiativesListPanel = new JPanel();
 
-    public ForumPanel(User currentUser) {
+    public ForumPanel(User currentUser,
+                      ClientConnectionManager clientConnectionManager) {
+
         this.currentUser = currentUser;
+
+        this.clientConnectionManager =
+                clientConnectionManager;
+
         setLayout(new BorderLayout(0, 12));
+
         setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JLabel heading = new JLabel("Community Forum");
-        heading.setFont(heading.getFont().deriveFont(Font.BOLD, 18f));
-        heading.setHorizontalAlignment(SwingConstants.CENTER);
 
-        Neighborhood neighborhood = currentUser != null ? currentUser.getNeighborhood() : null;
-        String neighborhoodText = neighborhood != null ? neighborhood.name() : "unknown";
+        heading.setFont(
+                heading.getFont().deriveFont(
+                        Font.BOLD,
+                        18f));
+
+        heading.setHorizontalAlignment(
+                SwingConstants.CENTER);
+
+        Neighborhood neighborhood =
+                currentUser != null
+                        ? currentUser.getNeighborhood()
+                        : null;
+
+        String neighborhoodText =
+                neighborhood != null
+                        ? neighborhood.name()
+                        : "unknown";
+
         JLabel subtitle = new JLabel(
-                "Showing public initiatives and neighborhood posts for: " + neighborhoodText);
-        subtitle.setHorizontalAlignment(SwingConstants.CENTER);
+                "Showing public initiatives and neighborhood posts for: "
+                        + neighborhoodText);
+
+        subtitle.setHorizontalAlignment(
+                SwingConstants.CENTER);
+
         subtitle.setForeground(Color.DARK_GRAY);
 
-        JPanel header = new JPanel(new BorderLayout(0, 6));
+        JPanel header =
+                new JPanel(new BorderLayout(0, 6));
+
         header.add(heading, BorderLayout.NORTH);
+
         header.add(subtitle, BorderLayout.CENTER);
 
-        JButton refreshBtn = new JButton("Refresh");
-        refreshBtn.addActionListener(e -> refreshForum());
-        JPanel headerSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        headerSouth.add(refreshBtn);
-        header.add(headerSouth, BorderLayout.SOUTH);
+        JButton refreshBtn =
+                new JButton("Refresh");
 
-        initiativesListPanel.setLayout(new BoxLayout(initiativesListPanel, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(initiativesListPanel);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        refreshBtn.addActionListener(
+                e -> refreshForum());
+
+        JPanel headerSouth =
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.RIGHT));
+
+        headerSouth.add(refreshBtn);
+
+        header.add(headerSouth,
+                BorderLayout.SOUTH);
+
+        initiativesListPanel.setLayout(
+                new BoxLayout(
+                        initiativesListPanel,
+                        BoxLayout.Y_AXIS));
+
+        JScrollPane scrollPane =
+                new JScrollPane(
+                        initiativesListPanel);
+
+        scrollPane.getVerticalScrollBar()
+                .setUnitIncrement(16);
+
+        scrollPane.setBorder(
+                BorderFactory.createLineBorder(
+                        Color.LIGHT_GRAY));
 
         add(header, BorderLayout.NORTH);
+
         add(scrollPane, BorderLayout.CENTER);
 
         refreshForum();

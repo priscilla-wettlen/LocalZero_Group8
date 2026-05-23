@@ -1,0 +1,10 @@
+{
+  "lola@mail.com": {
+    "id": "1ee236ca-f1bb-4729-976c-f0995683f1f8",
+    "name": "Lola",
+    "neighborhood": "Sofielund",
+    "email": "lola@mail.com",
+    "passwordHash": "$2a$10$66sFDmcMijVZKOiM8lvKGOiFiCr6HvFuANE3.gSttTkH0UOItoQa.",
+    "role": "Resident"
+  }
+}
