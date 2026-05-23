@@ -1,7 +1,9 @@
 package client.user_actions;
 
-import client.view.ClientConnectionManager;
+import client.ClientConnectionManager;
 import shared.Request;
+
+import java.util.HashMap;
 
 public class JoinInitiativeCommand extends BaseUserCommand implements IUserCommand {
 
@@ -10,7 +12,7 @@ public class JoinInitiativeCommand extends BaseUserCommand implements IUserComma
     }
 
     @Override
-    public void handleResponse() {
+    public void handleResponse(HashMap<String, Object> responsParam) {
 
     }
 
