@@ -26,12 +26,12 @@ public class LikeCommand
         this.initiativeId = initiativeId;
     }
 
-    @Override
-    public void handleResponse() {
-
-        System.out.println(
-                "Like request completed");
-    }
+//    @Override
+//    public void handleResponse() {
+//
+//        System.out.println(
+//                "Like request completed");
+//    }
 
     @Override
     public Request buildRequest() {
@@ -61,6 +61,6 @@ public class LikeCommand
 
         getConnectionManager().sendRequest(request);
 
-        handleResponse();
+        //handleResponse();
     }
 }

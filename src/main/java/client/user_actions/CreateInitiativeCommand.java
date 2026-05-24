@@ -48,16 +48,16 @@ public class CreateInitiativeCommand extends BaseUserCommand implements IUserCom
         request.setAuthToken(super.getToken()); ////this is to get the token from the clientConnectionManager to attach it to the request
         return request;
     }
-    @Override
-    public void handleResponse(HashMap<String, Object> responsParam) {
-        ////Do whatever with response, it should maybe always give success/fail as return???
-    }
+//    @Override
+//    public void handleResponse(HashMap<String, Object> responsParam) {
+//        ////Do whatever with response, it should maybe always give success/fail as return???
+//    }
 
     @Override
     public void execute(){
         Request request = buildRequest();
         Initiative response = super.sendRequest(request);
-        handleResponse();
+        //handleResponse();
 
     }
 }

@@ -18,10 +18,10 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
         this.comment = comment;
     }
 
-    @Override
-    public void handleResponse() {
-
-    }
+//    @Override
+//    public void handleResponse() {
+//
+//    }
 
     @Override
     public Request buildRequest() {
@@ -50,6 +50,6 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
     public void execute() {
         Request request = buildRequest();
         getConnectionManager().sendRequest(request);
-        handleResponse();
+        //handleResponse();
     }
 }

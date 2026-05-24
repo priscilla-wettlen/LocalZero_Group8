@@ -16,7 +16,7 @@ public abstract class BaseUserCommand {
         return connectionManager;
     }
 
-    public abstract void handleResponse();
+//    public abstract void handleResponse();
 
     public abstract Request buildRequest();
 

@@ -11,10 +11,10 @@ public class JoinInitiativeCommand extends BaseUserCommand implements IUserComma
         super(connectionManager);
     }
 
-    @Override
-    public void handleResponse(HashMap<String, Object> responsParam) {
-
-    }
+//    @Override
+//    public void handleResponse(HashMap<String, Object> responsParam) {
+//
+//    }
 
     @Override
     public Request buildRequest() {
