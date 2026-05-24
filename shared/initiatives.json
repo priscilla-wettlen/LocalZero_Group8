@@ -207,6 +207,24 @@
     "success": true,
     "responseParam": {},
     "likes": 1,
-    "comments": []
+    "comments": [
+      {
+        "author": "Test",
+        "text": "hejhej",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 24
+          },
+          "time": {
+            "hour": 16,
+            "minute": 13,
+            "second": 45,
+            "nano": 914987000
+          }
+        }
+      }
+    ]
   }
 }
