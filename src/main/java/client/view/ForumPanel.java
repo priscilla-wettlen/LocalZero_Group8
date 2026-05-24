@@ -2,12 +2,14 @@ package client.view;
 
 import client.user_actions.ViewForumCommand;
 import server.model.Neighborhood;
+import server.model.Role;
 import server.model.User;
 import server.model.Visibility;
 import protocol.Initiative;
 import client.ClientConnectionManager;
 import client.user_actions.LikeCommand;
 import client.user_actions.CommentCommand;
+import server.service.InitiativeService;
 
 
 import javax.swing.*;
@@ -381,12 +383,41 @@ public class ForumPanel extends JPanel {
         // =========================
 
         card.add(top, BorderLayout.NORTH);
-
         card.add(center, BorderLayout.CENTER);
 
-        card.add(actionsPanel, BorderLayout.SOUTH);
+        JPanel footer = new JPanel(new BorderLayout());
+        footer.add(actionsPanel, BorderLayout.WEST);
+
+        if (currentUser != null && currentUser.hasRole(Role.CommunityOrganizer)) {
+            JButton deleteButton = new JButton("Delete");
+            deleteButton.addActionListener(e -> handleDelete(initiative));
+            JPanel deletePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+            deletePanel.add(deleteButton);
+            footer.add(deletePanel, BorderLayout.EAST);
+        }
+
+        card.add(footer, BorderLayout.SOUTH);
 
         return card;
+    }
+
+    private void handleDelete(Initiative initiative) {
+        int choice = JOptionPane.showConfirmDialog(
+                this,
+                "Delete this initiative from the forum?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (choice != JOptionPane.YES_OPTION) {
+            return;
+        }
+        boolean deleted = InitiativeService.getInitiativeServiceInstance()
+                .deleteInitiative(initiative.getId());
+        if (!deleted) {
+            JOptionPane.showMessageDialog(this, "Failed to delete initiative.");
+            return;
+        }
+        refreshForum();
     }
 
     private static String nullToDash(String value) {
