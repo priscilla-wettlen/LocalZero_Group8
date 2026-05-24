@@ -22,7 +22,12 @@ public interface IInitiativeService {
     void addComment(String initiativeId,
                     String author,
                     String text);
-    public void joinInitiative(String initiativeID, String userID);
+    void addComment(String initiativeId, String author, String text);
+
+    boolean deleteInitiative(String initiativeId);
+}
+
+    void joinInitiative(String initiativeID, String userID);
 }
 
 

@@ -45,6 +45,12 @@ public class Coordinator implements ICoordinator{
             case "ViewInitiatives":
                 response = extractParamsViewForum(paramsMap);
                 break;
+            case "ViewMessages":
+                response = extractShowInboxParams(paramsMap);
+                break;
+            case "SendMessage":
+                response = extractSendMessageParams(paramsMap);
+                break;
             default:
                 throw new IllegalArgumentException("Invalid request type!");
         }
@@ -53,6 +59,25 @@ public class Coordinator implements ICoordinator{
 
 /// These methods extract the parameters from the request according to the service
 /// "contract" and call the respective service! I didn't want all this in the switch
+
+    private Initiative extractSendMessageParams(HashMap<String, Object> params) {
+        String senderName = (String) params.get("senderName");
+        String recipientUserId = (String) params.get("recipientUserId");
+        String message = (String) params.get("message");
+
+        messengerService.sendMessage(senderName, recipientUserId, message);
+        return new Initiative(true, "Message was sent!");
+    }
+
+    private Initiative extractShowInboxParams(HashMap<String, Object> params) {
+
+        String userId = (String) params.get("userId");
+        Initiative response = new Initiative(true, "Inbox loaded!");
+
+        response.getResponseParam().put("messages", messengerService.getInboxMessages(userId));
+        return response;
+    }
+
 
 
     private Initiative extractParamsViewForum(HashMap<String, Object> params) {
@@ -147,7 +172,7 @@ public class Coordinator implements ICoordinator{
     // This methods should call the method in the corresponding service using the unique instances.
     @Override
     public User login(String username, String password) {
-        return null;
+        return accountService.login(username, password);
     }
 
     @Override
