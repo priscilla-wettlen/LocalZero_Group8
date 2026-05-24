@@ -1,5 +1,11 @@
 package server.service;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.mindrot.jbcrypt.BCrypt;
 import server.data_persistence.JsonSerializer;
 import server.model.Neighborhood;
@@ -110,6 +116,36 @@ public class AccountService implements IAccountService {
         return usersByEmail.get(email);
     }
 
+    @Override
+    public List<User> getUsersByNeighborhood(Neighborhood neighborhood, String excludedUserId) {
+        Map<String, User> users = serializer.loadSavedData(FILE_PATH);
+        usersByEmail.putAll(users);
+
+        return users.values().stream()
+                .filter(user -> user.getNeighborhood() == neighborhood)
+                .filter(user -> excludedUserId == null || !excludedUserId.equals(user.getId()))
+                .sorted(Comparator.comparing(User::getName, String.CASE_INSENSITIVE_ORDER))
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
+//    public void addUser(User user){
+//        if (user == null || user.getEmail() == null) {
+//            return;
+//        }
+//        usersById.put(user.getId(), user);
+//        usersByEmail.put(user.getEmail(), user);
+//        JsonUserStore.StoredUser storedUser = new JsonUserStore.StoredUser();
+//        storedUser.id = user.getId();
+//        storedUser.email = user.getEmail();
+//        storedUser.name = user.getEmail();
+//        storedUser.passwordHash = user.getPasswordHash();
+//        storedUser.neighborhood = user.getNeighborhood() != null ? user.getNeighborhood().name() : null;
+//        userStore.save(storedUser);
+//    }
     public boolean updateUserRoles(String email, boolean wantsOrganizer, String adminCode) {
         if (email == null || email.isBlank()) {
             return false;
