@@ -151,6 +151,7 @@ public class InitiativeService implements IInitiativeService {
         }
 
         initiative.addMember(userID);
+        System.out.println("USER JOINED: " + userID);
 
         serializer.save(FILE_PATH, initiatives);
     }
