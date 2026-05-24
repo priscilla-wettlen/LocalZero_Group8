@@ -21,13 +21,37 @@ public class MessengerService implements IMessengerService{
 
 
     @Override
-    public void sendMessage(String senderUserID, String receiverUserID) {
+    public void sendMessage(String senderName, String receiverUserID, String message) {
+        if (receiverUserID == null || message == null || message.isBlank()) {
+            return;
+        }
+        String displaySender;
+        if(senderName == null || senderName.isBlank()){
+            displaySender = "Sender unknown";
+        }else{
+            displaySender = senderName;
+        }
 
+        String formattedMessage = "From " + displaySender + ": " + message.trim();
+        ArrayList<String> inboxMessages = messages.computeIfAbsent(receiverUserID, key -> new ArrayList<>());
+
+        synchronized (inboxMessages) {
+            inboxMessages.add(formattedMessage);
+        }
     }
+
 
     @Override
     public ArrayList<String> getInboxMessages(String userID) {
-        return messages.get(userID);
+        ArrayList<String> inboxMessages = messages.get(userID);
+
+        if (inboxMessages == null) {
+            return new ArrayList<>();
+        }
+        synchronized (inboxMessages) {
+            return new ArrayList<>(inboxMessages);
+        }
+
     }
 
 
