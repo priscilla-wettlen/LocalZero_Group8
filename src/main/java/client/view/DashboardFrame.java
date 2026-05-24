@@ -1,7 +1,7 @@
-package client.user_actions;
+package client.view;
 
 import client.ClientConnectionManager;
-import client.RegisterLoginGUI;
+import client.view.RegisterLoginGUI;
 import server.model.Role;
 import server.model.User;
 

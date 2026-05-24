@@ -1,5 +1,5 @@
 import client.ClientConnectionManager;
-import client.RegisterLoginGUI;
+import client.view.RegisterLoginGUI;
 
 import javax.swing.SwingUtilities;
 import java.io.IOException;
