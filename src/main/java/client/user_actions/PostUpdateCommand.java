@@ -7,16 +7,13 @@ import java.util.HashMap;
 
 public class PostUpdateCommand extends BaseUserCommand implements IUserCommand {
 
-
     public PostUpdateCommand(ClientConnectionManager connectionManager, String token) {
         super(connectionManager);
     }
 
     @Override
     public void handleResponse(HashMap<String, Object> responseParam) {
-
     }
-
 
     @Override
     public Request buildRequest() {
@@ -25,6 +22,5 @@ public class PostUpdateCommand extends BaseUserCommand implements IUserCommand {
 
     @Override
     public void execute() {
-
     }
 }
