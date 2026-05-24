@@ -158,7 +158,7 @@ public class Coordinator implements ICoordinator{
     // This methods should call the method in the corresponding service using the unique instances.
     @Override
     public User login(String username, String password) {
-        return null;
+        return accountService.login(username, password);
     }
 
     @Override
