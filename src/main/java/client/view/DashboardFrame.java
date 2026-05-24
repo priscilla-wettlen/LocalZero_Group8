@@ -63,8 +63,16 @@ public class DashboardFrame extends JFrame {
 
         contentPanel.add(new EcoTrackerPanel(clientConnectionManager), "eco");
 
+        client.user_actions.ViewForumCommand notifCmd = new client.user_actions.ViewForumCommand(clientConnectionManager, loggedInUser.getNeighborhood());
+        notifCmd.execute();
+        java.util.List<protocol.Initiative> initiatives = notifCmd.getLoadedInitiatives();
+        if (!initiatives.isEmpty()) {
+            SwingUtilities.invokeLater(() -> new NotificationsDialog(initiatives, loggedInUser).setVisible(true));
+        }
+
         myAccountPanel = new MyAccountPanel(loggedInUser);
         contentPanel.add(myAccountPanel, "my account");
+
 
 
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
