@@ -74,11 +74,25 @@ public class Coordinator implements ICoordinator{
     }
 
     private Initiative extractShowInboxParams(HashMap<String, Object> params) {
-
         String userId = (String) params.get("userId");
+        Neighborhood neighborhood = (Neighborhood) params.get("neighborhood");
         Initiative response = new Initiative(true, "Inbox loaded!");
 
         response.getResponseParam().put("messages", messengerService.getInboxMessages(userId));
+        if (neighborhood != null) {
+            List<User> neighbors = accountService.getUsersByNeighborhood(neighborhood, userId);
+            List<String> neighborLabels = new java.util.ArrayList<>();
+            HashMap<String, String> neighborIds = new HashMap<>();
+
+            for (User neighbor : neighbors) {
+                String label = neighbor.getName() + " (" + neighbor.getEmail() + ")";
+                neighborLabels.add(label);
+                neighborIds.put(label, neighbor.getId());
+            }
+
+            response.getResponseParam().put("neighbors", neighborLabels);
+            response.getResponseParam().put("neighborIds", neighborIds);
+        }
         return response;
     }
 
