@@ -128,9 +128,9 @@ public class AccountService implements IAccountService {
         return null;
     }
 
-    public User getUserByEmail(String email) {
-        return usersByEmail.get(email);
-    }
+//    public User getUserByEmail(String email) {
+//        return usersByEmail.get(email);
+//    }
 
     @Override
     public List<User> getUsersByNeighborhood(Neighborhood neighborhood, String excludedUserId) {
