@@ -138,6 +138,18 @@ public class AccountService implements IAccountService {
         return usersByEmail.get(email);
     }
 
+    public User getUserById(String id) {
+
+        for (User user : usersByEmail.values()) {
+
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+
+        return null;
+    }
+
 //    public void addUser(User user){
 //        if (user == null || user.getEmail() == null) {
 //            return;

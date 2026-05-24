@@ -3,6 +3,7 @@ package server.service;
 import server.data_persistence.JsonSerializer;
 import server.model.Comment;
 import server.model.Neighborhood;
+import server.model.User;
 import server.model.Visibility;
 import protocol.Initiative;
 
@@ -136,6 +137,20 @@ public class InitiativeService implements IInitiativeService {
                 new Comment(author, text);
 
         initiative.addComment(comment);
+
+        serializer.save(FILE_PATH, initiatives);
+    }
+
+    public void joinInitiative(String userID, String initiativeId) {
+
+        Initiative initiative =
+                initiatives.get(initiativeId);
+
+        if (initiative == null) {
+            return;
+        }
+
+        initiative.addMember(userID);
 
         serializer.save(FILE_PATH, initiatives);
     }

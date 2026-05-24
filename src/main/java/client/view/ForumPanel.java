@@ -1,5 +1,6 @@
 package client.view;
 
+import client.user_actions.JoinInitiativeCommand;
 import client.user_actions.ViewForumCommand;
 import server.model.Neighborhood;
 import server.model.User;
@@ -8,6 +9,7 @@ import protocol.Initiative;
 import client.ClientConnectionManager;
 import client.user_actions.LikeCommand;
 import client.user_actions.CommentCommand;
+import server.service.AccountService;
 
 
 import javax.swing.*;
@@ -312,6 +314,44 @@ public class ForumPanel extends JPanel {
         center.add(commentsPanel,
                 BorderLayout.SOUTH);
 
+        StringBuilder membersText =
+                new StringBuilder("Members: ");
+
+        if (initiative.getMemberIds().isEmpty()) {
+
+            membersText.append("No members yet");
+
+        } else {
+
+            for (String memberId
+                    : initiative.getMemberIds()) {
+
+                User user =
+                        AccountService
+                                .getAccountServiceInstance()
+                                .getUserById(memberId);
+
+                if (user != null) {
+
+                    membersText.append(user.getName())
+                            .append(", ");
+                }
+            }
+
+            // Remove last comma
+            membersText.setLength(
+                    membersText.length() - 2);
+        }
+
+        JLabel membersLabel =
+                new JLabel(membersText.toString());
+
+        membersLabel.setForeground(
+                new Color(70, 70, 70));
+
+        membersLabel.setBorder(
+                new EmptyBorder(6, 0, 0, 0));
+
         // =========================
         // ACTION BUTTONS
         // =========================
@@ -330,9 +370,24 @@ public class ForumPanel extends JPanel {
         JButton commentButton =
                 new JButton("Comment");
 
+        JButton joinButton =
+                new JButton(
+                        "Join");
+
+        if (initiative.isMember(
+                currentUser.getId())) {
+
+            joinButton.setText("Joined");
+
+            joinButton.setEnabled(false);
+        }
+
+
         actionsPanel.add(likeButton);
 
         actionsPanel.add(commentButton);
+
+        actionsPanel.add(joinButton);
 
         // =========================
         // BUTTON ACTIONS
@@ -376,9 +431,53 @@ public class ForumPanel extends JPanel {
             }
         });
 
+        joinButton.addActionListener(e -> {
+
+            JoinInitiativeCommand command =
+                    new JoinInitiativeCommand(
+                            clientConnectionManager,
+                            currentUser.getId(),
+                            initiative.getId()
+                    );
+
+            command.execute();
+
+            joinButton.setText("Joined");
+
+            joinButton.setEnabled(false);
+
+            refreshForum();
+        });
+
         // =========================
         // ADD EVERYTHING TO CARD
         // =========================
+
+//        card.add(top, BorderLayout.NORTH);
+//
+//        card.add(center, BorderLayout.CENTER);
+
+        JPanel infoPanel =
+                new JPanel();
+
+        infoPanel.setLayout(
+                new BoxLayout(
+                        infoPanel,
+                        BoxLayout.Y_AXIS));
+
+        infoPanel.setOpaque(false);
+
+        infoPanel.add(metaLabel);
+
+        infoPanel.add(Box.createVerticalStrut(6));
+
+        infoPanel.add(membersLabel);
+
+        center.add(infoPanel,
+                BorderLayout.NORTH);
+
+        center.add(description,
+                BorderLayout.CENTER);
 
         card.add(top, BorderLayout.NORTH);
 
