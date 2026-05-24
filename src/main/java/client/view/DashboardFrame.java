@@ -54,7 +54,7 @@ public class DashboardFrame extends JFrame {
 
         contentPanel.add(makeLabelPanel("Create New Initiative"), "community");
         contentPanel.add(makeLabelPanel("Active Tasks View"), "tasks");
-        contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
+        contentPanel.add(new CreateInitiativePanel(loggedInUser, clientConnectionManager), "Create");
         forumPanel = new ForumPanel(loggedInUser, clientConnectionManager);
         contentPanel.add(forumPanel, "forum");
         InboxPanel inboxPanel = new InboxPanel(loggedInUser, clientConnectionManager);

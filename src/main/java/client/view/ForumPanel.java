@@ -10,19 +10,24 @@ import client.ClientConnectionManager;
 import server.service.AccountService;
 import server.service.InitiativeService;
 
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
  * Swing forum view: lists sustainability initiatives the current user is allowed to see.
  */
 public class ForumPanel extends JPanel {
+
     private ClientConnectionManager clientConnectionManager;
+
     private final User currentUser;
-    private final JPanel initiativesListPanel = new JPanel();
+
+    private final JPanel initiativesListPanel =
+            new JPanel();
 
     public ForumPanel(User currentUser,
                       ClientConnectionManager clientConnectionManager) {
@@ -34,14 +39,21 @@ public class ForumPanel extends JPanel {
 
         setLayout(new BorderLayout(0, 12));
 
-        setBorder(new EmptyBorder(20, 20, 20, 20));
+        setBorder(
+                new EmptyBorder(
+                        20,
+                        20,
+                        20,
+                        20));
 
-        JLabel heading = new JLabel("Community Forum");
+        JLabel heading =
+                new JLabel("Community Forum");
 
         heading.setFont(
-                heading.getFont().deriveFont(
-                        Font.BOLD,
-                        18f));
+                heading.getFont()
+                        .deriveFont(
+                                Font.BOLD,
+                                18f));
 
         heading.setHorizontalAlignment(
                 SwingConstants.CENTER);
@@ -56,21 +68,30 @@ public class ForumPanel extends JPanel {
                         ? neighborhood.name()
                         : "unknown";
 
-        JLabel subtitle = new JLabel(
-                "Showing public initiatives and neighborhood posts for: "
-                        + neighborhoodText);
+        JLabel subtitle =
+                new JLabel(
+                        "Showing public initiatives and neighborhood posts for: "
+                                + neighborhoodText);
 
         subtitle.setHorizontalAlignment(
                 SwingConstants.CENTER);
 
-        subtitle.setForeground(Color.DARK_GRAY);
+        subtitle.setForeground(
+                Color.DARK_GRAY);
 
         JPanel header =
-                new JPanel(new BorderLayout(0, 6));
+                new JPanel(
+                        new BorderLayout(
+                                0,
+                                6));
 
-        header.add(heading, BorderLayout.NORTH);
+        header.add(
+                heading,
+                BorderLayout.NORTH);
 
-        header.add(subtitle, BorderLayout.CENTER);
+        header.add(
+                subtitle,
+                BorderLayout.CENTER);
 
         JButton refreshBtn =
                 new JButton("Refresh");
@@ -85,7 +106,8 @@ public class ForumPanel extends JPanel {
 
         headerSouth.add(refreshBtn);
 
-        header.add(headerSouth,
+        header.add(
+                headerSouth,
                 BorderLayout.SOUTH);
 
         initiativesListPanel.setLayout(
@@ -112,55 +134,99 @@ public class ForumPanel extends JPanel {
     }
 
     public void refreshForum() {
-        Neighborhood viewerNeighborhood = currentUser != null ? currentUser.getNeighborhood() : null;
+
+        Neighborhood viewerNeighborhood =
+                currentUser != null
+                        ? currentUser.getNeighborhood()
+                        : null;
+
         ViewForumCommand command =
                 new ViewForumCommand(
                         clientConnectionManager,
-                        viewerNeighborhood
-                );
+                        viewerNeighborhood);
+
         command.execute();
-        displayInitiatives(command.getLoadedInitiatives());
+
+        displayInitiatives(
+                command.getLoadedInitiatives());
     }
 
-    private void displayInitiatives(List<Initiative> initiatives) {
+    private void displayInitiatives(
+            List<Initiative> initiatives) {
+
         initiativesListPanel.removeAll();
 
         if (initiatives.isEmpty()) {
-            JLabel empty = new JLabel(
-                    "<html><center>No initiatives on the forum yet.<br>Create one from the dashboard menu.</center></html>",
-                    SwingConstants.CENTER);
-            empty.setAlignmentX(Component.CENTER_ALIGNMENT);
-            empty.setBorder(new EmptyBorder(40, 20, 40, 20));
+
+            JLabel empty =
+                    new JLabel(
+                            "<html><center>No initiatives on the forum yet.<br>Create one from the dashboard menu.</center></html>",
+                            SwingConstants.CENTER);
+
+            empty.setAlignmentX(
+                    Component.CENTER_ALIGNMENT);
+
+            empty.setBorder(
+                    new EmptyBorder(
+                            40,
+                            20,
+                            40,
+                            20));
+
             initiativesListPanel.add(empty);
+
         } else {
-            for (Initiative initiative : initiatives) {
-                initiativesListPanel.add(buildInitiativeCard(initiative));
-                initiativesListPanel.add(Box.createVerticalStrut(12));
+
+            for (Initiative initiative
+                    : initiatives) {
+
+                initiativesListPanel.add(
+                        buildInitiativeCard(
+                                initiative));
+
+                initiativesListPanel.add(
+                        Box.createVerticalStrut(12));
             }
         }
 
         initiativesListPanel.revalidate();
+
         initiativesListPanel.repaint();
     }
 
-    private JPanel buildInitiativeCard(Initiative initiative) {
+    private JPanel buildInitiativeCard(
+            Initiative initiative) {
 
         JPanel card =
-                new JPanel(new BorderLayout(8, 8));
+                new JPanel(
+                        new BorderLayout(
+                                8,
+                                8));
 
         card.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
-                                new Color(200, 200, 200)),
-                        new EmptyBorder(12, 14, 12, 14)
+                                new Color(
+                                        200,
+                                        200,
+                                        200)),
+                        new EmptyBorder(
+                                12,
+                                14,
+                                12,
+                                14)
                 ));
 
         card.setMaximumSize(
-                new Dimension(Integer.MAX_VALUE, 320));
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        420));
 
-        card.setAlignmentX(Component.LEFT_ALIGNMENT);
+        card.setAlignmentX(
+                Component.LEFT_ALIGNMENT);
 
-        card.setBackground(Color.WHITE);
+        card.setBackground(
+                Color.WHITE);
 
         // =========================
         // TITLE + VISIBILITY
@@ -173,38 +239,163 @@ public class ForumPanel extends JPanel {
                         : "Neighborhood only";
 
         JLabel titleLabel =
-                new JLabel(initiative.getTitle());
+                new JLabel(
+                        initiative.getTitle());
 
         titleLabel.setFont(
                 titleLabel.getFont()
-                        .deriveFont(Font.BOLD, 15f));
+                        .deriveFont(
+                                Font.BOLD,
+                                15f));
 
         JLabel badge =
-                new JLabel(visibilityLabel);
+                new JLabel(
+                        visibilityLabel);
 
         badge.setOpaque(true);
 
         badge.setBorder(
-                new EmptyBorder(4, 8, 4, 8));
+                new EmptyBorder(
+                        4,
+                        8,
+                        4,
+                        8));
 
         if (initiative.getVisibility()
                 == Visibility.Public) {
 
             badge.setBackground(
-                    new Color(220, 245, 220));
+                    new Color(
+                            220,
+                            245,
+                            220));
 
         } else {
 
             badge.setBackground(
-                    new Color(255, 240, 210));
+                    new Color(
+                            255,
+                            240,
+                            210));
         }
 
         JPanel top =
-                new JPanel(new BorderLayout());
+                new JPanel(
+                        new BorderLayout());
 
-        top.add(titleLabel, BorderLayout.CENTER);
+        top.setOpaque(false);
 
-        top.add(badge, BorderLayout.EAST);
+        top.add(
+                titleLabel,
+                BorderLayout.CENTER);
+
+        top.add(
+                badge,
+                BorderLayout.EAST);
+
+        // =========================
+        // CENTER PANEL
+        // =========================
+
+        JPanel center =
+                new JPanel(
+                        new BorderLayout(
+                                10,
+                                10));
+
+        center.setOpaque(false);
+
+        // =========================
+        // IMAGE SECTION
+        // =========================
+
+        if (initiative.getImage() != null) {
+
+            try {
+
+                ImageIcon originalIcon =
+                        new ImageIcon(
+                                initiative.getImage());
+
+                Image smallImage =
+                        originalIcon.getImage()
+                                .getScaledInstance(
+                                        220,
+                                        140,
+                                        Image.SCALE_SMOOTH);
+
+                Image largeImage =
+                        originalIcon.getImage()
+                                .getScaledInstance(
+                                        420,
+                                        260,
+                                        Image.SCALE_SMOOTH);
+
+                ImageIcon smallIcon =
+                        new ImageIcon(smallImage);
+
+                ImageIcon largeIcon =
+                        new ImageIcon(largeImage);
+
+                JLabel imageLabel =
+                        new JLabel(smallIcon);
+
+                imageLabel.setCursor(
+                        new Cursor(
+                                Cursor.HAND_CURSOR));
+
+                imageLabel.setBorder(
+                        new EmptyBorder(
+                                5,
+                                0,
+                                5,
+                                10));
+
+                // =========================
+                // HOVER EFFECT
+                // =========================
+
+                imageLabel.addMouseListener(
+                        new MouseAdapter() {
+
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+
+                                JLabel fullImage =
+                                        new JLabel(
+                                                new ImageIcon(
+                                                        initiative.getImage()));
+
+                                JOptionPane.showMessageDialog(
+                                        null,
+                                        fullImage,
+                                        "Image Preview",
+                                        JOptionPane.PLAIN_MESSAGE);
+                            }
+                        });
+
+                JPanel imagePanel =
+                        new JPanel(
+                                new BorderLayout());
+
+                imagePanel.setOpaque(false);
+
+                imagePanel.add(
+                        imageLabel,
+                        BorderLayout.NORTH);
+
+                center.add(
+                        imagePanel,
+                        BorderLayout.WEST);
+
+            } catch (Exception e) {
+
+                System.out.println(
+                        "Failed to load image");
+
+                e.printStackTrace();
+            }
+        }
 
         // =========================
         // META INFO
@@ -238,87 +429,22 @@ public class ForumPanel extends JPanel {
                                 initiative.getCreator())
                 ));
 
-        metaLabel.setForeground(Color.GRAY);
-
-        JTextArea description =
-                new JTextArea(
-                        initiative.getDescription());
-
-        description.setLineWrap(true);
-
-        description.setWrapStyleWord(true);
-
-        description.setEditable(false);
-
-        description.setOpaque(false);
-
-        description.setFont(metaLabel.getFont());
-
-        description.setBorder(null);
-
-        JPanel center =
-                new JPanel(new BorderLayout(0, 6));
-
-        center.add(metaLabel, BorderLayout.NORTH);
-
-        center.add(description, BorderLayout.CENTER);
+        metaLabel.setForeground(
+                Color.GRAY);
 
         // =========================
-        // COMMENTS SECTION
+        // MEMBERS
         // =========================
-
-        JPanel commentsPanel =
-                new JPanel();
-
-        commentsPanel.setLayout(
-                new BoxLayout(
-                        commentsPanel,
-                        BoxLayout.Y_AXIS));
-
-        commentsPanel.setBorder(
-                new EmptyBorder(10, 0, 0, 0));
-
-        if (initiative.getComments() != null
-                && !initiative.getComments().isEmpty()) {
-
-            JLabel commentsTitle =
-                    new JLabel("Comments:");
-
-            commentsTitle.setFont(
-                    commentsTitle.getFont()
-                            .deriveFont(Font.BOLD));
-
-            commentsPanel.add(commentsTitle);
-
-            commentsPanel.add(Box.createVerticalStrut(6));
-
-            for (server.model.Comment comment
-                    : initiative.getComments()) {
-
-                JLabel commentLabel =
-                        new JLabel(
-                                "<html><b>"
-                                        + comment.getAuthor()
-                                        + ":</b> "
-                                        + comment.getText()
-                                        + "</html>");
-
-                commentLabel.setBorder(
-                        new EmptyBorder(2, 8, 2, 2));
-
-                commentsPanel.add(commentLabel);
-            }
-        }
-
-        center.add(commentsPanel,
-                BorderLayout.SOUTH);
 
         StringBuilder membersText =
-                new StringBuilder("Members: ");
+                new StringBuilder(
+                        "Members: ");
 
-        if (initiative.getMemberIds().isEmpty()) {
+        if (initiative.getMemberIds()
+                .isEmpty()) {
 
-            membersText.append("No members yet");
+            membersText.append(
+                    "No members yet");
 
         } else {
 
@@ -332,24 +458,156 @@ public class ForumPanel extends JPanel {
 
                 if (user != null) {
 
-                    membersText.append(user.getName())
+                    membersText.append(
+                                    user.getName())
                             .append(", ");
                 }
             }
 
-            // Remove last comma
             membersText.setLength(
                     membersText.length() - 2);
         }
 
         JLabel membersLabel =
-                new JLabel(membersText.toString());
+                new JLabel(
+                        membersText.toString());
 
         membersLabel.setForeground(
-                new Color(70, 70, 70));
+                new Color(
+                        70,
+                        70,
+                        70));
 
         membersLabel.setBorder(
-                new EmptyBorder(6, 0, 0, 0));
+                new EmptyBorder(
+                        6,
+                        0,
+                        0,
+                        0));
+
+        JPanel infoPanel =
+                new JPanel();
+
+        infoPanel.setLayout(
+                new BoxLayout(
+                        infoPanel,
+                        BoxLayout.Y_AXIS));
+
+        infoPanel.setOpaque(false);
+
+        infoPanel.add(metaLabel);
+
+        infoPanel.add(
+                Box.createVerticalStrut(6));
+
+        infoPanel.add(membersLabel);
+
+        // =========================
+        // DESCRIPTION
+        // =========================
+
+        JTextArea description =
+                new JTextArea(
+                        initiative.getDescription());
+
+        description.setLineWrap(true);
+
+        description.setWrapStyleWord(true);
+
+        description.setEditable(false);
+
+        description.setOpaque(false);
+
+        description.setFont(
+                metaLabel.getFont());
+
+        description.setBorder(null);
+
+        JPanel textPanel =
+                new JPanel(
+                        new BorderLayout(
+                                0,
+                                8));
+
+        textPanel.setOpaque(false);
+
+        textPanel.add(
+                infoPanel,
+                BorderLayout.NORTH);
+
+        textPanel.add(
+                description,
+                BorderLayout.CENTER);
+
+        center.add(
+                textPanel,
+                BorderLayout.CENTER);
+
+        // =========================
+        // COMMENTS SECTION
+        // =========================
+
+        JPanel commentsPanel =
+                new JPanel();
+
+        commentsPanel.setLayout(
+                new BoxLayout(
+                        commentsPanel,
+                        BoxLayout.Y_AXIS));
+
+        commentsPanel.setOpaque(false);
+
+        commentsPanel.setBorder(
+                new EmptyBorder(
+                        10,
+                        0,
+                        0,
+                        0));
+
+        if (initiative.getComments() != null
+                && !initiative.getComments()
+                .isEmpty()) {
+
+            JLabel commentsTitle =
+                    new JLabel("Comments:");
+
+            commentsTitle.setFont(
+                    commentsTitle.getFont()
+                            .deriveFont(
+                                    Font.BOLD));
+
+            commentsPanel.add(
+                    commentsTitle);
+
+            commentsPanel.add(
+                    Box.createVerticalStrut(6));
+
+            for (server.model.Comment comment
+                    : initiative.getComments()) {
+
+                JLabel commentLabel =
+                        new JLabel(
+                                "<html><b>"
+                                        + comment.getAuthor()
+                                        + ":</b> "
+                                        + comment.getText()
+                                        + "</html>");
+
+                commentLabel.setBorder(
+                        new EmptyBorder(
+                                2,
+                                8,
+                                2,
+                                2));
+
+                commentsPanel.add(
+                        commentLabel);
+            }
+        }
+
+        center.add(
+                commentsPanel,
+                BorderLayout.SOUTH);
 
         // =========================
         // ACTION BUTTONS
@@ -367,7 +625,8 @@ public class ForumPanel extends JPanel {
                                 + ")");
 
         JButton commentButton =
-                new JButton("Comment");
+                new JButton(
+                        "Comment");
 
         JButton joinButton =
                 new JButton(
@@ -376,122 +635,147 @@ public class ForumPanel extends JPanel {
         if (initiative.isMember(
                 currentUser.getId())) {
 
-            joinButton.setText("Joined");
+            joinButton.setText(
+                    "Joined");
 
             joinButton.setEnabled(false);
         }
 
+        actionsPanel.add(
+                likeButton);
 
-        actionsPanel.add(likeButton);
+        actionsPanel.add(
+                commentButton);
 
-        actionsPanel.add(commentButton);
-
-        actionsPanel.add(joinButton);
+        actionsPanel.add(
+                joinButton);
 
         // =========================
         // BUTTON ACTIONS
         // =========================
 
-        likeButton.addActionListener(e -> {
+        likeButton.addActionListener(
+                e -> {
 
-            LikeCommand command =
-                    new LikeCommand(
-                            clientConnectionManager,
-                            currentUser.getName(),
-                            initiative.getId()
-                    );
+                    LikeCommand command =
+                            new LikeCommand(
+                                    clientConnectionManager,
+                                    currentUser.getName(),
+                                    initiative.getId());
 
-            command.execute();
+                    command.execute();
 
-            refreshForum();
-        });
+                    refreshForum();
+                });
 
-        commentButton.addActionListener(e -> {
+        commentButton.addActionListener(
+                e -> {
 
-            String comment =
-                    JOptionPane.showInputDialog(
-                            this,
-                            "Write a comment");
+                    String comment =
+                            JOptionPane.showInputDialog(
+                                    this,
+                                    "Write a comment");
 
-            if (comment != null
-                    && !comment.isBlank()) {
+                    if (comment != null
+                            && !comment.isBlank()) {
 
-                CommentCommand command =
-                        new CommentCommand(
-                                clientConnectionManager,
-                                currentUser.getName(),
-                                initiative.getId(),
-                                comment
-                        );
+                        CommentCommand command =
+                                new CommentCommand(
+                                        clientConnectionManager,
+                                        currentUser.getName(),
+                                        initiative.getId(),
+                                        comment);
 
-                command.execute();
+                        command.execute();
 
-                refreshForum();
-            }
-        });
+                        refreshForum();
+                    }
+                });
 
-        joinButton.addActionListener(e -> {
+        joinButton.addActionListener(
+                e -> {
 
-            JoinInitiativeCommand command =
-                    new JoinInitiativeCommand(
-                            clientConnectionManager,
-                            currentUser.getId(),
-                            initiative.getId()
-                    );
+                    JoinInitiativeCommand command =
+                            new JoinInitiativeCommand(
+                                    clientConnectionManager,
+                                    currentUser.getId(),
+                                    initiative.getId());
 
-            command.execute();
+                    command.execute();
 
-            joinButton.setText("Joined");
+                    joinButton.setText(
+                            "Joined");
 
-            joinButton.setEnabled(false);
+                    joinButton.setEnabled(false);
 
-            refreshForum();
-        });
+                    refreshForum();
+                });
 
         // =========================
-        // ADD EVERYTHING TO CARD
+        // FOOTER
         // =========================
 
-//        card.add(top, BorderLayout.NORTH);
-//
-//        card.add(center, BorderLayout.CENTER);
+        JPanel footer =
+                new JPanel(
+                        new BorderLayout());
 
-        JPanel infoPanel =
-                new JPanel();
+        footer.add(
+                actionsPanel,
+                BorderLayout.WEST);
 
-        infoPanel.setLayout(
-                new BoxLayout(
-                        infoPanel,
-                        BoxLayout.Y_AXIS));
+        if (currentUser != null
+                && currentUser.hasRole(
+                Role.CommunityOrganizer)) {
 
-        infoPanel.setOpaque(false);
+            JButton deleteButton =
+                    new JButton("Delete");
 
-        infoPanel.add(metaLabel);
+            deleteButton.addActionListener(
+                    e -> handleDelete(
+                            initiative));
 
-        infoPanel.add(Box.createVerticalStrut(6));
+            JPanel deletePanel =
+                    new JPanel(
+                            new FlowLayout(
+                                    FlowLayout.RIGHT,
+                                    0,
+                                    0));
 
-        infoPanel.add(membersLabel);
-
-        center.add(infoPanel,
-                BorderLayout.NORTH);
-
-        center.add(description,
-                BorderLayout.CENTER);
-
-        card.add(top, BorderLayout.NORTH);
-        card.add(center, BorderLayout.CENTER);
-
-        JPanel footer = new JPanel(new BorderLayout());
-        footer.add(actionsPanel, BorderLayout.WEST);
-
-        if (currentUser != null && currentUser.hasRole(Role.CommunityOrganizer)) {
-            JButton deleteButton = new JButton("Delete");
-            deleteButton.addActionListener(e -> handleDelete(initiative));
-            JPanel deletePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
             deletePanel.add(deleteButton);
-            footer.add(deletePanel, BorderLayout.EAST);
+
+            footer.add(
+                    deletePanel,
+                    BorderLayout.EAST);
         }
 
+        // =========================
+        // ADD TO CARD
+        // =========================
+
+        card.add(
+                top,
+                BorderLayout.NORTH);
+
+        card.add(
+                center,
+                BorderLayout.CENTER);
+
+        card.add(
+                footer,
+                BorderLayout.SOUTH);
+
+        return card;
+    }
+
+    private void handleDelete(
+            Initiative initiative) {
+
+        int choice =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "Delete this initiative from the forum?",
+                        "Confirm Delete",
+                        JOptionPane.YES_NO_OPTION);
         boolean canEdit = currentUser != null
                 && initiative.getCreator().equals(currentUser.getEmail());
 
@@ -504,27 +788,30 @@ public class ForumPanel extends JPanel {
 
         card.add(footer, BorderLayout.SOUTH);
 
-        return card;
-    }
+        if (choice
+                != JOptionPane.YES_OPTION) {
 
-    private void handleDelete(Initiative initiative) {
-        int choice = JOptionPane.showConfirmDialog(
-                this,
-                "Delete this initiative from the forum?",
-                "Confirm Delete",
-                JOptionPane.YES_NO_OPTION
-        );
-        if (choice != JOptionPane.YES_OPTION) {
             return;
         }
-        boolean deleted = InitiativeService.getInitiativeServiceInstance()
-                .deleteInitiative(initiative.getId());
+
+        boolean deleted =
+                InitiativeService
+                        .getInitiativeServiceInstance()
+                        .deleteInitiative(
+                                initiative.getId());
+
         if (!deleted) {
-            JOptionPane.showMessageDialog(this, "Failed to delete initiative.");
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to delete initiative.");
+
             return;
         }
+
         refreshForum();
     }
+
 
     private void handleEdit(Initiative initiative) {
         JTextField titleField = new JTextField(initiative.getTitle(), 20);
@@ -562,10 +849,17 @@ public class ForumPanel extends JPanel {
     }
 
     /** Turns enum-style names like VästraHamnen into readable labels. */
-    private static String formatNeighborhoodName(String enumName) {
-        if (enumName == null || enumName.isBlank()) {
+    private static String formatNeighborhoodName(
+            String enumName) {
+
+        if (enumName == null
+                || enumName.isBlank()) {
+
             return "—";
         }
-        return enumName.replaceAll("([a-zåäö])([A-ZÅÄÖ])", "$1 $2");
+
+        return enumName.replaceAll(
+                "([a-zåäö])([A-ZÅÄÖ])",
+                "$1 $2");
     }
 }

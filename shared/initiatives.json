@@ -1,4 +1,39 @@
 {
+  "3ce61a4d-f789-4f31-8134-100f5ebfb25d": {
+    "id": "3ce61a4d-f789-4f31-8134-100f5ebfb25d",
+    "title": "test",
+    "initiativeType": "EcoAction",
+    "duration": "1",
+    "visibility": "Neighborhood",
+    "description": "sdas",
+    "specificLocation": "sdas",
+    "creatorNeighborhood": "Sofielund",
+    "creator": "ben@mail.com",
+    "memberIds": [],
+    "success": true,
+    "responseParam": {},
+    "likes": 0,
+    "comments": []
+  },
+  "864326b0-2028-4051-8238-23773e22902d": {
+    "id": "864326b0-2028-4051-8238-23773e22902d",
+    "title": "dog sitting",
+    "initiativeType": "EcoAction",
+    "duration": "1",
+    "visibility": "Neighborhood",
+    "description": "dogs",
+    "specificLocation": "sas",
+    "creatorNeighborhood": "Sofielund",
+    "creator": "sofia@mail.com",
+    "memberIds": [],
+    "success": true,
+    "responseParam": {},
+    "likes": 0,
+    "comments": []
+  },
+  "c941974c-d501-40b8-a20f-f8592b40ed31": {
+    "id": "c941974c-d501-40b8-a20f-f8592b40ed31",
+    "title": "Clean the beach",
   "a2b084ef-e7ed-44db-9b14-776c7fb68945": {
     "id": "a2b084ef-e7ed-44db-9b14-776c7fb68945",
     "title": "dgsdg55",
@@ -10,6 +45,95 @@
     "creatorNeighborhood": "VästraHamnen",
     "creator": "a",
     "memberIds": [
+      "7000b681-db91-476a-8c4f-c22481deb33a",
+      "e5e228bf-45f5-40f9-bb6a-14e08c29f3b6"
+    ],
+    "success": true,
+    "responseParam": {},
+    "likes": 19,
+    "comments": [
+      {
+        "author": "testing",
+        "text": "dsfhgdfzhdfhdfh",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 24
+          },
+          "time": {
+            "hour": 16,
+            "minute": 50,
+            "second": 55,
+            "nano": 969388000
+          }
+        }
+      },
+      {
+        "author": "testing",
+        "text": "gfgggfgfg",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 24
+          },
+          "time": {
+            "hour": 16,
+            "minute": 50,
+            "second": 59,
+            "nano": 86965000
+          }
+        }
+      }
+    ]
+  },
+  "b1266337-f51a-4f44-a7bb-535c3d0ed2a2": {
+    "id": "b1266337-f51a-4f44-a7bb-535c3d0ed2a2",
+    "title": "test2",
+    "initiativeType": "EcoAction",
+    "duration": "1",
+    "visibility": "Public",
+    "description": "sadsad",
+    "specificLocation": "sdas",
+    "creatorNeighborhood": "Sofielund",
+    "image": "file:/Users/jabonfoca/Desktop/lana.jpg",
+    "creator": "ben@mail.com",
+    "memberIds": [],
+    "success": true,
+    "responseParam": {},
+    "likes": 0,
+    "comments": []
+  },
+  "e09b96f8-73bf-4c6b-aa5a-59667bb76ae8": {
+    "id": "e09b96f8-73bf-4c6b-aa5a-59667bb76ae8",
+    "title": "Hej",
+    "initiativeType": "RideSharing",
+    "duration": "60 min",
+    "visibility": "Public",
+    "description": "Jag gillar korv",
+    "specificLocation": "Hemma",
+    "creatorNeighborhood": "Bulltofta",
+    "creator": "Helia",
+    "memberIds": [],
+    "success": true,
+    "responseParam": {},
+    "likes": 0,
+    "comments": []
+  },
+  "da7e2ba8-c3ee-4f99-8155-d74086313f48": {
+    "id": "da7e2ba8-c3ee-4f99-8155-d74086313f48",
+    "title": "Cut the grass",
+    "initiativeType": "GardenActivity",
+    "duration": "3 hrs",
+    "visibility": "Neighborhood",
+    "description": "cut grass",
+    "specificLocation": "sofielund 5",
+    "creatorNeighborhood": "Sofielund",
+    "creator": "sofia@mail.com",
+    "memberIds": [
+      "cb0198b6-70f5-46ac-b32d-f5ae41b01a61",
+      "7000b681-db91-476a-8c4f-c22481deb33a"
       "7036a9aa-feab-4621-a693-e03efbc96a2b",
       "75779911-534c-4aa9-91bd-33e45009ab0d"
     ],

@@ -6,6 +6,7 @@ import server.model.User;
 import server.model.Visibility;
 import protocol.Request;
 import protocol.Initiative;
+import java.net.URL;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,18 +92,52 @@ public class Coordinator implements ICoordinator{
         return response;
     }
 
-    private Initiative extractParamsCreateInitiative(HashMap<String, Object> params){
-        String creator = (String) params.get("username");
-        String title = params.get("title").toString();
-        String description = params.get("description").toString();
-        String specificLocation = params.get("specificLocation") != null
-                ? params.get("specificLocation").toString() : "";
-        Neighborhood creatorNeighborhood = (Neighborhood) params.get("creatorNeighborhood");
-        InitiativeType type = (InitiativeType) params.get("type");
-        Visibility visibility = (Visibility) params.get("visibility");
-        String duration = params.get("duration") != null ? params.get("duration").toString() : "";
+    private Initiative extractParamsCreateInitiative(
+            HashMap<String, Object> params){
 
-        return createInitiative(creator, title, description, type, specificLocation, creatorNeighborhood, visibility, duration);
+        String creator =
+                (String) params.get("username");
+
+        String title =
+                params.get("title").toString();
+
+        String description =
+                params.get("description").toString();
+
+        String specificLocation =
+                params.get("specificLocation") != null
+                        ? params.get("specificLocation").toString()
+                        : "";
+
+        Neighborhood creatorNeighborhood =
+                (Neighborhood) params.get("creatorNeighborhood");
+
+        InitiativeType type =
+                (InitiativeType) params.get("type");
+
+        Visibility visibility =
+                (Visibility) params.get("visibility");
+
+        String duration =
+                params.get("duration") != null
+                        ? params.get("duration").toString()
+                        : "";
+
+        URL image =
+                (URL) params.get("image");
+        System.out.println("IMAGE: " + image);
+
+        return initiativeService.createInitiative(
+                creator,
+                title,
+                description,
+                type.name(),
+                specificLocation,
+                creatorNeighborhood,
+                visibility,
+                duration,
+                image
+        );
     }
 
 
