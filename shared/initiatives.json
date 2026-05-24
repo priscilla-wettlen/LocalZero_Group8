@@ -158,8 +158,43 @@
     "creator": "juani@ta.com",
     "success": true,
     "responseParam": {},
-    "likes": 0,
-    "comments": []
+    "likes": 19,
+    "comments": [
+      {
+        "author": "testing",
+        "text": "dsfhgdfzhdfhdfh",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 24
+          },
+          "time": {
+            "hour": 16,
+            "minute": 50,
+            "second": 55,
+            "nano": 969388000
+          }
+        }
+      },
+      {
+        "author": "testing",
+        "text": "gfgggfgfg",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 24
+          },
+          "time": {
+            "hour": 16,
+            "minute": 50,
+            "second": 59,
+            "nano": 86965000
+          }
+        }
+      }
+    ]
   },
   "a7a2dd6c-9d45-46a0-be08-be902999a5f3": {
     "id": "a7a2dd6c-9d45-46a0-be08-be902999a5f3",
@@ -191,26 +226,10 @@
             "nano": 701614000
           }
         }
-      }
-    ]
-  },
-  "7428909f-1678-499c-b8f2-483938ac2ed7": {
-    "id": "7428909f-1678-499c-b8f2-483938ac2ed7",
-    "title": "Clean the beach",
-    "initiativeType": "EcoAction",
-    "duration": "1 day",
-    "visibility": "Public",
-    "description": "let\u0027s clean",
-    "specificLocation": "Ribersborg",
-    "creatorNeighborhood": "VästraHamnen",
-    "creator": "juani@ta.com",
-    "success": true,
-    "responseParam": {},
-    "likes": 1,
-    "comments": [
+      },
       {
-        "author": "Test",
-        "text": "hejhej",
+        "author": "testing",
+        "text": "gurgel",
         "timestamp": {
           "date": {
             "year": 2026,
@@ -219,9 +238,26 @@
           },
           "time": {
             "hour": 16,
-            "minute": 13,
-            "second": 45,
-            "nano": 914987000
+            "minute": 53,
+            "second": 9,
+            "nano": 810813000
+          }
+        }
+      },
+      {
+        "author": "testing",
+        "text": "1234",
+        "timestamp": {
+          "date": {
+            "year": 2026,
+            "month": 5,
+            "day": 24
+          },
+          "time": {
+            "hour": 16,
+            "minute": 53,
+            "second": 17,
+            "nano": 180071000
           }
         }
       }

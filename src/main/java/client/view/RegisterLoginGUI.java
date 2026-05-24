@@ -262,16 +262,10 @@ public class RegisterLoginGUI extends JFrame {
             return;
         }
 
-        String userId = accountService.login(email, password);
+        User user = accountService.login(email, password);
 
-        if (userId.isEmpty()) {
-            statusLabel.setText("Login failed");
-            return;
-        }
-
-        User user = accountService.getUserByEmail(email);
         if (user == null) {
-            statusLabel.setText("Login failed (user not found)");
+            statusLabel.setText("Login failed");
             return;
         }
 

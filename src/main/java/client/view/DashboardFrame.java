@@ -15,6 +15,7 @@ public class DashboardFrame extends JFrame {
     private final ClientConnectionManager clientConnectionManager;
     private final User loggedInUser;
     private ForumPanel forumPanel;
+    private MyAccountPanel myAccountPanel;
 
 
     public DashboardFrame(User user,
@@ -52,13 +53,18 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
         forumPanel = new ForumPanel(loggedInUser, clientConnectionManager);
         contentPanel.add(forumPanel, "forum");
+        myAccountPanel = new MyAccountPanel(loggedInUser);
+        contentPanel.add(myAccountPanel, "my account");
 
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
         forumBtn.addActionListener(e -> {
             forumPanel.refreshForum();
             cardLayout.show(contentPanel, "forum");
         });
-        accountBtn.addActionListener(e -> cardLayout.show(contentPanel, "my account"));
+        accountBtn.addActionListener(e -> {
+            myAccountPanel.refreshUser(loggedInUser);
+            cardLayout.show(contentPanel, "my account");
+        });
         //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
 
         menuPanel.add(createNewInitiative);

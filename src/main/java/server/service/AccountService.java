@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public abstract class AccountService implements IAccountService {
+public class AccountService implements IAccountService {
 
     private static AccountService accountServiceInstance;
 
@@ -76,28 +76,34 @@ public abstract class AccountService implements IAccountService {
     }
 
     @Override
-    public String login(String email, String password) {
+    public User login(String email,
+                      String password) {
+
         User user = usersByEmail.get(email);
 
         if (user == null) {
+
             Map<String, User> users =
                     serializer.loadSavedData(FILE_PATH);
+
             user = users.get(email);
+
             if (user != null) {
                 usersByEmail.put(email, user);
             }
         }
 
         if (user == null) {
-            return "";
+            return null;
         }
 
         if (!BCrypt.checkpw(password,
                 user.getPasswordHash())) {
-            return "";
+
+            return null;
         }
 
-        return user.getId();
+        return user;
     }
 
     public User getUserByEmail(String email) {
