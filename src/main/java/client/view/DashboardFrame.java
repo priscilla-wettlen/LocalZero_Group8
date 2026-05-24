@@ -15,6 +15,7 @@ public class DashboardFrame extends JFrame {
     private final ClientConnectionManager clientConnectionManager;
     private final User loggedInUser;
     private ForumPanel forumPanel;
+    private MyAccountPanel myAccountPanel;
 
 
     public DashboardFrame(User user,
@@ -31,6 +32,7 @@ public class DashboardFrame extends JFrame {
 
         JButton createNewInitiative = new JButton("Create New Initiative");
         JButton forumBtn = new JButton("Forum");
+        JButton ecoBtn = new JButton("Eco Tracker");
         JButton accountBtn = new JButton("My Account");
         //JButton forumBtn = new JButton("Forum");
 
@@ -40,6 +42,7 @@ public class DashboardFrame extends JFrame {
         );
         createNewInitiative.setBorder(buttonBorder);
         forumBtn.setBorder(buttonBorder);
+        ecoBtn.setBorder(buttonBorder);
         accountBtn.setBorder(buttonBorder);
         //forumBtn.setBorder(buttonBorder);
 
@@ -53,16 +56,31 @@ public class DashboardFrame extends JFrame {
         forumPanel = new ForumPanel(loggedInUser, clientConnectionManager);
         contentPanel.add(forumPanel, "forum");
 
+        contentPanel.add(new EcoTrackerPanel(clientConnectionManager), "eco");
+
+        myAccountPanel = new MyAccountPanel(loggedInUser);
+        contentPanel.add(myAccountPanel, "my account");
+
+
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
         forumBtn.addActionListener(e -> {
             forumPanel.refreshForum();
             cardLayout.show(contentPanel, "forum");
         });
+
+        
+        ecoBtn.addActionListener(e -> cardLayout.show(contentPanel, "eco"));
         accountBtn.addActionListener(e -> cardLayout.show(contentPanel, "my account"));
-        //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
+
+        accountBtn.addActionListener(e -> {
+            myAccountPanel.refreshUser(loggedInUser);
+            cardLayout.show(contentPanel, "my account");
+        });
+      //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
 
         menuPanel.add(createNewInitiative);
         menuPanel.add(forumBtn);
+        menuPanel.add(ecoBtn);
         menuPanel.add(accountBtn);
         //menuPanel.add(forumBtn);
         menuPanel.add(new JLabel());
