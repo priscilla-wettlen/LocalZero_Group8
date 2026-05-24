@@ -1,5 +1,6 @@
-package client.user_actions;
+package client.view;
 
+import client.user_actions.ViewForumCommand;
 import server.model.Neighborhood;
 import server.model.User;
 import server.model.Visibility;

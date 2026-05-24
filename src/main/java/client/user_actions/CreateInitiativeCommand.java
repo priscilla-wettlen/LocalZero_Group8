@@ -49,7 +49,7 @@ public class CreateInitiativeCommand extends BaseUserCommand implements IUserCom
         return request;
     }
     @Override
-    public void handleResponse() {
+    public void handleResponse(HashMap<String, Object> responsParam) {
         ////Do whatever with response, it should maybe always give success/fail as return???
     }
 

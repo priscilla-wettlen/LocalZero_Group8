@@ -3,15 +3,16 @@ package client.user_actions;
 import client.ClientConnectionManager;
 import protocol.Request;
 
-public class JoinInitiativeCommand extends BaseUserCommand implements IUserCommand {
+import java.util.HashMap;
 
+public class JoinInitiativeCommand extends BaseUserCommand implements IUserCommand {
 
     public JoinInitiativeCommand(ClientConnectionManager connectionManager, String token) {
         super(connectionManager);
     }
 
     @Override
-    public void handleResponse() {
+    public void handleResponse(HashMap<String, Object> responsParam) {
 
     }
 

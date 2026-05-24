@@ -1,4 +1,4 @@
-package client.user_actions;
+package client.view;
 
 import server.model.Neighborhood;
 import server.model.User;
