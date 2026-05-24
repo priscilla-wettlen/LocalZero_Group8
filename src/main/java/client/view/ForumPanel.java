@@ -6,6 +6,9 @@ import server.model.User;
 import server.model.Visibility;
 import protocol.Initiative;
 import client.ClientConnectionManager;
+import client.user_actions.LikeCommand;
+import client.user_actions.CommentCommand;
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

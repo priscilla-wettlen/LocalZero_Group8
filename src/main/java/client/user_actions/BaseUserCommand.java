@@ -1,9 +1,11 @@
 package client.user_actions;
 
 
+import java.util.HashMap;
+
 import client.ClientConnectionManager;
-import protocol.Request;
 import protocol.Initiative;
+import protocol.Request;
 
 public abstract class BaseUserCommand {
     private final ClientConnectionManager connectionManager;
@@ -16,9 +18,10 @@ public abstract class BaseUserCommand {
         return connectionManager;
     }
 
-//    public abstract void handleResponse();
+    public abstract void handleResponse(HashMap<String, Object> responseParam);
 
     public abstract Request buildRequest();
+
 
     public final Initiative sendRequest(Request request) {
         if (connectionManager == null) {

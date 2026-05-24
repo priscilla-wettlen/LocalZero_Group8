@@ -12,10 +12,11 @@ public class LoginCommand extends BaseUserCommand implements IUserCommand {
         super(connectionManager);
     }
 
-//    @Override
-//    public void handleResponse(HashMap<String, Object> responseParam) {
-//
-//    }
+    @Override
+    public void handleResponse(HashMap<String, Object> responseParam) {
+
+    }
+
 
     @Override
     public Request buildRequest() {

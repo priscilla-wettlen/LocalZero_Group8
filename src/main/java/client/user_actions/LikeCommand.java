@@ -1,10 +1,10 @@
 package client.user_actions;
 
+import java.util.HashMap;
+
 import client.ClientConnectionManager;
 import protocol.Request;
 import protocol.UserActionType;
-
-import java.util.HashMap;
 
 public class LikeCommand
         extends BaseUserCommand
@@ -26,12 +26,11 @@ public class LikeCommand
         this.initiativeId = initiativeId;
     }
 
-//    @Override
-//    public void handleResponse() {
-//
-//        System.out.println(
-//                "Like request completed");
-//    }
+    @Override
+    public void handleResponse(HashMap<String, Object> responseParam) {
+
+    }
+
 
     @Override
     public Request buildRequest() {

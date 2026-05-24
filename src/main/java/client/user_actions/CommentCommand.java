@@ -18,10 +18,11 @@ public class CommentCommand extends BaseUserCommand implements IUserCommand{
         this.comment = comment;
     }
 
-//    @Override
-//    public void handleResponse() {
-//
-//    }
+    @Override
+    public void handleResponse(HashMap<String, Object> responseParam) {
+
+    }
+
 
     @Override
     public Request buildRequest() {

@@ -1,16 +1,16 @@
 package client.user_actions;
 
-import client.ClientConnectionManager;
-import server.model.InitiativeType;
-import server.model.Neighborhood;
-import protocol.UserActionType;
-import server.model.Visibility;
-import protocol.Request;
-import protocol.Initiative;
-
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+
+import client.ClientConnectionManager;
+import protocol.Initiative;
+import protocol.Request;
+import protocol.UserActionType;
+import server.model.InitiativeType;
+import server.model.Neighborhood;
+import server.model.Visibility;
 
 
 public class CreateInitiativeCommand extends BaseUserCommand implements IUserCommand{
@@ -48,10 +48,11 @@ public class CreateInitiativeCommand extends BaseUserCommand implements IUserCom
         request.setAuthToken(super.getToken()); ////this is to get the token from the clientConnectionManager to attach it to the request
         return request;
     }
-//    @Override
-//    public void handleResponse(HashMap<String, Object> responsParam) {
-//        ////Do whatever with response, it should maybe always give success/fail as return???
-//    }
+    @Override
+    public void handleResponse(HashMap<String, Object> responseParam) {
+        // Do whatever with response, it should maybe always give success/fail as return???
+    }
+
 
     @Override
     public void execute(){

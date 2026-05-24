@@ -4,9 +4,15 @@ import server.model.Neighborhood;
 import server.model.Role;
 import server.model.User;
 import server.service.AccountService;
+import client.ClientConnectionManager;
 
 import javax.swing.*;
 import java.awt.*;
+
+import java.awt.*;
+
+import java.awt.*;
+
 
 public class RegisterLoginGUI extends JFrame {
     private final ClientConnectionManager clientConnectionManager;
