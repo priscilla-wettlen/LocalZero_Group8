@@ -254,46 +254,31 @@ public class RegisterLoginGUI extends JFrame {
     }
 
     private void login() {
+        String email = loginEmailField.getText();
+        String password = new String(loginPasswordField.getPassword());
 
-        String email =
-                loginEmailField.getText();
-
-        String password =
-                new String(
-                        loginPasswordField.getPassword());
-
-        if (email.isBlank()
-                || password.isBlank()) {
-
-            statusLabel.setText(
-                    "Email and password required");
-
+        if (email.isBlank() || password.isBlank()) {
+            statusLabel.setText("Email and password required");
             return;
         }
 
-        User user =
-                accountService.login(
-                        email,
-                        password);
+        String userId = accountService.login(email, password);
 
+        if (userId.isEmpty()) {
+            statusLabel.setText("Login failed");
+            return;
+        }
+
+        User user = accountService.getUserByEmail(email);
         if (user == null) {
-
-            statusLabel.setText(
-                    "Login failed");
-
+            statusLabel.setText("Login failed (user not found)");
             return;
         }
 
         SwingUtilities.invokeLater(() -> {
-
-            DashboardFrame dashboard =
-                    new DashboardFrame(
-                            user,
-                            clientConnectionManager);
-
+            DashboardFrame dashboard = new DashboardFrame(user, clientConnectionManager);
             dashboard.setVisible(true);
         });
-
-        dispose();
+        dispose(); // close login window
     }
 }
