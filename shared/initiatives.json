@@ -10,7 +10,8 @@
     "creatorNeighborhood": "VästraSorgenfri",
     "creator": "jessy@mail.com",
     "memberIds": [
-      "7000b681-db91-476a-8c4f-c22481deb33a"
+      "7000b681-db91-476a-8c4f-c22481deb33a",
+      "e5e228bf-45f5-40f9-bb6a-14e08c29f3b6"
     ],
     "success": true,
     "responseParam": {},
@@ -51,6 +52,22 @@
         }
       }
     ]
+  },
+  "e09b96f8-73bf-4c6b-aa5a-59667bb76ae8": {
+    "id": "e09b96f8-73bf-4c6b-aa5a-59667bb76ae8",
+    "title": "Hej",
+    "initiativeType": "RideSharing",
+    "duration": "60 min",
+    "visibility": "Public",
+    "description": "Jag gillar korv",
+    "specificLocation": "Hemma",
+    "creatorNeighborhood": "Bulltofta",
+    "creator": "Helia",
+    "memberIds": [],
+    "success": true,
+    "responseParam": {},
+    "likes": 0,
+    "comments": []
   },
   "da7e2ba8-c3ee-4f99-8155-d74086313f48": {
     "id": "da7e2ba8-c3ee-4f99-8155-d74086313f48",
