@@ -31,6 +31,7 @@ public class DashboardFrame extends JFrame {
 
         JButton createNewInitiative = new JButton("Create New Initiative");
         JButton forumBtn = new JButton("Forum");
+        JButton inboxBtn = new JButton("Inbox");
         JButton accountBtn = new JButton("My Account");
         //JButton forumBtn = new JButton("Forum");
 
@@ -41,6 +42,7 @@ public class DashboardFrame extends JFrame {
         createNewInitiative.setBorder(buttonBorder);
         forumBtn.setBorder(buttonBorder);
         accountBtn.setBorder(buttonBorder);
+        inboxBtn.setBorder(buttonBorder);
         //forumBtn.setBorder(buttonBorder);
 
 //        boolean isOrganizer = user != null && user.getRoles() != null
@@ -52,17 +54,24 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
         forumPanel = new ForumPanel(loggedInUser, clientConnectionManager);
         contentPanel.add(forumPanel, "forum");
+        InboxPanel inboxPanel = new InboxPanel(loggedInUser, clientConnectionManager);
+        contentPanel.add(inboxPanel, "inbox");
 
         createNewInitiative.addActionListener(e -> cardLayout.show(contentPanel, "Create"));
         forumBtn.addActionListener(e -> {
             forumPanel.refreshForum();
             cardLayout.show(contentPanel, "forum");
         });
+        inboxBtn.addActionListener(e -> {
+            inboxPanel.refreshInboxPanel();
+            cardLayout.show(contentPanel, "inbox");
+        });
         accountBtn.addActionListener(e -> cardLayout.show(contentPanel, "my account"));
         //forumBtn.addActionListener(e -> cardLayout.show(contentPanel, "forum"));
 
         menuPanel.add(createNewInitiative);
         menuPanel.add(forumBtn);
+        menuPanel.add(inboxBtn);
         menuPanel.add(accountBtn);
         //menuPanel.add(forumBtn);
         menuPanel.add(new JLabel());
