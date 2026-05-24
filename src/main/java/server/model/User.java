@@ -7,7 +7,7 @@ public class User {
     private String name;
     private Neighborhood neighborhood;
     private String email;
-    private String passwordHash; ///Option to database??
+    private String passwordHash; ///Option to databasee??
     private String adminCode;
     private String role;
     //private HashSet<Role> roles = new HashSet<Role>();
