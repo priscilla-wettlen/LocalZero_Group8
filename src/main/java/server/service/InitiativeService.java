@@ -109,6 +109,32 @@ public class InitiativeService implements IInitiativeService {
         return true;
     }
 
+    @Override
+    public boolean updateInitiative(String initiativeId, String newTitle, String newDescription, String actorEmail) {
+        if (initiativeId == null || initiativeId.isBlank()) {
+            return false;
+        }
+        if (newTitle == null || newTitle.isBlank() || newDescription == null || newDescription.isBlank()) {
+            return false;
+        }
+
+        initiatives.clear();
+        initiatives.putAll(serializer.loadSavedData(FILE_PATH));
+
+        Initiative initiative = initiatives.get(initiativeId);
+        if (initiative == null) {
+            return false;
+        }
+        if (actorEmail == null || !actorEmail.equals(initiative.getCreator())) {
+            return false;
+        }
+
+        initiative.setTitle(newTitle);
+        initiative.setDescription(newDescription);
+        serializer.save(FILE_PATH, initiatives);
+        return true;
+    }
+
     private boolean isVisibleOnForum(Initiative initiative, Neighborhood viewerNeighborhood) {
         if (initiative.getVisibility() == Visibility.Public) {
             return true;

@@ -1,15 +1,12 @@
 package client.view;
 
-import client.user_actions.JoinInitiativeCommand;
-import client.user_actions.ViewForumCommand;
+import client.user_actions.*;
 import server.model.Neighborhood;
 import server.model.Role;
 import server.model.User;
 import server.model.Visibility;
 import protocol.Initiative;
 import client.ClientConnectionManager;
-import client.user_actions.LikeCommand;
-import client.user_actions.CommentCommand;
 import server.service.AccountService;
 import server.service.InitiativeService;
 
@@ -495,6 +492,16 @@ public class ForumPanel extends JPanel {
             footer.add(deletePanel, BorderLayout.EAST);
         }
 
+        boolean canEdit = currentUser != null
+                && initiative.getCreator().equals(currentUser.getEmail());
+
+        JButton editButton = new JButton("Edit");
+        editButton.setEnabled(canEdit);
+        editButton.addActionListener(e -> handleEdit(initiative));
+        JPanel editPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        editPanel.add(editButton);
+        footer.add(editPanel, BorderLayout.CENTER);
+
         card.add(footer, BorderLayout.SOUTH);
 
         return card;
@@ -517,6 +524,37 @@ public class ForumPanel extends JPanel {
             return;
         }
         refreshForum();
+    }
+
+    private void handleEdit(Initiative initiative) {
+        JTextField titleField = new JTextField(initiative.getTitle(), 20);
+        JTextArea descArea = new JTextArea(initiative.getDescription(), 5, 20);
+        descArea.setLineWrap(true);
+        descArea.setWrapStyleWord(true);
+
+        JPanel panel = new JPanel(new BorderLayout(8, 8));
+        panel.add(new JLabel("Title:"), BorderLayout.NORTH);
+        panel.add(titleField, BorderLayout.CENTER);
+        panel.add(new JScrollPane(descArea), BorderLayout.SOUTH);
+
+        int result = JOptionPane.showConfirmDialog(
+                this, panel, "Edit Initiative", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String newTitle = titleField.getText().trim();
+            String newDesc = descArea.getText().trim();
+            if (newTitle.isEmpty() || newDesc.isEmpty()) return;
+
+            UpdateInitiativeCommand cmd = new UpdateInitiativeCommand(
+                    clientConnectionManager,
+                    initiative.getId(),
+                    newTitle,
+                    newDesc,
+                    currentUser.getEmail()
+            );
+            cmd.execute();
+            refreshForum();
+        }
     }
 
     private static String nullToDash(String value) {

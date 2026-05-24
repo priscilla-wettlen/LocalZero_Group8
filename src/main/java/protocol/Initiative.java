@@ -125,6 +125,14 @@ public class Initiative implements Serializable {
         return creator;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getLikes() {
         return likes;
     }

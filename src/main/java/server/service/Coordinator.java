@@ -51,6 +51,9 @@ public class Coordinator implements ICoordinator{
             case "SendMessage":
                 response = extractSendMessageParams(paramsMap);
                 break;
+            case "UpdateInitiative":
+                response = extractParamsUpdateInitiative(paramsMap);
+                break;
             default:
                 throw new IllegalArgumentException("Invalid request type!");
         }
@@ -165,6 +168,22 @@ public class Coordinator implements ICoordinator{
         return new Initiative(
                 true,
                 "Joined initiative successfully");
+    }
+
+    private Initiative extractParamsUpdateInitiative(HashMap<String, Object> params) {
+        String initiativeId = (String) params.get("initiativeId");
+        String title = (String) params.get("title");
+        String description = (String) params.get("description");
+        String actorEmail = (String) params.get("actorEmail");
+
+        boolean updated = initiativeService.updateInitiative(
+                initiativeId,
+                title,
+                description,
+                actorEmail
+        );
+
+        return new Initiative(updated, updated ? "Initiative updated" : "Update failed");
     }
 
 
