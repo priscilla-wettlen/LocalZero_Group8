@@ -149,8 +149,22 @@ public class Coordinator implements ICoordinator{
         return null;
     }
 
-    private Initiative extractParamsJoinInitiative(HashMap<String, Object> params) {
-        return null;
+    private Initiative extractParamsJoinInitiative(
+            HashMap<String, Object> params) {
+
+        String userId =
+                (String) params.get("userId");
+
+        String initiativeId =
+                (String) params.get("initiativeId");
+
+        initiativeService.joinInitiative(
+                userId,
+                initiativeId);
+
+        return new Initiative(
+                true,
+                "Joined initiative successfully");
     }
 
 

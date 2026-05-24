@@ -19,14 +19,15 @@ public interface IInitiativeService {
 
     void likeInitiative(String initiativeId);
 
+    void addComment(String initiativeId,
+                    String author,
+                    String text);
     void addComment(String initiativeId, String author, String text);
 
     boolean deleteInitiative(String initiativeId);
 }
 
+    void joinInitiative(String initiativeID, String userID);
+}
 
-    /*
-    public void joinInitiative(String initiativeID, String userID);
-
-     */
 

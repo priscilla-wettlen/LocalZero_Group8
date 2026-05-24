@@ -2,13 +2,18 @@ package client.user_actions;
 
 import client.ClientConnectionManager;
 import protocol.Request;
+import protocol.UserActionType;
 
 import java.util.HashMap;
 
 public class JoinInitiativeCommand extends BaseUserCommand implements IUserCommand {
+    private String userId;
+    private String initiativeId;
 
-    public JoinInitiativeCommand(ClientConnectionManager connectionManager, String token) {
+    public JoinInitiativeCommand(ClientConnectionManager connectionManager, String userId, String initiativeId) {
         super(connectionManager);
+        this.userId = userId;
+        this.initiativeId = initiativeId;
     }
 
     @Override
@@ -19,11 +24,28 @@ public class JoinInitiativeCommand extends BaseUserCommand implements IUserComma
 
     @Override
     public Request buildRequest() {
-        return null;
+        HashMap<String, Object> details =
+                new HashMap<>();
+
+        details.put("userId", userId);
+
+        details.put("initiativeId", initiativeId);
+
+        Request request =
+                new Request(
+                        UserActionType.JoinInitiative,
+                        details
+                );
+
+        request.setAuthToken(getToken());
+
+        return request;
     }
 
     @Override
     public void execute() {
+        Request request = buildRequest();
 
+        getConnectionManager().sendRequest(request);
     }
 }

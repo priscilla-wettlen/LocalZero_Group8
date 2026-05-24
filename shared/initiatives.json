@@ -1,161 +1,17 @@
 {
-  "9e1b8dec-6898-448d-a348-f6b8be55eae7": {
-    "id": "9e1b8dec-6898-448d-a348-f6b8be55eae7",
-    "title": "Grill",
-    "initiativeType": "SwapFood",
-    "duration": "3 hrs",
-    "visibility": "Neighborhood",
-    "description": "grilling meat",
-    "specificLocation": "my haus",
-    "creatorNeighborhood": "Sofielund",
-    "creator": "este@ban.com",
-    "success": true,
-    "responseParam": {},
-    "likes": 2,
-    "comments": [
-      {
-        "text": "sounds good",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 20,
-            "minute": 54,
-            "second": 35,
-            "nano": 680062000
-          }
-        }
-      },
-      {
-        "text": "fantastic",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 21,
-            "minute": 11,
-            "second": 2,
-            "nano": 896407000
-          }
-        }
-      },
-      {
-        "text": "sounds fun",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 21,
-            "minute": 13,
-            "second": 18,
-            "nano": 268643000
-          }
-        }
-      },
-      {
-        "text": "yesss",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 21,
-            "minute": 16,
-            "second": 50,
-            "nano": 60316000
-          }
-        }
-      },
-      {
-        "author": "Lola ",
-        "text": "ysysysysys",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 21,
-            "minute": 25,
-            "second": 14,
-            "nano": 648307000
-          }
-        }
-      }
-    ]
-  },
-  "403da7a9-026e-4e30-a586-84eb2800cd31": {
-    "id": "403da7a9-026e-4e30-a586-84eb2800cd31",
-    "title": "Partyyyy",
-    "initiativeType": "GardenActivity",
-    "duration": "1 day",
-    "visibility": "Neighborhood",
-    "description": "Partayyyy",
-    "specificLocation": "My haus",
-    "creatorNeighborhood": "Sofielund",
-    "creator": "lola@mail.com",
-    "success": true,
-    "responseParam": {},
-    "likes": 1,
-    "comments": [
-      {
-        "author": "0b22da9b-df49-4197-a470-d1afe05b3f12",
-        "text": "going",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 19,
-            "minute": 57,
-            "second": 52,
-            "nano": 431898000
-          }
-        }
-      },
-      {
-        "author": "Lola ",
-        "text": "kullll",
-        "timestamp": {
-          "date": {
-            "year": 2026,
-            "month": 5,
-            "day": 23
-          },
-          "time": {
-            "hour": 21,
-            "minute": 25,
-            "second": 23,
-            "nano": 796771000
-          }
-        }
-      }
-    ]
-  },
-  "230908d8-235c-4269-939a-e44f514deac7": {
-    "id": "230908d8-235c-4269-939a-e44f514deac7",
-    "title": "Clean the garden",
+  "c941974c-d501-40b8-a20f-f8592b40ed31": {
+    "id": "c941974c-d501-40b8-a20f-f8592b40ed31",
+    "title": "Clean the beach",
     "initiativeType": "EcoAction",
     "duration": "1 day",
     "visibility": "Public",
-    "description": "let\u0027s clean",
-    "specificLocation": "Storgatan 11",
-    "creatorNeighborhood": "VästraHamnen",
-    "creator": "juani@ta.com",
+    "description": "clean",
+    "specificLocation": "Ribersborg",
+    "creatorNeighborhood": "VästraSorgenfri",
+    "creator": "jessy@mail.com",
+    "memberIds": [
+      "7000b681-db91-476a-8c4f-c22481deb33a"
+    ],
     "success": true,
     "responseParam": {},
     "likes": 19,
@@ -196,34 +52,38 @@
       }
     ]
   },
-  "a7a2dd6c-9d45-46a0-be08-be902999a5f3": {
-    "id": "a7a2dd6c-9d45-46a0-be08-be902999a5f3",
-    "title": "paint fence",
+  "da7e2ba8-c3ee-4f99-8155-d74086313f48": {
+    "id": "da7e2ba8-c3ee-4f99-8155-d74086313f48",
+    "title": "Cut the grass",
     "initiativeType": "GardenActivity",
-    "duration": "dfdsfds",
-    "visibility": "Public",
-    "description": "paint",
-    "specificLocation": "wfds",
+    "duration": "3 hrs",
+    "visibility": "Neighborhood",
+    "description": "cut grass",
+    "specificLocation": "sofielund 5",
     "creatorNeighborhood": "Sofielund",
-    "creator": "lola@mail.com",
+    "creator": "sofia@mail.com",
+    "memberIds": [
+      "cb0198b6-70f5-46ac-b32d-f5ae41b01a61",
+      "7000b681-db91-476a-8c4f-c22481deb33a"
+    ],
     "success": true,
     "responseParam": {},
-    "likes": 1,
+    "likes": 2,
     "comments": [
       {
-        "author": "sodia",
-        "text": "im in",
+        "author": "Ben",
+        "text": "cool",
         "timestamp": {
           "date": {
             "year": 2026,
             "month": 5,
-            "day": 23
+            "day": 24
           },
           "time": {
-            "hour": 21,
-            "minute": 32,
-            "second": 34,
-            "nano": 701614000
+            "hour": 17,
+            "minute": 40,
+            "second": 26,
+            "nano": 784163000
           }
         }
       },

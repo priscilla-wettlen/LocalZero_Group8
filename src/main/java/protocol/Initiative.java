@@ -8,6 +8,7 @@ import java.util.List;
 
 import server.model.Comment;
 import server.model.Neighborhood;
+import server.model.User;
 import server.model.Visibility;
 
 public class Initiative implements Serializable {
@@ -23,6 +24,8 @@ public class Initiative implements Serializable {
     private Neighborhood creatorNeighborhood;
     private URL image;
     private String creator;
+
+    private List<String> memberIds = new ArrayList<>();
 
     private boolean success;
     private String message;
@@ -50,6 +53,7 @@ public class Initiative implements Serializable {
         this.image = image;
         this.creator = creator;
         this.success = true;
+
     }
 
     public boolean isSuccess() {
@@ -136,4 +140,31 @@ public class Initiative implements Serializable {
     public void addComment(Comment comment) {
         comments.add(comment);
     }
+
+    public List<String> getMemberIds() {
+
+        if (memberIds == null) {
+            memberIds = new ArrayList<>();
+        }
+
+        return memberIds;
+    }
+
+    public void addMember(String userId) {
+        if (!memberIds.contains(userId)) {
+            memberIds.add(userId);
+        }
+    }
+
+    public boolean isMember(String userId) {
+        for (String member : memberIds) {
+            if (member.equals(userId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }

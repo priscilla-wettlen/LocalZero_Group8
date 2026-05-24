@@ -112,6 +112,22 @@ public class AccountService implements IAccountService {
         return user;
     }
 
+    public User getUserByEmail(String email){
+        return usersByEmail.get(email);
+    }
+
+    public User getUserById(String id) {
+
+        for (User user : usersByEmail.values()) {
+
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+
+        return null;
+    }
+
     public User getUserByEmail(String email) {
         return usersByEmail.get(email);
     }
@@ -129,23 +145,6 @@ public class AccountService implements IAccountService {
     }
 
 
-
-
-
-//    public void addUser(User user){
-//        if (user == null || user.getEmail() == null) {
-//            return;
-//        }
-//        usersById.put(user.getId(), user);
-//        usersByEmail.put(user.getEmail(), user);
-//        JsonUserStore.StoredUser storedUser = new JsonUserStore.StoredUser();
-//        storedUser.id = user.getId();
-//        storedUser.email = user.getEmail();
-//        storedUser.name = user.getEmail();
-//        storedUser.passwordHash = user.getPasswordHash();
-//        storedUser.neighborhood = user.getNeighborhood() != null ? user.getNeighborhood().name() : null;
-//        userStore.save(storedUser);
-//    }
     public boolean updateUserRoles(String email, boolean wantsOrganizer, String adminCode) {
         if (email == null || email.isBlank()) {
             return false;
