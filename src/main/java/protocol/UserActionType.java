@@ -13,4 +13,5 @@ public enum UserActionType {
     SeeNotifications,
     ViewInitiatives,
     ViewMessages,
+    UpdateInitiative
 }
