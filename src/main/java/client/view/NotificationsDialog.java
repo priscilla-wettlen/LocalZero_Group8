@@ -13,7 +13,7 @@ import java.util.List;
 
 public class NotificationsDialog extends JDialog {
 
-    public NotificationsDialog(List<Initiative> initiatives, User user) {
+    public NotificationsDialog(List<Initiative> initiatives, User user, java.util.ArrayList<String> inboxMessages) {
         super((Frame) null, "Notifications", true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -25,7 +25,8 @@ public class NotificationsDialog extends JDialog {
         JPanel root = new JPanel(new BorderLayout(0, 12));
         root.setBorder(new EmptyBorder(14, 14, 14, 14));
 
-        JPanel sections = new JPanel(new GridLayout(2, 1, 0, 12));
+        JPanel sections = new JPanel(new GridLayout(3, 1, 0, 12));
+
 
         JPanel publicSection = buildSectionPanel(
                 "Public Initiatives",
@@ -44,7 +45,34 @@ public class NotificationsDialog extends JDialog {
         sections.add(publicSection);
         sections.add(neighborhoodSection);
 
+        JPanel messagesSection = new JPanel(new BorderLayout(8, 8));
+
+        JLabel messagesHeading = new JLabel("Your Messages");
+        messagesHeading.setFont(messagesHeading.getFont().deriveFont(Font.BOLD, 14f));
+        messagesSection.add(messagesHeading, BorderLayout.NORTH);
+
+        DefaultListModel<String> messagesModel = new DefaultListModel<>();
+
+        if (inboxMessages == null || inboxMessages.isEmpty()) {
+            messagesModel.addElement("No new messages");
+        } else {
+            for (String msg : inboxMessages) {
+                messagesModel.addElement(msg);
+            }
+        }
+
+        JList<String> messagesList = new JList<>(messagesModel);
+        messagesList.setEnabled(false);
+        messagesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JScrollPane messagesScroll = new JScrollPane(messagesList);
+        messagesScroll.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
+        messagesSection.add(messagesScroll, BorderLayout.CENTER);
+
+        sections.add(messagesSection);
+
         root.add(sections, BorderLayout.CENTER);
+
 
         JButton closeBtn = new JButton("Close");
         closeBtn.addActionListener(e -> dispose());

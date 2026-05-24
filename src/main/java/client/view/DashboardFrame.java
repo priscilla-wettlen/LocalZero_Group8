@@ -66,9 +66,12 @@ public class DashboardFrame extends JFrame {
         client.user_actions.ViewForumCommand notifCmd = new client.user_actions.ViewForumCommand(clientConnectionManager, loggedInUser.getNeighborhood());
         notifCmd.execute();
         java.util.List<protocol.Initiative> initiatives = notifCmd.getLoadedInitiatives();
-        if (!initiatives.isEmpty()) {
-            SwingUtilities.invokeLater(() -> new NotificationsDialog(initiatives, loggedInUser).setVisible(true));
+        server.service.MessengerService messengerService = server.service.MessengerService.getMessengerServiceInstance();
+        java.util.ArrayList<String> inboxMessages = messengerService.getInboxMessages(loggedInUser.getId());
+        if (!initiatives.isEmpty() || (inboxMessages != null && !inboxMessages.isEmpty())) {
+            SwingUtilities.invokeLater(() -> new NotificationsDialog(initiatives, loggedInUser, inboxMessages).setVisible(true));
         }
+
 
         myAccountPanel = new MyAccountPanel(loggedInUser);
         contentPanel.add(myAccountPanel, "my account");
