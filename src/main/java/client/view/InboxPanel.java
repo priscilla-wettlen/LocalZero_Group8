@@ -2,30 +2,27 @@ package client.view;
 
 import client.ClientConnectionManager;
 import client.user_actions.ShowInboxCommand;
-import protocol.Initiative;
-import protocol.Request;
-import protocol.UserActionType;
-import server.model.User;
-import server.service.AccountService;
-import server.service.MessengerService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
 
 public class InboxPanel extends JPanel {
 
-    private final ClientConnectionManager connectionManager;
-    private final User currentUser;
-    private final AccountService accountService = AccountService.getAccountServiceInstance();
-    private final MessengerService messengerService = MessengerService.getMessengerServiceInstance();
+    private final ShowInboxCommand showInboxCommand;
     private final JPanel messagesPanel = new JPanel();
     private JPanel composePanel;
 
-    public InboxPanel(User currentUser, ClientConnectionManager connectionManager) {
-        this.currentUser = currentUser;
-        this.connectionManager = connectionManager;
+    public InboxPanel(String userId,
+                      String userName,
+                      Object neighborhood,
+                      ClientConnectionManager connectionManager) {
+        this.showInboxCommand = new ShowInboxCommand(
+                connectionManager,
+                userId,
+                userName,
+                neighborhood
+        );
 
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -52,9 +49,13 @@ public class InboxPanel extends JPanel {
     }
 
     public void refreshInboxPanel() {
+        showInboxCommand.execute();
+        renderMessages(showInboxCommand.getMessages());
+    }
+
+    private void renderMessages(List<String> messages) {
         messagesPanel.removeAll();
 
-        List<String> messages = loadMessages();
         if (messages.isEmpty()) {
             JLabel emptyLabel = new JLabel("No messages yet.");
             emptyLabel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
@@ -67,15 +68,6 @@ public class InboxPanel extends JPanel {
 
         messagesPanel.revalidate();
         messagesPanel.repaint();
-    }
-
-    private List<String> loadMessages() {
-        ShowInboxCommand command = new ShowInboxCommand(
-                connectionManager,
-                currentUser.getId()
-        );
-        command.execute();
-        return command.getMessages();
     }
 
     private JPanel buildMessageRow(String message) {
@@ -111,18 +103,11 @@ public class InboxPanel extends JPanel {
         panel.setPreferredSize(new Dimension(300, 0));
         panel.setBorder(BorderFactory.createTitledBorder("Write Message"));
 
-        JComboBox<User> recipientDropdown = new JComboBox<>();
-        List<User> neighbors = accountService.getUsersByNeighborhood(
-                currentUser.getNeighborhood(),
-                currentUser.getId()
-        );
-        for (User neighbor : neighbors) {
+        JComboBox<String> recipientDropdown = new JComboBox<>();
+        List<String> neighbors = showInboxCommand.getNeighbors();
+        for (String neighbor : neighbors) {
             recipientDropdown.addItem(neighbor);
         }
-        recipientDropdown.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
-            String label = value == null ? "" : value.getName() + " (" + value.getEmail() + ")";
-            return new JLabel(label);
-        });
 
         JPanel recipientPanel = new JPanel(new BorderLayout(4, 4));
         recipientPanel.add(new JLabel("To:"), BorderLayout.NORTH);
@@ -140,7 +125,7 @@ public class InboxPanel extends JPanel {
 
         cancelButton.addActionListener(e -> hideComposePanel());
         sendButton.addActionListener(e -> {
-            User recipient = (User) recipientDropdown.getSelectedItem();
+            String recipient = (String) recipientDropdown.getSelectedItem();
             String message = messageArea.getText().trim();
             if (recipient == null) {
                 JOptionPane.showMessageDialog(this, "No neighbors are available to message.");
@@ -151,7 +136,11 @@ public class InboxPanel extends JPanel {
                 return;
             }
 
-            sendMessage(recipient, message);
+            if (!showInboxCommand.sendMessage(recipient, message)) {
+                JOptionPane.showMessageDialog(this, "Message could not be sent.");
+                return;
+            }
+
             messageArea.setText("");
             hideComposePanel();
             JOptionPane.showMessageDialog(this, "Message sent.");
@@ -172,23 +161,5 @@ public class InboxPanel extends JPanel {
             revalidate();
             repaint();
         }
-    }
-
-    private void sendMessage(User recipient, String message) {
-        if (connectionManager != null) {
-            HashMap<String, Object> details = new HashMap<>();
-            details.put("senderName", currentUser.getName());
-            details.put("recipientUserId", recipient.getId());
-            details.put("message", message);
-
-            Request request = new Request(UserActionType.SendMessage, details);
-            request.setAuthToken(connectionManager.getToken());
-            Initiative response = connectionManager.sendRequest(request);
-            if (response != null && response.isSuccess()) {
-                return;
-            }
-        }
-
-        messengerService.sendMessage(currentUser.getName(), recipient.getId(), message);
     }
 }

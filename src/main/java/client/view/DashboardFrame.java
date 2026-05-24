@@ -57,7 +57,8 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(new CreateInitiativePanel(loggedInUser), "Create");
         forumPanel = new ForumPanel(loggedInUser, clientConnectionManager);
         contentPanel.add(forumPanel, "forum");
-        InboxPanel inboxPanel = new InboxPanel(loggedInUser, clientConnectionManager);
+        InboxPanel inboxPanel = new InboxPanel(loggedInUser.getId(), loggedInUser.getName(),
+                loggedInUser.getNeighborhood(), clientConnectionManager);
         contentPanel.add(inboxPanel, "inbox");
 
         contentPanel.add(new EcoTrackerPanel(clientConnectionManager), "eco");
