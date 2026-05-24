@@ -723,6 +723,34 @@ public class ForumPanel extends JPanel {
                 actionsPanel,
                 BorderLayout.WEST);
 
+        boolean canEdit =
+                currentUser != null
+                        && initiative.getCreator()
+                        .equals(currentUser.getEmail());
+
+        JButton editButton =
+                new JButton("Edit");
+
+        editButton.setEnabled(canEdit);
+
+        editButton.addActionListener(
+                e -> handleEdit(initiative));
+
+        JPanel editPanel =
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.RIGHT,
+                                0,
+                                0));
+
+        editPanel.setOpaque(false);
+
+        editPanel.add(editButton);
+
+        footer.add(
+                editPanel,
+                BorderLayout.CENTER);
+
         if (currentUser != null
                 && currentUser.hasRole(
                 Role.CommunityOrganizer)) {
@@ -776,17 +804,7 @@ public class ForumPanel extends JPanel {
                         "Delete this initiative from the forum?",
                         "Confirm Delete",
                         JOptionPane.YES_NO_OPTION);
-        boolean canEdit = currentUser != null
-                && initiative.getCreator().equals(currentUser.getEmail());
 
-        JButton editButton = new JButton("Edit");
-        editButton.setEnabled(canEdit);
-        editButton.addActionListener(e -> handleEdit(initiative));
-        JPanel editPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        editPanel.add(editButton);
-        footer.add(editPanel, BorderLayout.CENTER);
-
-        card.add(footer, BorderLayout.SOUTH);
 
         if (choice
                 != JOptionPane.YES_OPTION) {
